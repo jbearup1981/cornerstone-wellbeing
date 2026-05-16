@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CEHAS Invoice — Acme Manufacturing — May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAF7;
+  --surface: #E8EADF;
+  --surface-alt: #DDE0D3;
+  --muted: #E5E6DD;
+  --border: #D9DDCC;
+  --fg: #1F3D2E;
+  --fg-muted: #5C7066;
+  --primary: #C75A2C;
+  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: "DM Serif Display", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  color: var(--fg);
+  background: var(--bg);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 56px 56px 72px;
+}
+.invoice-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: flex-start;
+  padding-bottom: 28px;
+  border-bottom: 2px solid var(--fg);
+  margin-bottom: 32px;
+}
+.logo-block .mark {
+  font-family: var(--font-serif);
+  font-size: 1.9rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.logo-block .mark .dash { color: var(--primary); padding: 0 6px; }
+.logo-block .tag {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--fg-muted);
+  margin-top: 8px;
+}
+.invoice-title {
+  text-align: right;
+}
+.invoice-title h1 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 2.6rem;
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+.invoice-title .num {
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+.meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+.meta-grid .block .label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--fg-muted);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.meta-grid .block .value {
+  font-size: 0.98rem;
+}
+.meta-grid .block .value strong {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 2px;
+}
+.bill-to-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 28px;
+  margin-bottom: 36px;
+}
+.bill-to .block-card,
+.service-period .block-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 22px;
+  height: 100%;
+}
+.block-card .label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--fg-muted);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.block-card .name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  margin-bottom: 4px;
+}
+.block-card .addr {
+  font-size: 0.9rem;
+  color: var(--fg-muted);
+  line-height: 1.5;
+}
+.block-card .period {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  margin-bottom: 4px;
+}
+.block-card .period-sub {
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+}
+table.lines {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 18px;
+}
+table.lines thead th {
+  text-align: left;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: var(--fg-muted);
+  padding: 12px 12px;
+  border-bottom: 2px solid var(--fg);
+}
+table.lines tbody td {
+  padding: 13px 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.95rem;
+}
+table.lines .num { text-align: right; font-variant-numeric: tabular-nums; }
+table.lines .plan-cell strong { font-weight: 600; }
+table.lines .plan-cell .sub {
+  font-size: 0.78rem;
+  color: var(--fg-muted);
+  display: block;
+  margin-top: 2px;
+}
+.totals {
+  margin-left: auto;
+  width: 360px;
+  margin-top: 8px;
+}
+.totals .row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 0.95rem;
+}
+.totals .row.sub {
+  border-top: 1px solid var(--border);
+  font-weight: 600;
+  margin-top: 4px;
+  padding-top: 12px;
+}
+.totals .row.admin {
+  color: var(--fg-muted);
+}
+.totals .row.total {
+  border-top: 2px solid var(--fg);
+  margin-top: 8px;
+  padding-top: 14px;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  align-items: baseline;
+}
+.totals .row.total .amount { color: var(--primary); }
+.payment-block {
+  margin-top: 44px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 28px;
+}
+.payment-block .card {
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 22px 24px;
+}
+.payment-block h3 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--fg-muted);
+  margin: 0 0 14px;
+}
+.payment-block .ach-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  font-size: 0.92rem;
+  border-bottom: 1px dashed var(--border);
+}
+.payment-block .ach-line:last-child { border-bottom: 0; }
+.payment-block .ach-line .k { color: var(--fg-muted); }
+.payment-block .ach-line .v { font-weight: 500; font-variant-numeric: tabular-nums; }
+.terms p { margin: 0 0 10px; font-size: 0.92rem; }
+.terms .due-callout {
+  background: var(--surface);
+  border-left: 3px solid var(--primary);
+  padding: 12px 16px;
+  border-radius: 0 6px 6px 0;
+  font-size: 0.92rem;
+  margin-top: 12px;
+}
+.footer {
+  margin-top: 52px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+  font-size: 0.82rem;
+  color: var(--fg-muted);
+}
+.footer .col strong {
+  display: block;
+  color: var(--fg);
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+@media print {
+  body { background: white; }
+  .page { padding: 24px; max-width: 100%; }
+  .invoice-title h1 { font-size: 2rem; }
+  .meta-grid, .bill-to-row, .payment-block, .footer { break-inside: avoid; }
+  table.lines tbody tr { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="invoice-head">
+    <div class="logo-block">
+      <div class="mark">CEHAS<span class="dash">—</span>Capitol Group</div>
+      <div class="tag">Cornerstone Well-Being Program &middot; Eligibility-Based Billing</div>
+    </div>
+    <div class="invoice-title">
+      <h1>Invoice</h1>
+      <div class="num">No. CEHAS-INV-2026-05-0417</div>
+    </div>
+  </div>
+
+  <div class="meta-grid">
+    <div class="block">
+      <div class="label">Invoice Date</div>
+      <div class="value"><strong>May 1, 2026</strong></div>
+    </div>
+    <div class="block">
+      <div class="label">Due Date</div>
+      <div class="value"><strong>May 16, 2026</strong>Net 15</div>
+    </div>
+    <div class="block">
+      <div class="label">Group ID</div>
+      <div class="value"><strong>CWB-ACME-0417</strong>Cornerstone Well-Being</div>
+    </div>
+  </div>
+
+  <div class="bill-to-row">
+    <div class="bill-to">
+      <div class="block-card">
+        <div class="label">Bill To</div>
+        <div class="name">Acme Manufacturing</div>
+        <div class="addr">
+          Attn: Accounts Payable<br>
+          1428 Industrial Park Drive<br>
+          Grand Rapids, MI 49504<br>
+          ap@acme-mfg.example
+        </div>
+      </div>
+    </div>
+    <div class="service-period">
+      <div class="block-card">
+        <div class="label">Service Period</div>
+        <div class="period">May 2026</div>
+        <div class="period-sub">May 1 – May 31, 2026<br>Based on eligibility file received Apr 28, 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <table class="lines">
+    <thead>
+      <tr>
+        <th>Plan Level</th>
+        <th class="num">Enrolled</th>
+        <th class="num">Monthly Premium</th>
+        <th class="num">Line Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="plan-cell"><strong>Plan 1500</strong><span class="sub">$1,500 premium &middot; $1,200 reimbursement</span></td>
+        <td class="num">3</td>
+        <td class="num">$1,500.00</td>
+        <td class="num">$4,500.00</td>
+      </tr>
+      <tr>
+        <td class="plan-cell"><strong>Plan 1200</strong><span class="sub">$1,200 premium &middot; $960 reimbursement</span></td>
+        <td class="num">4</td>
+        <td class="num">$1,200.00</td>
+        <td class="num">$4,800.00</td>
+      </tr>
+      <tr>
+        <td class="plan-cell"><strong>Plan 900</strong><span class="sub">$900 premium &middot; $720 reimbursement</span></td>
+        <td class="num">5</td>
+        <td class="num">$900.00</td>
+        <td class="num">$4,500.00</td>
+      </tr>
+      <tr>
+        <td class="plan-cell"><strong>Plan 700</strong><span class="sub">$700 premium &middot; $560 reimbursement</span></td>
+        <td class="num">3</td>
+        <td class="num">$700.00</td>
+        <td class="num">$2,100.00</td>
+      </tr>
+      <tr>
+        <td class="plan-cell"><strong>Plan 500</strong><span class="sub">$500 premium &middot; $400 reimbursement</span></td>
+        <td class="num">3</td>
+        <td class="num">$500.00</td>
+        <td class="num">$1,500.00</td>
+      </tr>
+      <tr>
+        <td class="plan-cell"><strong>Plan 350</strong><span class="sub">$350 premium &middot; $280 reimbursement</span></td>
+        <td class="num">2</td>
+        <td class="num">$350.00</td>
+        <td class="num">$700.00</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="totals">
+    <div class="row sub">
+      <span>Premium Subtotal (20 enrolled)</span>
+      <span>$18,100.00</span>
+    </div>
+    <div class="row admin">
+      <span>Program Admin Fee (20 &times; $40.00)</span>
+      <span>$800.00</span>
+    </div>
+    <div class="row total">
+      <span>Total Due</span>
+      <span class="amount">$18,900.00</span>
+    </div>
+  </div>
+
+  <div class="payment-block">
+    <div class="card">
+      <h3>Payment Instructions &middot; ACH (Preferred)</h3>
+      <div class="ach-line"><span class="k">Beneficiary</span><span class="v">CEHAS Administrative Services, LLC</span></div>
+      <div class="ach-line"><span class="k">Bank</span><span class="v">[Bank Name Placeholder], N.A.</span></div>
+      <div class="ach-line"><span class="k">Routing (ABA)</span><span class="v">XXXXXXXXX</span></div>
+      <div class="ach-line"><span class="k">Account</span><span class="v">XXXXXXXXXXXX</span></div>
+      <div class="ach-line"><span class="k">Reference</span><span class="v">CEHAS-INV-2026-05-0417</span></div>
+      <div class="ach-line"><span class="k">Check (alternative)</span><span class="v">Payable to CEHAS Administrative Services, LLC</span></div>
+    </div>
+    <div class="card terms">
+      <h3>Terms</h3>
+      <p>Payment due within 15 days of invoice date (<strong>Net 15</strong>). Late balances accrue at 1.0% per month after 30 days past due.</p>
+      <p>Eligibility changes received after the 25th of the prior month are reconciled on the following invoice.</p>
+      <div class="due-callout"><strong>Pay by May 16, 2026</strong> to avoid coverage interruption.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="col">
+      <strong>Remit To</strong>
+      CEHAS Administrative Services, LLC<br>
+      P.O. Box 00000<br>
+      [City, State ZIP Placeholder]
+    </div>
+    <div class="col">
+      <strong>Billing Questions</strong>
+      billing@cehas.example<br>
+      (000) 000-0000<br>
+      Mon–Fri &middot; 8:00 AM – 5:00 PM ET
+    </div>
+    <div class="col">
+      <strong>Program Servicing</strong>
+      Nexus Benefit Solutions<br>
+      Insight Benefit Administrators (TPA)<br>
+      service@nexusbenefitsolutions.com
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

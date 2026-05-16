@@ -1,29 +1,895 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cornerstone Well-Being Program</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      max-width: 720px;
-      margin: 6rem auto;
-      padding: 0 1.5rem;
-      color: #1f2937;
-      line-height: 1.6;
-    }
-    h1 { font-size: 2rem; margin-bottom: 0.25rem; font-weight: 600; }
-    .subtitle { color: #6b7280; margin-top: 0; }
-    .divider { border: none; border-top: 1px solid #e5e7eb; margin: 2rem 0; }
-    .status { color: #6b7280; font-size: 0.9rem; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cornerstone Well-Being Program</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --font-sans:  "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "DM Serif Display", Georgia, "Times New Roman", serif;
+
+  --color-bg:            #FAFAF7;
+  --color-surface:       #E8EADF;
+  --color-surface-alt:   #DDE0D3;
+  --color-muted:         #E5E6DD;
+  --color-border:        #D9DDCC;
+  --color-fg:            #1F3D2E;
+  --color-fg-muted:      #5C7066;
+  --color-primary:       #C75A2C;
+  --color-primary-hover: #B8522A;
+  --color-primary-fg:    #FFFFFF;
+  --color-accent-green:  #10B981;
+  --color-accent-teal:   #0891B2;
+
+  --color-dark-bg:       #0E1F17;
+  --color-dark-fg:       #F2F2EC;
+  --color-dark-surface:  #1A2E22;
+
+  --radius: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-pill: 9999px;
+
+  --section-py: clamp(3rem, 6vw, 6rem);
+  --container-max: 1200px;
+  --prose-max: 720px;
+
+  --fs-eyebrow: 0.75rem;
+  --fs-sm:      0.875rem;
+  --fs-base:    1rem;
+  --fs-lead:    1.125rem;
+  --fs-h3:      1.375rem;
+  --fs-h2:      clamp(1.75rem, 3vw, 2.375rem);
+  --fs-h1:      clamp(2.25rem, 5vw, 4rem);
+  --lh-tight:   1.15;
+  --lh-body:    1.6;
+  --tracking-eyebrow: 0.12em;
+  --tracking-heading: -0.01em;
+}
+
+* { box-sizing: border-box; }
+html { font-family: var(--font-sans); color: var(--color-fg); background: var(--color-bg); scroll-behavior: smooth; }
+body { margin: 0; font-size: var(--fs-base); line-height: var(--lh-body); -webkit-font-smoothing: antialiased; }
+
+h1, h2, .display { font-family: var(--font-serif); font-weight: 400; letter-spacing: var(--tracking-heading); line-height: var(--lh-tight); margin: 0 0 0.75rem; }
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-family: var(--font-sans); font-weight: 600; font-size: var(--fs-h3); margin: 0 0 0.5rem; letter-spacing: -0.005em; }
+h4 { font-family: var(--font-sans); font-weight: 600; font-size: 1rem; margin: 0 0 0.5rem; }
+p { margin: 0 0 1rem; }
+a { color: var(--color-primary); text-decoration: none; }
+a:hover { color: var(--color-primary-hover); text-decoration: underline; }
+
+.eyebrow {
+  font-size: var(--fs-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  font-weight: 600;
+  color: var(--color-fg-muted);
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+.container { max-width: var(--container-max); margin: 0 auto; padding: 0 1.5rem; }
+.section { padding-block: var(--section-py); border-bottom: 1px solid var(--color-border); }
+.section:last-of-type { border-bottom: none; }
+.prose { max-width: var(--prose-max); }
+.prose p { font-size: var(--fs-lead); color: var(--color-fg); }
+.lead { font-size: var(--fs-lead); color: var(--color-fg-muted); max-width: var(--prose-max); }
+
+/* Sticky nav */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(250, 250, 247, 0.92);
+  backdrop-filter: saturate(140%) blur(8px);
+  -webkit-backdrop-filter: saturate(140%) blur(8px);
+  border-bottom: 1px solid var(--color-border);
+}
+.nav-inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0.625rem 1.5rem;
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.nav-brand {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--color-fg);
+  margin-right: auto;
+  letter-spacing: -0.01em;
+}
+.nav a.nav-link {
+  font-size: 0.8125rem;
+  color: var(--color-fg-muted);
+  font-weight: 500;
+  padding: 0.25rem 0;
+  position: relative;
+  text-decoration: none;
+}
+.nav a.nav-link:hover { color: var(--color-fg); }
+.nav a.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 0; height: 1px;
+  background: var(--color-primary);
+  transition: width 200ms ease;
+}
+.nav a.nav-link:hover::after { width: 100%; }
+
+/* Hero */
+.hero {
+  background: var(--color-dark-bg);
+  color: var(--color-dark-fg);
+  padding-block: clamp(4rem, 9vw, 7rem);
+  border-bottom: 1px solid var(--color-border);
+}
+.hero .eyebrow { color: rgba(242, 242, 236, 0.7); }
+.hero h1 { color: var(--color-dark-fg); max-width: 18ch; }
+.hero .subtitle {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--color-primary);
+  margin-top: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+.hero .frame {
+  font-size: var(--fs-lead);
+  color: rgba(242, 242, 236, 0.85);
+  max-width: 56ch;
+  margin: 0;
+}
+
+/* Partner cards */
+.partner-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.partner-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+.partner-card .name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--color-fg);
+  margin-bottom: 0.25rem;
+  display: block;
+}
+.partner-card .role {
+  font-size: var(--fs-sm);
+  color: var(--color-fg-muted);
+  margin: 0;
+}
+
+/* Generic cards */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+.card-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+.card-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+.card-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+/* Process step list */
+.steps {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  counter-reset: step;
+}
+.steps li {
+  counter-increment: step;
+  padding: 0.625rem 0 0.625rem 2.5rem;
+  position: relative;
+  border-top: 1px solid var(--color-border);
+  font-size: var(--fs-base);
+}
+.steps li:last-child { border-bottom: 1px solid var(--color-border); }
+.steps li::before {
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.625rem;
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  color: var(--color-primary);
+  font-feature-settings: "tnum";
+}
+
+/* Tables */
+.table-wrap { overflow-x: auto; margin-top: 1.25rem; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+th, td {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+}
+thead th {
+  background: var(--color-surface-alt);
+  font-weight: 600;
+  color: var(--color-fg);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+tbody tr:nth-child(even) { background: rgba(232, 234, 223, 0.4); }
+tbody tr:last-child td { border-bottom: none; }
+td strong { color: var(--color-fg); }
+.matrix-cell-r { color: var(--color-primary); font-weight: 600; }
+.matrix-cell-s { color: var(--color-fg-muted); font-weight: 600; }
+
+/* Swim lane */
+.swimlane {
+  display: grid;
+  grid-template-columns: 140px repeat(3, 1fr);
+  gap: 1px;
+  background: var(--color-border);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-top: 1.5rem;
+}
+.swimlane > div {
+  background: var(--color-bg);
+  padding: 0.875rem 1rem;
+  font-size: 0.875rem;
+}
+.swimlane .lane-head {
+  background: var(--color-dark-bg);
+  color: var(--color-dark-fg);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+}
+.swimlane .row-head {
+  background: var(--color-surface-alt);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  display: flex;
+  align-items: center;
+}
+.swimlane .cell-owner { border-left: 3px solid var(--color-primary); }
+.swimlane .cell-support { border-left: 3px solid var(--color-accent-teal); }
+.swimlane .cell-empty { background: var(--color-muted); color: var(--color-fg-muted); font-style: italic; }
+.swimlane-legend {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
+  color: var(--color-fg-muted);
+}
+.swimlane-legend .key { display: inline-flex; align-items: center; gap: 0.5rem; }
+.swimlane-legend .swatch {
+  display: inline-block; width: 14px; height: 3px;
+}
+.swimlane-legend .swatch.owner { background: var(--color-primary); }
+.swimlane-legend .swatch.support { background: var(--color-accent-teal); }
+
+/* Highlight tile */
+.highlight {
+  border-left: 3px solid var(--color-primary);
+  background: var(--color-surface);
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: var(--fs-base);
+}
+.highlight strong { color: var(--color-fg); }
+
+/* Status blocks */
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+.status-block h4 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+.status-block ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: var(--fs-sm);
+  color: var(--color-fg);
+}
+.status-block li { margin-bottom: 0.375rem; }
+
+/* Team cards */
+.team-col h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.125rem;
+  color: var(--color-fg);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.team-col ul { list-style: none; padding: 0; margin: 0; font-size: var(--fs-sm); }
+.team-col li { margin-bottom: 0.5rem; line-height: 1.5; }
+.team-col li strong { color: var(--color-fg); display: block; font-weight: 600; }
+.team-col li span { color: var(--color-fg-muted); }
+
+/* Footer */
+.footer {
+  background: var(--color-dark-bg);
+  color: rgba(242, 242, 236, 0.7);
+  padding: 2rem 0;
+  font-size: var(--fs-sm);
+}
+.footer a { color: rgba(242, 242, 236, 0.9); }
+.footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+
+/* Anchor offset for sticky nav */
+section[id] { scroll-margin-top: 72px; }
+
+/* Responsive */
+@media (max-width: 720px) {
+  .swimlane { grid-template-columns: 100px repeat(3, 1fr); }
+  .swimlane > div { padding: 0.625rem 0.5rem; font-size: 0.75rem; }
+  .nav-inner { gap: 0.875rem; }
+  .nav a.nav-link { font-size: 0.75rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* Print */
+@media print {
+  .nav, .footer { display: none; }
+  .hero { background: var(--color-bg); color: var(--color-fg); }
+  .hero h1, .hero .frame { color: var(--color-fg); }
+  .section { padding-block: 1.5rem; page-break-inside: avoid; }
+  .swimlane, .card, table { box-shadow: none; }
+  body { font-size: 11pt; }
+  a { color: var(--color-fg); text-decoration: none; }
+}
+</style>
 </head>
 <body>
-  <h1>Cornerstone Well-Being Program</h1>
-  <p class="subtitle">Powered by Amaze Health</p>
-  <hr class="divider">
-  <p>Project hub under construction.</p>
-  <p class="status">v0 scaffold &middot; live build in progress</p>
+
+<nav class="nav" aria-label="Section navigation">
+  <div class="nav-inner">
+    <span class="nav-brand">Cornerstone Well-Being</span>
+    <a class="nav-link" href="#overview">Overview</a>
+    <a class="nav-link" href="#sales">Sales</a>
+    <a class="nav-link" href="#implementation">Implementation</a>
+    <a class="nav-link" href="#service">Service</a>
+    <a class="nav-link" href="#buckets">Two Buckets</a>
+    <a class="nav-link" href="#roles">Roles</a>
+    <a class="nav-link" href="#pipeline">Pipeline</a>
+    <a class="nav-link" href="#documents">Documents</a>
+    <a class="nav-link" href="#status">Status</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <span class="eyebrow">Internal Working Hub</span>
+    <h1>Cornerstone Well-Being Program</h1>
+    <p class="subtitle">Powered by Amaze Health</p>
+    <p class="frame">A Section 125 fixed-indemnity wellbeing program built on Capitol Group's carrier infrastructure, delivered through Nexus Benefit Solutions with Insight Benefits as TPA.</p>
+  </div>
+</header>
+
+<section class="section" id="overview">
+  <div class="container">
+    <span class="eyebrow">Overview</span>
+    <h2>What this program is, and who does what</h2>
+    <div class="prose">
+      <p>The Cornerstone Well-Being Program runs on rails Capitol Group has spent years building. The CEHAS captive, the SiriusPoint reinsurance layer, the carrier paper, and the invoicing infrastructure that supports it all are foundational — none of that gets duplicated, and the program does not exist without it.</p>
+      <p>What Nexus is building is the distribution, implementation, and ongoing-service layer that runs on top of those rails. Sales qualification, employee education, payroll setup, weekly eligibility audits, and the client-facing front door in steady state — that's the operational lane Nexus owns, with Insight Benefits as the TPA partner doing the per-cycle work on the Nexus side of the line.</p>
+      <p>Amaze Health owns the clinical experience end-to-end. Virtual primary care, concierge engagement, prescriptions, and member-side disenrollment — that's their domain, and Nexus and Insight stay out of care delivery entirely.</p>
+      <p>We are early. The Capitol partnership was a May 1 handshake; structure is under operational review. This hub is the working reference for the seams between the four parties — process, roles, hour load, contract and file handoffs, pipeline, and status. It is meant to read like an internal operations doc, not a pitch.</p>
+    </div>
+
+    <div class="partner-grid">
+      <div class="partner-card">
+        <span class="name">Nexus</span>
+        <p class="role">Distribution, qualification, implementation, ongoing audit. Client-facing front door.</p>
+      </div>
+      <div class="partner-card">
+        <span class="name">Capitol Group</span>
+        <p class="role">Carrier paper, CEHAS captive, SiriusPoint reinsurance, eligibility ingest, invoicing, ACH.</p>
+      </div>
+      <div class="partner-card">
+        <span class="name">Insight Benefits</span>
+        <p class="role">TPA — payroll setup, biweekly audit, eligibility file maintenance, change comms.</p>
+      </div>
+      <div class="partner-card">
+        <span class="name">Amaze Health</span>
+        <p class="role">Virtual primary care, $0 copay Rx, member engagement, disenrollment intake.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="sales">
+  <div class="container">
+    <span class="eyebrow">Process · 01</span>
+    <h2>Sales</h2>
+    <div class="prose">
+      <p>Nexus runs two sales teams. Jason owns both and sits on every deal personally. That isn't a growth-stage quirk — it's the design. Keeping the owner on every conversation is how we hold the qualification line and make sure nothing moves forward that shouldn't. The program rides on infrastructure Capitol has spent years building; the responsibility on our side is to make sure the groups we put through it are the right groups.</p>
+      <p>Qualification happens upfront and it is deliberately tight. The target profile is 50 to 1,000 eligible employees, with the sweet spot between 50 and 300. We want stable populations, low turnover, and a real payroll function already in place. We do not pursue staffing companies, restaurants, farming or seasonal operations, or any industry where churn or wage volatility would create month-over-month eligibility noise. That narrowness is the upstream risk filter — getting it right at the front end keeps implementation and ongoing service low-lift for everyone downstream, including Capitol.</p>
+      <p>From first conversation, the flow is discovery, then presentation, then a payroll-report build done jointly with the client's HR or payroll contact. Wendy or Shea pulls that build early — it is technically still sales, but it is where sales starts to bleed into implementation. We ask for two data points: a current payroll register and a W-4 filing status report. Those two files feed our proprietary quoting tool, which runs an AI census audit, flags qualification issues, surfaces discrepancies between W-4 elections and actual paycheck behavior, produces an eligibility cheat sheet, and generates a before-and-after paycheck view for every employee.</p>
+      <p>The output of that tool becomes the proposal. The client reviews it, asks questions, and either signs or doesn't. Both sides go in eyes wide open — if anything in the data or the conversation tells us this group isn't a fit, or if the client isn't comfortable with what they're seeing, the deal doesn't move. Once signed, the file hands off to implementation.</p>
+    </div>
+    <ol class="steps">
+      <li>Discovery and qualification against the target profile</li>
+      <li>Presentation</li>
+      <li>Joint payroll-report build with client HR / payroll (register + W-4 status)</li>
+      <li>Quoting tool: AI census audit, qualification flags, discrepancy detection, eligibility cheat sheet, per-employee before/after paycheck</li>
+      <li>Proposal generation, client review, signature</li>
+      <li>Handoff to implementation</li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="implementation">
+  <div class="container">
+    <span class="eyebrow">Process · 02</span>
+    <h2>Implementation</h2>
+    <div class="prose">
+      <p>A signed proposal triggers implementation. The first piece of work is payroll setup with the client. Two codes need to land in the client's payroll system: a Section 125 pre-tax deduction code for the employee contribution, and a separate reimbursement code for the indemnity payments, which are not wages and need to be coded as such. Getting these set correctly at the start is what keeps the downstream cycle clean.</p>
+      <p>From there, Insight Benefits builds the initial payroll file. For clients with sophisticated payroll systems, we deliver an upload-ready file. For clients who prefer to enter changes manually, we deliver the same data in a format their admin can work from. Either way, the first payroll run after go-live gets a 100 percent audit — not a spot check, every line — to confirm deductions, reimbursements, and eligibility all reconcile to what was sold.</p>
+      <p>In parallel, the employee education window opens. This runs 4 to 6 weeks before go-live and includes Amaze Health communications, individual before-and-after paycheck statements per employee, and a clearly marked opt-out path that routes through Amaze. Employees see exactly what is changing on their check, what they are getting in return, and how to decline if they don't want to participate.</p>
+      <p>Insight Benefits is the operational labor partner across this phase. They execute the payroll setup, run the audit, and own the change communication cadence with the client's payroll admin. Nexus stays in the loop and owns the client relationship, but the hands on the keyboard during implementation are Insight's.</p>
+    </div>
+    <ol class="steps">
+      <li>Payroll setup — Section 125 deduction code + indemnity reimbursement code</li>
+      <li>Initial payroll file build (upload-ready or manual entry format)</li>
+      <li>Employee education window, 4–6 weeks, Amaze comms + per-EE before/after statements</li>
+      <li>Opt-out path routed through Amaze</li>
+      <li>100% audit of the first payroll run</li>
+      <li>Go-live</li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="service">
+  <div class="container">
+    <span class="eyebrow">Process · 03</span>
+    <h2>Ongoing Service</h2>
+    <div class="prose">
+      <p>Steady-state service runs on the client's payroll cycle — weekly or biweekly, whichever they're already on. Every cycle, Insight pulls the payroll register, either by the client emailing the report on a standing schedule or by Insight accessing the client's payroll system directly when that has been set up. The register goes into the Nexus quoting and audit system, the same engine that ran the initial census audit during sales.</p>
+      <p>The system runs an eligibility audit against the new file. It identifies who is still qualified, who is no longer qualified because of a pay change or a leave or a status shift, who is newly eligible because a new hire has cleared the waiting period, and who needs to be reclassified. The output is a variance view that Insight reviews at a glance before anything is pushed forward.</p>
+      <p>This review step is intentional. The pattern we watch for is the wild swing — a count that moves more than the population should reasonably move in a single cycle. The Davenport adjunct-faculty episode is the cautionary tale we keep in front of the team: a payroll feed shifted dramatically one cycle because of an adjunct payroll quirk, and the lesson was that when a number doesn't look right, you stop and ask before you push. "Houston, we have a problem" is the posture — pause, verify, then proceed.</p>
+      <p>Once the variances are reconciled, Insight emails the client's payroll admin with the changes for that cycle and pushes an updated eligibility file to Capitol's CEHAS system. That weekly push is what keeps invoicing and ACH on an accurate roster — Capitol bills off the eligibility file we send. Brenda at Insight is likely to own the steady-state cadence; Howard, Brenda Brown, Lindsay, and Breanne are the implementation-side touchpoints who hand work into that cadence. Amaze Health handles disenrollment requests directly — employees who decide they no longer want to participate route through Amaze, and the change flows back to Insight on the next cycle.</p>
+    </div>
+    <ol class="steps">
+      <li>Insight pulls payroll register each cycle (client email or direct access)</li>
+      <li>File ingested into Nexus eligibility audit system</li>
+      <li>System flags still-qualified, no-longer-qualified, newly eligible, and reclassifications</li>
+      <li>Insight reviews variances; large swings pause for verification before push</li>
+      <li>Insight emails payroll admin with the cycle's changes</li>
+      <li>Updated eligibility file pushed to Capitol CEHAS weekly for invoicing and ACH</li>
+      <li>Amaze handles employee disenrollment requests directly</li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="swimlane">
+  <div class="container">
+    <span class="eyebrow">At a glance</span>
+    <h2>Process — who does what, when</h2>
+    <p class="lead">A flat view of the operational seams. Orange tick = owner. Teal tick = supports. Blank cell = not involved in that phase.</p>
+
+    <div class="swimlane" role="table" aria-label="Process swim-lane diagram">
+      <div class="lane-head"></div>
+      <div class="lane-head">Sales</div>
+      <div class="lane-head">Implementation</div>
+      <div class="lane-head">Ongoing Service</div>
+
+      <div class="row-head">Nexus</div>
+      <div class="cell-owner"><strong>Owns.</strong> Prospecting, discovery, qualification, proposal, signature.</div>
+      <div class="cell-support"><strong>Supports.</strong> Owns the relationship and education; Insight does the keyboard work.</div>
+      <div class="cell-owner"><strong>Owns the relationship.</strong> Front door to client; renewal and escalations.</div>
+
+      <div class="row-head">Capitol</div>
+      <div class="cell-support"><strong>Supports.</strong> Carrier paper backs the proposal.</div>
+      <div class="cell-empty">Not involved in implementation labor.</div>
+      <div class="cell-owner"><strong>Owns.</strong> CEHAS ingests eligibility file weekly; invoicing and ACH.</div>
+
+      <div class="row-head">Insight</div>
+      <div class="cell-support"><strong>Supports.</strong> Discovery / qualification touchpoints.</div>
+      <div class="cell-owner"><strong>Owns.</strong> Payroll setup, deduction codes, initial file, 100% first-cycle audit.</div>
+      <div class="cell-owner"><strong>Owns.</strong> Biweekly audit, eligibility file maintenance, change comms.</div>
+
+      <div class="row-head">Amaze</div>
+      <div class="cell-empty">Not involved in the sale.</div>
+      <div class="cell-support"><strong>Supports.</strong> Education comms; opt-out path.</div>
+      <div class="cell-owner"><strong>Owns.</strong> Clinical care, Rx, member engagement, disenrollment intake.</div>
+    </div>
+
+    <div class="swimlane-legend">
+      <span class="key"><span class="swatch owner"></span>Owner</span>
+      <span class="key"><span class="swatch support"></span>Supports</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="buckets">
+  <div class="container">
+    <span class="eyebrow">Routing</span>
+    <h2>Two-Bucket Case Routing</h2>
+    <p class="lead">Nexus operates a narrow lane by design. Cases that fit get full Nexus economics; cases that don't route back to Capitol on a different structure. The less work Nexus does, the less Nexus earns — that's how the incentive stays clean.</p>
+
+    <div class="card-grid-2" style="margin-top:1.5rem;">
+      <div class="card">
+        <span class="eyebrow">Bucket 1</span>
+        <h3>Nexus Standard — Nexus owns end-to-end</h3>
+        <ul style="padding-left:1.1rem; margin:0;">
+          <li><strong>Group size:</strong> 50–1,000 employees. Sweet spot 50–300.</li>
+          <li><strong>Workforce profile:</strong> stable population, low turnover.</li>
+          <li><strong>Wages:</strong> bands that genuinely qualify — no borderline force-fits.</li>
+          <li><strong>Payroll function:</strong> a real, competent payroll owner inside the company.</li>
+          <li><strong>Operational maturity:</strong> leadership engaged, HR responsive, finance willing to participate.</li>
+          <li><strong>Posture:</strong> eyes-wide-open and mutual — either side can walk.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="eyebrow">Bucket 2</span>
+        <h3>Out-of-Profile — routes to Capitol, reduced Nexus comp</h3>
+        <p>When a Nexus advisor or external broker brings a deal that doesn't fit the Standard profile, Nexus does not turn it down. The deal routes to Capitol on a different economic structure so distribution partners keep getting paid and the client gets placed. Capitol owns the operational lift through its existing broker and TPA network.</p>
+        <ul style="padding-left:1.1rem; margin:0;">
+          <li>Staffing companies</li>
+          <li>Farming and other seasonal operations</li>
+          <li>Restaurants and food service, even at 200–300 EE</li>
+          <li>High-turnover industries generally</li>
+          <li>Groups requiring API-level payroll integrations</li>
+          <li>Groups materially larger than the Nexus sweet spot</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <strong>The routing principle.</strong> The economics follow the work. Nexus Standard runs full Nexus economics because Nexus is doing the sales, qualification, implementation, and ongoing audit. Capitol-routed runs reduced Nexus comp because Nexus is contributing distribution only and Capitol absorbs operations.
+    </div>
+  </div>
+</section>
+
+<section class="section" id="hours">
+  <div class="container">
+    <span class="eyebrow">Workload model</span>
+    <h2>Insight Hour-Workload</h2>
+    <p class="lead">What Insight can plan against per client per year. The 5-hour implementation block covers the initial payroll build, first clean audit, education window, and go-live. After that the group is in cycle. Numbers are locked for planning; a group that materially exceeds is treated as an exception, not a re-baseline.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Phase</th>
+            <th>Cadence</th>
+            <th style="text-align:right;">Hours</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sales + Implementation</td>
+            <td>One-time, per group</td>
+            <td style="text-align:right;">5.0</td>
+          </tr>
+          <tr>
+            <td>Ongoing service — payroll audit, eligibility file, change comms</td>
+            <td>30 min × every 2 weeks × 26 cycles</td>
+            <td style="text-align:right;">12.0</td>
+          </tr>
+          <tr>
+            <td>Buffer — unexpected change management</td>
+            <td>Per year</td>
+            <td style="text-align:right;">3.0</td>
+          </tr>
+          <tr>
+            <td><strong>Total per client per year (steady state)</strong></td>
+            <td></td>
+            <td style="text-align:right;"><strong>~20.0</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="margin-top:1.25rem; max-width: var(--prose-max); color: var(--color-fg-muted);">Nexus is intentionally absorbing the heavier work upstream — qualification, education, and the ongoing system-level audit posture — so Insight's per-client hours stay predictable. The model only holds if the Nexus Standard profile is enforced at the front door.</p>
+  </div>
+</section>
+
+<section class="section" id="roles">
+  <div class="container">
+    <span class="eyebrow">Matrix</span>
+    <h2>Roles &amp; Responsibilities</h2>
+    <p class="lead"><span class="matrix-cell-r">R</span> = owns (responsible and accountable). <span class="matrix-cell-s">S</span> = supports (contributes, not the owner). Blank = not involved.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Activity</th>
+            <th>Nexus</th>
+            <th>Capitol</th>
+            <th>Insight</th>
+            <th>Amaze</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Sales / prospecting</td><td class="matrix-cell-r">R</td><td></td><td></td><td></td></tr>
+          <tr><td>Discovery / qualification</td><td class="matrix-cell-r">R</td><td></td><td class="matrix-cell-s">S</td><td></td></tr>
+          <tr><td>Proposal / quote generation</td><td class="matrix-cell-r">R</td><td class="matrix-cell-s">S</td><td></td><td></td></tr>
+          <tr><td>Contract execution (employer-side)</td><td class="matrix-cell-r">R</td><td></td><td class="matrix-cell-s">S</td><td></td></tr>
+          <tr><td>Carrier paper / underwriting</td><td></td><td class="matrix-cell-r">R</td><td></td><td></td></tr>
+          <tr><td>Captive / reinsurance structure</td><td></td><td class="matrix-cell-r">R</td><td></td><td></td></tr>
+          <tr><td>Payroll system integration / initial setup</td><td class="matrix-cell-s">S</td><td></td><td class="matrix-cell-r">R</td><td></td></tr>
+          <tr><td>Payroll deduction + reimbursement code config</td><td class="matrix-cell-s">S</td><td></td><td class="matrix-cell-r">R</td><td></td></tr>
+          <tr><td>Employee education / communications</td><td class="matrix-cell-r">R</td><td></td><td class="matrix-cell-s">S</td><td class="matrix-cell-s">S</td></tr>
+          <tr><td>Member enrollment / disenrollment processing</td><td></td><td></td><td class="matrix-cell-r">R</td><td class="matrix-cell-s">S</td></tr>
+          <tr><td>Weekly / biweekly payroll audit</td><td class="matrix-cell-s">S</td><td></td><td class="matrix-cell-r">R</td><td></td></tr>
+          <tr><td>Eligibility file maintenance</td><td></td><td></td><td class="matrix-cell-r">R</td><td class="matrix-cell-s">S</td></tr>
+          <tr><td>Invoicing / ACH collection</td><td></td><td class="matrix-cell-r">R</td><td class="matrix-cell-s">S</td><td></td></tr>
+          <tr><td>Compliance docs (WRAP / SPD / §125 / COBRA)</td><td class="matrix-cell-r">R</td><td class="matrix-cell-s">S</td><td class="matrix-cell-s">S</td><td></td></tr>
+          <tr><td>Ongoing member medical care</td><td></td><td></td><td></td><td class="matrix-cell-r">R</td></tr>
+          <tr><td>Concierge medical engagement / Rx</td><td></td><td></td><td></td><td class="matrix-cell-r">R</td></tr>
+          <tr><td>Client-facing front door (steady state)</td><td class="matrix-cell-r">R</td><td></td><td class="matrix-cell-s">S</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight" style="margin-top:1.5rem;">
+      Carrier paper, the captive, and reinsurance sit entirely with Capitol — that infrastructure is what the program runs on, and Nexus does not touch it. Payroll mechanics are Insight's domain. The client-facing front door in steady state is shared between Nexus and Insight; to the client it looks like one team. Amaze owns the clinical experience end-to-end.
+    </div>
+  </div>
+</section>
+
+<section class="section" id="documents">
+  <div class="container">
+    <span class="eyebrow">Operational handoffs</span>
+    <h2>Files, contracts, and payroll systems</h2>
+
+    <h3 style="margin-top:2rem;">Eligibility File &amp; Invoicing</h3>
+    <p style="max-width: var(--prose-max);">Weekly cadence aligned to the client's payroll cycle. Nexus produces and maintains the eligibility file. Capitol's CEHAS ingests it weekly, generates the invoice, and initiates ACH collection from the employer.</p>
+
+    <div class="card-grid-2" style="margin-top:1rem;">
+      <div class="card">
+        <h4>Required fields</h4>
+        <ul style="padding-left:1.1rem; margin:0; font-size: var(--fs-sm);">
+          <li>Employee identifiers (employer ID, employee ID, SSN or masked equivalent)</li>
+          <li>Plan election</li>
+          <li>Enrollment status (active, pending, termed)</li>
+          <li>Opt-out flag</li>
+          <li>Non-qualified flag</li>
+          <li>Employee email address</li>
+          <li>Dependent information (where applicable)</li>
+          <li>Coverage effective date</li>
+          <li>Termination date (if applicable)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Delivery method — open decision</h4>
+        <p style="font-size: var(--fs-sm); margin-bottom:0.75rem;"><strong>Option A — CSV push.</strong> Nexus delivers a CSV file to Capitol's intake on the agreed weekly cadence.</p>
+        <p style="font-size: var(--fs-sm); margin-bottom:0.75rem;"><strong>Option B — System access.</strong> Capitol is granted read access to the live Nexus eligibility data and pulls on its own schedule.</p>
+        <p style="font-size: var(--fs-sm); color: var(--color-fg-muted); margin:0;">Decision pending. Nexus is producing a sample CSV deliverable for CEHAS review.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:2.5rem;">Contract Package &amp; E-Sign Flow</h3>
+    <p style="max-width: var(--prose-max);">Three core contracts execute at employer onboarding: the Administrative Services Agreement (ASA), the Compliance Protection Document, and the Request for Coverage. Signatures sequence employer → CEHAS → insurer. Fully executed copies distribute to the client, Nexus, CEHAS, and the carrier.</p>
+    <div class="card" style="margin-top:1rem;">
+      <h4>Pending from Capitol</h4>
+      <ul style="padding-left:1.1rem; margin:0; font-size: var(--fs-sm);">
+        <li>Connie to provide the latest ASA, Compliance Protection document, and Request for Coverage.</li>
+        <li>CEHAS and insurer signature contact details to be confirmed by Connie.</li>
+      </ul>
+    </div>
+
+    <h3 style="margin-top:2.5rem;">Payroll System Support Matrix</h3>
+    <p style="max-width: var(--prose-max);">Standard means the system supports a clean export Nexus can ingest directly. Edge case means manual workflow with the same audit and approval gates applied at the end. Edge-case systems correlate with smaller, less operationally mature employers — itself a qualification signal.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>System</th><th>Handling</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>ADP (Workforce Now)</td><td>Standard — export report, structured upload format</td></tr>
+          <tr><td>I-Solved</td><td>Standard</td></tr>
+          <tr><td>Paycom</td><td>Standard</td></tr>
+          <tr><td>Paychex</td><td>Standard</td></tr>
+          <tr><td>Kronos / UKG</td><td>Standard (encountered less frequently)</td></tr>
+          <tr><td>ADP Run</td><td>Edge case — manual self-service export required</td></tr>
+          <tr><td>Gusto</td><td>Edge case — manual handling</td></tr>
+          <tr><td>Heartland</td><td>Edge case — manual handling</td></tr>
+          <tr><td>QuickBooks Payroll</td><td>Edge case — often used by smaller groups outside Nexus profile</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size: var(--fs-sm); color: var(--color-fg-muted); margin-top:0.75rem; max-width: var(--prose-max);">Brenda Manning is compiling the prioritized payroll vendor list. That work is in flight and will refine this matrix as new systems are encountered in production.</p>
+  </div>
+</section>
+
+<section class="section" id="pipeline">
+  <div class="container">
+    <span class="eyebrow">Distribution</span>
+    <h2>Pipeline</h2>
+    <p class="lead">All Nexus Standard profile. None of these groups are out-of-profile, staffing, or high-turnover. Conversion is sequenced deliberately to protect implementation quality.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Group</th>
+            <th>Est. Employees</th>
+            <th>Target Window</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Cornerstone University</td><td>300</td><td>2026</td><td>Real prospect, active</td></tr>
+          <tr><td>Hillsdale College</td><td>600</td><td>2026</td><td>Real prospect, active</td></tr>
+          <tr><td>Pioneer Construction</td><td>500</td><td>2026</td><td>Existing relationship; Nexus working ancillary product only</td></tr>
+          <tr><td>Big Rapids Products</td><td>400</td><td>2026</td><td>Real prospect, active</td></tr>
+          <tr><td>Harloff Manufacturing</td><td>80</td><td>2026 (Aug–Sep)</td><td>Live demo case; CFO engaged</td></tr>
+          <tr><td>West MI Janitorial</td><td>500</td><td>2026</td><td>Real prospect, active</td></tr>
+          <tr><td>Display Pack</td><td>250</td><td>2026</td><td>Real prospect, active</td></tr>
+          <tr><td>Augusta Tower</td><td>50</td><td>2026</td><td>Real prospect, active</td></tr>
+          <tr><td>Smaller groups (30–50 EE)</td><td>Various</td><td>2026</td><td>Ongoing flow</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight">
+      <strong>2026 goal.</strong> 1,500–2,500 enrolled employees added across new groups. <strong>End-of-2027 goal.</strong> 5,000–6,000 total enrolled employees. An existing book of ~1,200 lives on a predecessor program will migrate into the Cornerstone structure sequenced across 2026.
+    </div>
+  </div>
+</section>
+
+<section class="section" id="status">
+  <div class="container">
+    <span class="eyebrow">Where we are</span>
+    <h2>Status</h2>
+
+    <div class="status-grid">
+      <div class="status-block card">
+        <h4>Partnership Status</h4>
+        <ul>
+          <li><strong>Capitol Group</strong> — handshake May 1; structure under operational review.</li>
+          <li><strong>Insight Benefits</strong> — committed; demo'd; operational coordination underway.</li>
+          <li><strong>Amaze Health</strong> — committed; integration patterns proven on existing book.</li>
+        </ul>
+      </div>
+
+      <div class="status-block card">
+        <h4>Operational Readiness</h4>
+        <ul>
+          <li>Quoting and payroll-audit platform — live and in use on the existing book.</li>
+          <li>Eligibility file format — in design with Capitol's Connie and CEHAS IT.</li>
+          <li>Sample eligibility CSV — in preparation.</li>
+          <li>Sample invoice / payroll summary for CEHAS review — in preparation.</li>
+          <li>Contract package — latest versions pending from Capitol.</li>
+        </ul>
+      </div>
+
+      <div class="status-block card">
+        <h4>Distribution</h4>
+        <ul>
+          <li>Active pipeline — ~2,500 employees across named prospects.</li>
+          <li>2026 target — 1,500–2,500 enrolled lives added.</li>
+          <li>2027 target — 5,000–6,000 total enrolled lives.</li>
+          <li>Existing book migration — ~1,200 lives, sequenced over 2026.</li>
+        </ul>
+      </div>
+
+      <div class="status-block card">
+        <h4>Open Items</h4>
+        <ul>
+          <li>Eligibility file delivery method (CSV push vs. system access) — pending decision with Capitol.</li>
+          <li>ASA / Compliance Protection / Request for Coverage drafts — pending from Capitol.</li>
+          <li>CEHAS and insurer signature contact details — pending from Capitol.</li>
+          <li>Howard ↔ Connie compliance call — scheduled for next week.</li>
+          <li>Payroll vendor priority list — Brenda compiling.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="team">
+  <div class="container">
+    <span class="eyebrow">Who's who</span>
+    <h2>Team</h2>
+
+    <div class="card-grid-4" style="margin-top:1.5rem;">
+      <div class="team-col">
+        <h3>Nexus Benefit Solutions</h3>
+        <ul>
+          <li><strong>Jason Bearup</strong><span>Owner. Sales lead on every deal. Architect of the platform.</span></li>
+          <li><strong>Ken Fortier</strong><span>Co-founder, advisor.</span></li>
+          <li><strong>Brenda Manning</strong><span>Senior advisor; liaison to Capitol; deep TPA background.</span></li>
+          <li><strong>Cameron Manning</strong><span>Advisor.</span></li>
+          <li><strong>Tom Snikkers</strong><span>Advisor (TBD on platform commitment).</span></li>
+          <li><strong>Wendy</strong><span>Ops / implementation; payroll-report builds.</span></li>
+          <li><strong>Shea</strong><span>Ops / implementation; payroll-report builds.</span></li>
+        </ul>
+      </div>
+
+      <div class="team-col">
+        <h3>Insight Benefits</h3>
+        <ul>
+          <li><strong>Howard Lancaster</strong><span>Principal; compliance and operations leadership.</span></li>
+          <li><strong>Brenda Brown</strong><span>Operations.</span></li>
+          <li><strong>Lindsay Kepley</strong><span>Ops / implementation.</span></li>
+          <li><strong>Breanne Marsiglia</strong><span>Operations.</span></li>
+        </ul>
+      </div>
+
+      <div class="team-col">
+        <h3>Capitol Group</h3>
+        <ul>
+          <li><strong>Scott</strong><span>Principal contact for the carrier relationship.</span></li>
+          <li><strong>Connie</strong><span>Compliance officer; operational handoff lead.</span></li>
+          <li><strong>April</strong><span>Eligibility and invoicing operations.</span></li>
+          <li><strong>CEHAS IT</strong><span>Eligibility file format and delivery.</span></li>
+        </ul>
+      </div>
+
+      <div class="team-col">
+        <h3>Amaze Health</h3>
+        <ul>
+          <li><strong>Dave Silverstein</strong><span>Principal contact.</span></li>
+          <li><strong>Amaze Health team</strong><span>Member education, concierge medicine, disenrollment requests.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div>Last updated: 2026-05-16 · Cornerstone Well-Being Program · Internal working hub.</div>
+    <div>Questions? <a href="mailto:jason@nexusbenefitsolutions.com">jason@nexusbenefitsolutions.com</a></div>
+  </div>
+</footer>
+
 </body>
 </html>

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cornerstone Well-Being — Payroll Cycle Summary — Acme Manufacturing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAF7;
+  --surface: #E8EADF;
+  --surface-alt: #DDE0D3;
+  --muted: #E5E6DD;
+  --border: #D9DDCC;
+  --fg: #1F3D2E;
+  --fg-muted: #5C7066;
+  --primary: #C75A2C;
+  --primary-hover: #B8522A;
+  --accent-green: #10B981;
+  --destructive: #BD2828;
+  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: "DM Serif Display", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  color: var(--fg);
+  background: var(--bg);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 56px 56px 80px;
+}
+.eyebrow {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 600;
+  color: var(--fg-muted);
+  margin-bottom: 12px;
+}
+h1 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 2.6rem;
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+h2 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.6rem;
+  margin: 40px 0 16px;
+  letter-spacing: -0.01em;
+}
+h3 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+  margin: 0 0 12px;
+}
+.lede {
+  color: var(--fg-muted);
+  max-width: 640px;
+  margin: 0 0 28px;
+}
+.header-meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding: 24px 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 36px;
+}
+.header-meta .item .label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--fg-muted);
+  margin-bottom: 4px;
+}
+.header-meta .item .value {
+  font-weight: 600;
+  font-size: 1rem;
+}
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 22px;
+}
+.card .big {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  line-height: 1;
+  margin: 8px 0 4px;
+}
+.card .sublabel {
+  color: var(--fg-muted);
+  font-size: 0.85rem;
+}
+.plan-tally {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+.plan-tally .tile {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 10px;
+  text-align: center;
+}
+.plan-tally .plan-name {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.plan-tally .count {
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  line-height: 1;
+  margin: 6px 0 2px;
+}
+.plan-tally .premium {
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  margin-bottom: 12px;
+}
+thead th {
+  text-align: left;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--fg-muted);
+  padding: 12px 10px;
+  border-bottom: 1.5px solid var(--border);
+  background: var(--bg);
+}
+tbody td {
+  padding: 11px 10px;
+  border-bottom: 1px solid var(--border);
+}
+tbody tr:hover { background: rgba(232, 234, 223, 0.4); }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.pos { color: var(--accent-green); font-weight: 500; }
+.neg { color: var(--destructive); font-weight: 500; }
+.flag {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.flag-active { background: #E8EADF; color: var(--fg-muted); }
+.flag-new { background: #D1FAE5; color: #047857; }
+.flag-term { background: #FEE2E2; color: #B91C1C; }
+.flag-variance { background: #FEF3C7; color: #B45309; }
+.variance-box {
+  border-left: 3px solid var(--primary);
+  padding: 14px 20px;
+  background: var(--muted);
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 14px;
+}
+.variance-box .vtitle {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.variance-box .vmeta {
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+}
+.footer {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+}
+.footer .delta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.footer .delta {
+  font-family: var(--font-serif);
+  color: var(--fg);
+  font-size: 1.5rem;
+}
+.signoff {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  flex-direction: column;
+  text-align: right;
+}
+.signoff .initials {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: var(--fg);
+  margin-top: 8px;
+}
+.brand-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.brand {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+}
+.brand .accent { color: var(--primary); }
+.doc-id {
+  font-size: 0.8rem;
+  color: var(--fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+@media print {
+  body { background: white; }
+  .page { padding: 24px; max-width: 100%; }
+  table { font-size: 0.78rem; }
+  thead th, tbody td { padding: 7px 6px; }
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.3rem; margin-top: 24px; }
+  .card, .header-meta, .variance-box { break-inside: avoid; }
+  tr { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="brand-bar">
+    <div class="brand">Cornerstone <span class="accent">Well-Being</span> Program</div>
+    <div class="doc-id">Payroll Cycle Summary &middot; Doc #PCS-2026-0094</div>
+  </div>
+
+  <div class="eyebrow">Internal Cycle Audit &middot; Nexus / Insight Operations</div>
+  <h1>Payroll Cycle Summary</h1>
+  <p class="lede">Biweekly payroll audit for the Cornerstone Well-Being Program. Reviewed by the Insight back-office team prior to release of carrier eligibility file and employer payroll posting.</p>
+
+  <div class="header-meta">
+    <div class="item">
+      <div class="label">Employer</div>
+      <div class="value">Acme Manufacturing</div>
+    </div>
+    <div class="item">
+      <div class="label">Group ID</div>
+      <div class="value">CWB-ACME-0417</div>
+    </div>
+    <div class="item">
+      <div class="label">Pay Period</div>
+      <div class="value">Apr 27 – May 10, 2026</div>
+    </div>
+    <div class="item">
+      <div class="label">Cycle Frequency</div>
+      <div class="value">Biweekly &middot; Cycle 9 of 26</div>
+    </div>
+  </div>
+
+  <div class="summary-grid">
+    <div class="card">
+      <h3>Enrolled</h3>
+      <div class="big">20</div>
+      <div class="sublabel">of 25 eligible employees<br>(80.0% participation)</div>
+    </div>
+    <div class="card">
+      <h3>Enrollment by Plan Level</h3>
+      <div class="plan-tally">
+        <div class="tile"><div class="plan-name">1500</div><div class="count">3</div><div class="premium">$1,500/mo</div></div>
+        <div class="tile"><div class="plan-name">1200</div><div class="count">4</div><div class="premium">$1,200/mo</div></div>
+        <div class="tile"><div class="plan-name">900</div><div class="count">5</div><div class="premium">$900/mo</div></div>
+        <div class="tile"><div class="plan-name">700</div><div class="count">3</div><div class="premium">$700/mo</div></div>
+        <div class="tile"><div class="plan-name">500</div><div class="count">3</div><div class="premium">$500/mo</div></div>
+        <div class="tile"><div class="plan-name">350</div><div class="count">2</div><div class="premium">$350/mo</div></div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Per-Employee Detail</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Employee</th>
+        <th>Plan</th>
+        <th class="num">Pre-Tax Deduction (Cycle)</th>
+        <th class="num">Reimbursement (Cycle)</th>
+        <th class="num">Net Paycheck Change</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Acker, Daniel</td><td>1500</td><td class="num">$692.31</td><td class="num">$553.85</td><td class="num pos">+$48.27</td><td><span class="flag flag-active">Active</span></td></tr>
+      <tr><td>Bauer, Megan</td><td>1500</td><td class="num">$692.31</td><td class="num">$553.85</td><td class="num pos">+$51.92</td><td><span class="flag flag-active">Active</span></td></tr>
+      <tr><td>Castellanos, Luis</td><td>1500</td><td class="num">$692.31</td><td class="num">$553.85</td><td class="num pos">+$46.10</td><td><span class="flag flag-active">Active</span></td></tr>
+      <tr><td>DeWitt, Karen</td><td>1200</td><td class="num">$553.85</td><td class="num">$443.08</td><td class="num pos">+$38.74</td><td><span class="flag flag-active">Active</span></td></tr>
+      <tr><td>Eriksen, Paul</td><td>1200</td><td class="num">$553.85</td><td class="num">$443.08</td><td class="num pos">+$41.20</td><td><span class="flag flag-active">Active</span></td></tr>
+      <tr><td>Foley, Marcus</td><td>1200</td><td class="num">$553.85</td><td class="num">$443.08</td><td class="num pos">+$39.55</td><td><span class="flag flag-variance">Variance</span></td></tr>
+      <tr><td>Gallego, Rosa</td><td>1200</td><td class="num">$553.85</td><td class="num">$443.08</td><td class="num pos">+$37.91</td><td><span class="flag flag-active">Active</span></td></tr>
+      <tr><td>Henderson, Tyler</td><td>900</td><td class="num">$415.38</td><td class="num">$332.31</td><td class="num pos">+$29.04</td><td><span class="flag flag-active">Active</span></td></tr>
+      <tr><td>Iverson, Brianne</td><td>900</td><td class="num">$415.38</td><td class="num">$332.31</td><td class="num pos">+$28.62</td><td><span class="flag flag-active">Active</span></td></tr>
+      <tr><td>Johansson, Eric</td><td>900</td><td class="num">$415.38</td><td class="num">$332.31</td><td class="num pos">+$30.18</td><td><span class="flag flag-new">New</span></td></tr>
+      <tr><td>Kowalski, Anna</td><td>900</td><td class="num">$415.38</td><td class="num">$332.31</td><td class="num pos">+$27.85</td><td><span class="flag flag-active">Active</span></td></tr>
+      <tr><td>Larkin, Jeremy</td><td>900</td><td class="num">$415.38</td><td class="num">$332.31</td><td class="num pos">+$29.41</td><td><span class="flag flag-active">Active</span></td></tr>
+      <tr><td>Martinez, Sofia</td><td>700</td><td class="num">$323.08</td><td class="num">$258.46</td><td class="num pos">+$22.07</td><td><span class="flag flag-active">Active</span></td></tr>
+      <tr><td>Nguyen, Trevor</td><td>700</td><td class="num">$323.08</td><td class="num">$258.46</td><td class="num pos">+$22.79</td><td><span class="flag flag-active">Active</span></td></tr>
+      <tr><td>O'Brien, Patrick</td><td>700</td><td class="num">$323.08</td><td class="num">$258.46</td><td class="num pos">+$21.50</td><td><span class="flag flag-active">Active</span></td></tr>
+      <tr><td>Patel, Anjali</td><td>500</td><td class="num">$230.77</td><td class="num">$184.62</td><td class="num pos">+$16.10</td><td><span class="flag flag-active">Active</span></td></tr>
+      <tr><td>Quinn, Stephen</td><td>500</td><td class="num">$230.77</td><td class="num">$184.62</td><td class="num pos">+$15.85</td><td><span class="flag flag-active">Active</span></td></tr>
+      <tr><td>Ramirez, Christina</td><td>500</td><td class="num">$230.77</td><td class="num">$184.62</td><td class="num pos">+$16.42</td><td><span class="flag flag-active">Active</span></td></tr>
+      <tr><td>Stein, Aaron</td><td>350</td><td class="num">$161.54</td><td class="num">$129.23</td><td class="num pos">+$11.27</td><td><span class="flag flag-active">Active</span></td></tr>
+      <tr><td>Thompson, Hannah</td><td>350</td><td class="num">$161.54</td><td class="num">$129.23</td><td class="num pos">+$11.04</td><td><span class="flag flag-active">Active</span></td></tr>
+    </tbody>
+    <tfoot>
+      <tr style="font-weight:600;">
+        <td colspan="2" style="padding:13px 10px; border-top:1.5px solid var(--border);">Cycle Totals (20 enrolled)</td>
+        <td class="num" style="padding:13px 10px; border-top:1.5px solid var(--border);">$8,353.86</td>
+        <td class="num" style="padding:13px 10px; border-top:1.5px solid var(--border);">$6,683.08</td>
+        <td class="num pos" style="padding:13px 10px; border-top:1.5px solid var(--border);">+$585.83</td>
+        <td style="padding:13px 10px; border-top:1.5px solid var(--border);"></td>
+      </tr>
+    </tfoot>
+  </table>
+  <p style="font-size:0.78rem; color:var(--fg-muted); margin-top:4px;">Net paycheck change reflects FICA savings on the §125 pre-tax deduction net of cycle-level tax adjustments. Reimbursement disbursed via post-tax line item on the same paycheck.</p>
+
+  <h2>Variance &amp; Lifecycle Notes</h2>
+
+  <div class="variance-box">
+    <div class="vtitle">New enrollment — Eric Johansson (Plan 900)</div>
+    <div class="vmeta">Hired Mar 2, 2026 &middot; Completed 60-day waiting period Apr 30, 2026 &middot; First deduction this cycle. Eligibility file updated; carrier confirmation pending.</div>
+  </div>
+
+  <div class="variance-box">
+    <div class="vtitle">Wage variance — Marcus Foley (Plan 1200)</div>
+    <div class="vmeta">Gross wages increased $1.25/hr effective Apr 28 (W-4 unchanged). Deduction percentage of pay unchanged; net paycheck impact within ±$5 tolerance — no plan adjustment required. Flagged for trend monitoring next cycle.</div>
+  </div>
+
+  <div class="variance-box">
+    <div class="vtitle">Disenrollment — none this cycle</div>
+    <div class="vmeta">No terminations, voluntary opt-outs, or LOA events affecting eligibility this period.</div>
+  </div>
+
+  <div class="variance-box">
+    <div class="vtitle">Eligible-not-enrolled — 5 employees</div>
+    <div class="vmeta">5 of 25 eligible employees remain unenrolled (3 declined at open enrollment, 2 within 60-day waiting period). Re-offer scheduled at Q3 mid-year window.</div>
+  </div>
+
+  <div class="footer">
+    <div>
+      <h3 style="margin-bottom:14px;">Cycle-over-Cycle Delta</h3>
+      <div class="delta-grid">
+        <div>
+          <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em;">Enrollment</div>
+          <div class="delta">19 &rarr; 20</div>
+          <div>+1 (new hire past waiting period)</div>
+        </div>
+        <div>
+          <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em;">Cycle Premium</div>
+          <div class="delta">$7,938.48 &rarr; $8,353.86</div>
+          <div>+$415.38 (+5.2%)</div>
+        </div>
+      </div>
+    </div>
+    <div class="signoff">
+      <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em;">Reviewed by Insight Benefits</div>
+      <div class="initials">WU &middot; HL</div>
+      <div>Wendi Uhrig (prep) &middot; Howard Lancaster (review)</div>
+      <div style="margin-top:6px;">Released May 11, 2026 &middot; 09:42 ET</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
