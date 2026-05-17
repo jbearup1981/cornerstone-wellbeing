@@ -1275,6 +1275,26 @@ section[id] { scroll-margin-top: 72px; }
       </table>
     </div>
     <p style="font-size: var(--fs-sm); color: var(--color-fg-muted); margin-top:0.75rem; max-width: var(--prose-max);">Brenda Manning is compiling the prioritized payroll vendor list. That work is in flight and will refine this matrix as new systems are encountered in production.</p>
+
+    <h3 style="margin-top:2.5rem;">Sample Artifacts</h3>
+    <p style="max-width: var(--prose-max);">Working examples of the files this program produces. Sanitized, sample-only — not live client data.</p>
+    <div class="card-grid-3" style="margin-top:1rem;">
+      <div class="card">
+        <h4>Eligibility CSV</h4>
+        <p style="font-size: var(--fs-sm); margin-bottom:0.75rem;">25 rows demonstrating the weekly file format Nexus produces for CEHAS ingestion. Mix of enrolled, opt-out, non-qualified, pending, and terminated rows.</p>
+        <p style="font-size: var(--fs-sm); margin:0;"><a href="artifacts/sample-eligibility-acme-manufacturing.csv">Download sample-eligibility-acme-manufacturing.csv</a> &middot; <a href="artifacts/sample-eligibility-README.md">Column spec (README)</a></p>
+      </div>
+      <div class="card">
+        <h4>CEHAS Invoice</h4>
+        <p style="font-size: var(--fs-sm); margin-bottom:0.75rem;">What CEHAS generates from a typical month's eligibility data — premium lines per plan tier, totals, and ACH collection terms.</p>
+        <p style="font-size: var(--fs-sm); margin:0;"><a href="artifacts/sample-invoice.html">View sample-invoice.html</a></p>
+      </div>
+      <div class="card">
+        <h4>Payroll Summary</h4>
+        <p style="font-size: var(--fs-sm); margin-bottom:0.75rem;">Nexus's internal biweekly cycle audit doc — reconciles deductions, reimbursements, and net paycheck impact across enrolled employees.</p>
+        <p style="font-size: var(--fs-sm); margin:0;"><a href="artifacts/sample-payroll-summary.html">View sample-payroll-summary.html</a></p>
+      </div>
+    </div>
   </div>
 </section>
 
