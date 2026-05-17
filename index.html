@@ -870,6 +870,173 @@ td strong { color: var(--color-fg); }
   gap: 1.25rem;
   margin-top: 1rem;
 }
+.projection-grid--three { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) {
+  .projection-grid--three { grid-template-columns: 1fr; }
+}
+
+/* Current Book — full-width hero card above the 3-up projections */
+.current-book-card {
+  border-top: 3px solid var(--color-fg);
+  padding: 1.5rem 1.75rem 1.25rem;
+  margin-top: 1rem;
+}
+.current-book-card .cb-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  margin-bottom: 0.75rem;
+}
+.current-book-card h4 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: var(--color-fg);
+  margin: 0.15rem 0 0;
+  line-height: 1.2;
+}
+.current-book-card .cb-narrative {
+  font-size: var(--fs-sm);
+  color: var(--color-fg);
+  line-height: 1.55;
+  margin: 0 0 1.25rem;
+  max-width: 80ch;
+}
+.cb-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.75rem;
+  margin: 0 0 1.25rem;
+  list-style: none;
+  padding: 0;
+}
+.cb-stats li {
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 0.9rem;
+}
+.cb-stats .cb-stat-label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-fg-muted);
+  margin-bottom: 0.2rem;
+}
+.cb-stats .cb-stat-value {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  line-height: 1.1;
+}
+.cb-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(260px, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .cb-body { grid-template-columns: 1fr; }
+}
+.cb-clients-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+}
+.cb-clients-table thead th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-fg-muted);
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.cb-clients-table td {
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-fg);
+  vertical-align: top;
+}
+.cb-clients-table td.cb-lives { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.cb-clients-table tr.cb-total td {
+  background: rgba(199, 90, 44, 0.06);
+  font-weight: 600;
+  border-bottom: none;
+  padding-top: 0.55rem;
+  padding-bottom: 0.55rem;
+}
+.cb-clients-table tr.cb-total td strong { color: var(--color-primary); }
+.cb-davenport-note {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--color-fg-muted);
+  font-style: italic;
+  margin-top: 0.15rem;
+  line-height: 1.35;
+}
+.cb-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.cb-mix {
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.1rem;
+}
+.cb-mix-title {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-fg-muted);
+  font-weight: 600;
+  margin: 0 0 0.6rem;
+}
+.cb-mix ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.cb-mix li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: var(--fs-sm);
+  color: var(--color-fg);
+  line-height: 1.4;
+}
+.cb-mix li .cb-mix-label { color: var(--color-fg); }
+.cb-mix li .cb-mix-value {
+  color: var(--color-primary);
+  font-weight: 600;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.cb-highlight {
+  border-left: 3px solid var(--color-primary);
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  font-size: var(--fs-sm);
+  color: var(--color-fg);
+  line-height: 1.5;
+}
+.cb-highlight-eyebrow {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
 .projection-card {
   display: flex;
   flex-direction: column;
@@ -1314,7 +1481,7 @@ section[id] { scroll-margin-top: 72px; }
         <p class="role">Distribution, qualification, implementation, ongoing audit. Client-facing front door.</p>
       </div>
       <div class="partner-card">
-        <div class="logo"><span class="logo-text">Capitol Group</span></div>
+        <div class="logo"><img src="assets/logos/capitol.png" alt="Capitol Group"></div>
         <span class="name">Capitol Group</span>
         <p class="role">Carrier paper, CEHAS captive, SiriusPoint reinsurance, eligibility ingest, invoicing, ACH.</p>
       </div>
@@ -2003,55 +2170,69 @@ section[id] { scroll-margin-top: 72px; }
         </ul>
       </div>
 
-      <div class="projection-grid">
-        <div class="projection-card card" style="border-top-color: var(--color-fg);">
-          <span class="proj-eyebrow" style="color: var(--color-fg);">Live Today · May 2026</span>
-          <h4>Current Book</h4>
-          <p class="proj-narrative">Live operational footprint today across 17 mixed groups — the full Section 125 wellbeing program (EH / CEHAS), Amaze-only concierge medicine relationships, one legacy Champion group transitioning to the new product, and one Elysian relationship. These groups are our operational proof — we already run this.</p>
-          <table class="proj-table">
-            <thead>
-              <tr><th>Metric</th><th colspan="2">Value</th></tr>
-            </thead>
-            <tbody>
-              <tr class="proj-base"><td>Enrolled lives</td><td colspan="2"><strong>~848</strong></td></tr>
-              <tr><td>Active groups</td><td colspan="2"><strong>17</strong></td></tr>
-              <tr><td>Avg group size</td><td colspan="2"><strong>~50 lives / group</strong></td></tr>
-            </tbody>
-          </table>
-          <table class="proj-table" style="margin-top:0.75rem;">
-            <thead>
-              <tr><th>#</th><th>Client</th><th>Products</th><th>Lives</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>1</td><td>Zip Xpress</td><td>Champion → transitioning</td><td>200</td></tr>
-              <tr><td>2</td><td>Davenport University <span style="display:block; font-size:0.75rem; color:var(--color-fg-muted); font-style:italic; margin-top:0.15rem;">1.5 years from first conversation to live enrollment — flagship education account</span></td><td>EH (CEHAS)</td><td>~225</td></tr>
-              <tr><td>3</td><td>E Fulfillment Service</td><td>EH</td><td>90</td></tr>
-              <tr><td>4</td><td>Great Lakes Label / Bindery</td><td>EH + Amaze</td><td>~53</td></tr>
-              <tr><td>5</td><td>Cornerstone Church of Caledonia</td><td>Amaze</td><td>40</td></tr>
-              <tr><td>6</td><td>One Way Products</td><td>Amaze</td><td>~38</td></tr>
-              <tr><td>7</td><td>Creston Industrial Sales</td><td>Amaze</td><td>30</td></tr>
-              <tr><td>8</td><td>Perceptive Controls + Service & Ops</td><td>Amaze</td><td>30</td></tr>
-              <tr><td>9</td><td>Steel 21</td><td>EH</td><td>~24</td></tr>
-              <tr><td>10</td><td>Permaloc Corporation</td><td>EH</td><td>~22</td></tr>
-              <tr><td>11</td><td>Stearns Drilling Company</td><td>EH (ENVI stream)</td><td>20</td></tr>
-              <tr><td>12</td><td>Burco Inc.</td><td>EH</td><td>~18</td></tr>
-              <tr><td>13</td><td>Vanity Salon and Spa</td><td>EH</td><td>10</td></tr>
-              <tr><td>14</td><td>GR Motor Car</td><td>EH</td><td>~9</td></tr>
-              <tr><td>15</td><td>Red Wagon Advisors</td><td>Amaze</td><td>~7</td></tr>
-              <tr><td>16</td><td>Alano Club of Kent County</td><td>Amaze</td><td>~4</td></tr>
-              <tr><td>17</td><td>CC Capital (dba Car Center)</td><td>Elysian</td><td>~28</td></tr>
-              <tr class="proj-base"><td colspan="3"><strong>Total</strong></td><td><strong>~848</strong></td></tr>
-            </tbody>
-          </table>
-          <ul class="proj-meta">
-            <li style="margin-top:0.5rem;"><strong>Product-mix breakdown:</strong></li>
-            <li>· <strong>EH (CEHAS) — full Section 125 wellbeing program:</strong> 9 groups, ~618 lives (Davenport, E Fulfillment, Steel 21, Permaloc, Stearns, Burco, Vanity, GR Motor Car — plus Great Lakes Label as combined EH + Amaze, ~53 lives)</li>
-            <li>· <strong>Amaze (concierge medicine only, no Section 125 wrapper):</strong> 6 groups, ~149 lives (Cornerstone Church, One Way, Creston, Perceptive, Red Wagon, Alano Club)</li>
-            <li>· <strong>Champion (legacy, transitioning):</strong> Zip Xpress, 200 lives</li>
-            <li>· <strong>Elysian (other carrier paper):</strong> 1 group, ~28 lives (CC Capital / Car Center)</li>
-          </ul>
+      <div class="current-book-card card">
+        <div class="cb-header">
+          <div>
+            <span class="proj-eyebrow" style="color: var(--color-fg);">Live Today · May 2026</span>
+            <h4>Current Book — Existing Operational Footprint</h4>
+          </div>
         </div>
+        <p class="cb-narrative">Live operational footprint today across 17 mixed groups — the full Section 125 wellbeing program (EH / CEHAS), Amaze-only concierge medicine relationships, one legacy Champion group transitioning to the new product, and one Elysian relationship. These groups are our operational proof — we already run this.</p>
 
+        <ul class="cb-stats">
+          <li><span class="cb-stat-label">Enrolled lives</span><span class="cb-stat-value">~848</span></li>
+          <li><span class="cb-stat-label">Active groups</span><span class="cb-stat-value">17</span></li>
+          <li><span class="cb-stat-label">Avg group size</span><span class="cb-stat-value">~50</span></li>
+          <li><span class="cb-stat-label">Product lines</span><span class="cb-stat-value">4</span></li>
+        </ul>
+
+        <div class="cb-body">
+          <table class="cb-clients-table">
+            <thead>
+              <tr><th style="width:2rem;">#</th><th>Client</th><th>Products</th><th class="cb-lives">Lives</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Zip Xpress</td><td>Champion → transitioning</td><td class="cb-lives">200</td></tr>
+              <tr><td>2</td><td>Davenport University<span class="cb-davenport-note">1.5 years from first conversation to live enrollment — flagship education account</span></td><td>EH (CEHAS)</td><td class="cb-lives">~225</td></tr>
+              <tr><td>3</td><td>E Fulfillment Service</td><td>EH</td><td class="cb-lives">90</td></tr>
+              <tr><td>4</td><td>Great Lakes Label / Bindery</td><td>EH + Amaze</td><td class="cb-lives">~53</td></tr>
+              <tr><td>5</td><td>Cornerstone Church of Caledonia</td><td>Amaze</td><td class="cb-lives">40</td></tr>
+              <tr><td>6</td><td>One Way Products</td><td>Amaze</td><td class="cb-lives">~38</td></tr>
+              <tr><td>7</td><td>Creston Industrial Sales</td><td>Amaze</td><td class="cb-lives">30</td></tr>
+              <tr><td>8</td><td>Perceptive Controls + Service & Ops</td><td>Amaze</td><td class="cb-lives">30</td></tr>
+              <tr><td>9</td><td>Steel 21</td><td>EH</td><td class="cb-lives">~24</td></tr>
+              <tr><td>10</td><td>Permaloc Corporation</td><td>EH</td><td class="cb-lives">~22</td></tr>
+              <tr><td>11</td><td>Stearns Drilling Company</td><td>EH (ENVI stream)</td><td class="cb-lives">20</td></tr>
+              <tr><td>12</td><td>Burco Inc.</td><td>EH</td><td class="cb-lives">~18</td></tr>
+              <tr><td>13</td><td>Vanity Salon and Spa</td><td>EH</td><td class="cb-lives">10</td></tr>
+              <tr><td>14</td><td>GR Motor Car</td><td>EH</td><td class="cb-lives">~9</td></tr>
+              <tr><td>15</td><td>Red Wagon Advisors</td><td>Amaze</td><td class="cb-lives">~7</td></tr>
+              <tr><td>16</td><td>Alano Club of Kent County</td><td>Amaze</td><td class="cb-lives">~4</td></tr>
+              <tr><td>17</td><td>CC Capital (dba Car Center)</td><td>Elysian</td><td class="cb-lives">~28</td></tr>
+              <tr class="cb-total"><td colspan="3"><strong>Total</strong></td><td class="cb-lives"><strong>~848</strong></td></tr>
+            </tbody>
+          </table>
+
+          <div class="cb-side">
+            <div class="cb-mix">
+              <p class="cb-mix-title">Product-Mix Breakdown</p>
+              <ul>
+                <li><span class="cb-mix-label"><strong>EH (CEHAS)</strong> — full Section 125 wellbeing program<br><span style="font-size:0.72rem; color:var(--color-fg-muted);">9 groups · Davenport, E Fulfillment, Steel 21, Permaloc, Stearns, Burco, Vanity, GR Motor Car + Great Lakes Label (EH + Amaze)</span></span><span class="cb-mix-value">~618 lives</span></li>
+                <li><span class="cb-mix-label"><strong>Amaze</strong> — concierge medicine only (no §125 wrapper)<br><span style="font-size:0.72rem; color:var(--color-fg-muted);">6 groups · Cornerstone Church, One Way, Creston, Perceptive, Red Wagon, Alano Club</span></span><span class="cb-mix-value">~149 lives</span></li>
+                <li><span class="cb-mix-label"><strong>Champion</strong> — legacy, transitioning<br><span style="font-size:0.72rem; color:var(--color-fg-muted);">Zip Xpress</span></span><span class="cb-mix-value">200 lives</span></li>
+                <li><span class="cb-mix-label"><strong>Elysian</strong> — other carrier paper<br><span style="font-size:0.72rem; color:var(--color-fg-muted);">CC Capital / Car Center</span></span><span class="cb-mix-value">~28 lives</span></li>
+              </ul>
+            </div>
+
+            <div class="cb-highlight">
+              <span class="cb-highlight-eyebrow">Highlights</span>
+              <strong>Davenport University:</strong> 1.5 years from first conversation to live enrollment — flagship education account, ~225 lives. The single biggest piece of the existing book and the rep that made larger education and nonprofit conversations real.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="projection-grid projection-grid--three" style="margin-top:1.5rem;">
         <div class="projection-card card">
           <span class="proj-eyebrow">Window 1</span>
           <h4>6 Months — through Nov 2026</h4>
@@ -2321,7 +2502,7 @@ section[id] { scroll-margin-top: 72px; }
     <div class="container">
       <span class="label">Built in partnership with</span>
       <span class="partner-mark"><img src="assets/logos/nexus.png" alt="Nexus Benefit Solutions"></span>
-      <span class="partner-mark"><span class="logo-text">Capitol Group</span></span>
+      <span class="partner-mark"><img src="assets/logos/capitol.png" alt="Capitol Group"></span>
       <span class="partner-mark"><span class="logo-text">Insight Benefits</span></span>
       <span class="partner-mark"><img src="assets/logos/amaze.png" alt="Amaze Health"></span>
     </div>
