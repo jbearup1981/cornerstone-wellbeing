@@ -1,70 +1,70 @@
+---
+title: "Interactive Tracker Setup"
+date: "2026-05-17"
+tags: []
+---
 # Cornerstone Hub — Interactive Project Tracker Setup
 
-The Project Tracker section on [the hub](https://jbearup1981.github.io/cornerstone-wellbeing/) is now a live, partner-editable view embedded from **Google Sheets**. Until you wire up the Sheet (5-minute one-time step below), the page falls back to the previous static table — so the hub is never broken, just less interactive.
+The Project Tracker section on [the hub](https://jbearup1981.github.io/cornerstone-wellbeing/) is a live, partner-editable view embedded from **Microsoft Excel Online** (the workbook lives on Jason's OneDrive for Business). If the iframe ever fails to load, the page falls back to a static snapshot table — so the hub is never broken, just less interactive.
 
-## Why Google Sheets
+## Why Excel Online / OneDrive
 
 | Option | Friction for Capitol / Insight | Verdict |
 |---|---|---|
-| **Google Sheets** | None — "Anyone with the link" can edit, no account creation, no invites | **Chosen** |
+| **Excel Online (M365)** | Anonymous edit link — no Microsoft account required, no invites. Capitol and Insight both run on M365 so it's already a native tool. | **Chosen** |
+| Google Sheets | Capitol and Insight live in M365; introducing Google Drive added friction. | Replaced |
 | Airtable | Free to view, but editing requires an Airtable account for each partner | Too much friction |
-| Notion (via MCP) | Public pages are read-only for non-members; edit needs invited guests | Wrong tool for cross-org editing |
+| [[Notion]] | Public pages are read-only for non-members; edit needs invited guests | Wrong tool for cross-org editing |
 | GitHub Issues | Partners need GitHub accounts | Nonstarter |
 
-Jason already runs Google Workspace. Capitol and Insight ops people can edit a status cell from a phone in 10 seconds with no login.
+Capitol and Insight ops people can edit a status cell from a phone in 10 seconds with no login. Jason controls the file from his OneDrive.
 
-## 5-Minute Setup (Jason does this once)
+## File Location
 
-### 1. Create the Sheet from the seed CSV
-- Open Google Drive → **New → Google Sheets → Blank spreadsheet**
-- **File → Import → Upload** → drag `cornerstone-wellbeing/artifacts/tracker-seed.csv`
-- Import location: **Replace spreadsheet** · Separator: **Comma** · Convert text to numbers/dates: **Yes**
-- Rename the file: **Cornerstone Well-Being — Live Tracker**
-- Rename the tab: **Tracker**
+**OneDrive path:** `CornerstoneProgram/Cornerstone_Project_Tracker.xlsx`
 
-### 2. Format for readability (optional but recommended, ~2 min)
-- Freeze row 1: View → Freeze → 1 row
-- Bold row 1
-- Format column D (Status) → Data → Data validation → "Dropdown" with values: `Open`, `In Flight`, `Delivered — Awaiting Review`, `Scheduled`, `Blocked`, `Future Phase`, `Done`
-- Format column E (Updated) → Format → Number → Date
-- Optional: conditional formatting on Status column for color pills (Open = orange, Done = green, Blocked = red, Future Phase = gray)
+**Direct web URL (Jason's owner view):**
+`https://nexusbenefitsolutions-my.sharepoint.com/personal/jason_nexusbenefitsolutions_com/_layouts/15/Doc.aspx?sourcedoc=%7B9CF9A6B4-12D6-42E1-8574-A2BC06203A4F%7D&file=Cornerstone_Project_Tracker.xlsx`
 
-### 3. Publish for embed (read-only view)
-- **File → Share → Publish to web**
-- Link tab: choose the **Tracker** sheet (not "Entire Document")
-- Format: **Web page**
-- Click **Publish** → confirm
-- Copy the published URL — looks like `https://docs.google.com/spreadsheets/d/e/<KEY>/pubhtml?gid=0&single=true`
+Item ID (for Graph API calls): `01WKQNOI5UU34ZZVQS4FBIK5FCXQDCAOSP`
 
-### 4. Wire the embed into the hub
-- Open `cornerstone-wellbeing/index.html`
-- Search for `TRACKER_EMBED_URL` (one occurrence in the tracker section)
-- Uncomment the `<iframe>` block (remove the surrounding `<!--` and `-->`)
-- Replace `TRACKER_EMBED_URL` with the published URL from step 3
-- Optionally delete the `<!-- BEGIN: static fallback -->` block — or leave it; it'll be visually replaced by the iframe
-- Commit + push: the GitHub Pages site updates within ~60 seconds
+## Share Links (Generated via Microsoft Graph)
 
-### 5. Grant edit access (private — do NOT publish this link)
-- Back in the Sheet: **Share** (top right)
-- General access: **Anyone with the link** → role **Editor**
-- Copy the link
-- Send privately to:
-  - Brenda Manning (Capitol liaison)
-  - Connie (Capitol Group)
-  - Howard Lancaster (Insight Benefits) + his team — Brenda Brown, Lindsay Kepley, Breanne Marsiglia
-  - Dave Silverstein (Amaze Health) if relevant
-- Tell them: "Find your row, update Status + Notes + Updated date. Page on the hub refreshes within a minute."
+| Link | Scope | Used For |
+|---|---|---|
+| **Anonymous Edit** | `anonymous` / `edit` | Sent privately to Capitol + Insight ops team. Do NOT publish. |
+| **Anonymous View** | `anonymous` / `view` | Used as the iframe `src` on the public hub (with `?action=embedview`). |
 
-**Important:** the embedded `/pubhtml` URL on the hub is **read-only**. The editable link is separate and only goes to people you trust. The hub viewer never sees the edit link.
+Microsoft Graph does not currently support `type: embed` for SharePoint Online business tenants (returns `notSupported`). The workaround is to use the anonymous view-only share URL and append `?action=embedview&wdAllowInteractivity=True&wdHideGridlines=True` — this is the same Doc.aspx embedview that Microsoft serves via the "Embed" UI in OneDrive.
+
+## How the Workbook Is Built
+
+The file is generated from `artifacts/tracker-seed.csv` (11 seed rows). Styling applied:
+
+- **Header row:** forest green (#2D5F3F) fill, white bold text, frozen
+- **Status column (D):** color-coded fill per status value + data-validation dropdown (Open · In Flight · Delivered — Awaiting Review · Scheduled · Blocked · Future Phase · Done)
+- **Owner column (B):** dropdown (Nexus · Capitol · Insight · Amaze)
+- **Auto-filter** on the header row
+- **Column widths + wrap text** sized for the Notes column
+
+Build script (one-shot, lives in `/tmp/build_and_upload.py` during the setup session): converts CSV → styled XLSX with `openpyxl`, uploads to OneDrive via Graph (`PUT /me/drive/root:/path:/content`), creates anonymous edit + view links via `POST /me/drive/items/{id}/createLink`. Token pulled from `~/.config/m365-mcp/token_cache.json` — needs `Files.ReadWrite.All` + share-link permissions.
+
+## 5-Minute Setup (one-time, already done)
+
+1. ✅ CSV → styled XLSX
+2. ✅ Upload to OneDrive at `/CornerstoneProgram/Cornerstone_Project_Tracker.xlsx`
+3. ✅ Anonymous edit link created (private — see Vault)
+4. ✅ Anonymous view link created and wired into the iframe on `index.html`
+5. ✅ Static fallback table preserved in HTML (hidden via `:has(iframe)` CSS when the embed loads)
 
 ## Schema
 
 | Column | Type | Values |
 |---|---|---|
 | Task | Text | The task description (primary) |
-| Owner | Single select | Nexus / Capitol / Insight / Amaze |
-| Owner Detail | Text | Specific person(s), e.g. "Connie" or "Howard ↔ Connie" |
-| Status | Single select | Open · In Flight · Delivered — Awaiting Review · Scheduled · Blocked · Future Phase · Done |
+| Owner | Dropdown | Nexus / Capitol / Insight / Amaze |
+| Owner Detail | Text | Specific person(s), e.g. "Connie" or "[[Howard]] ↔ Connie" |
+| Status | Dropdown | Open · In Flight · Delivered — Awaiting Review · Scheduled · Blocked · Future Phase · Done |
 | Updated | Date | YYYY-MM-DD — partner updates when they touch their row |
 | Notes | Long text | Free-form context, links, blockers |
 
@@ -72,29 +72,38 @@ Seed data lives in `artifacts/tracker-seed.csv` — 11 rows matching the origina
 
 ## Maintenance
 
-- **Adding a new task:** add a row in the Sheet. The embed picks it up automatically.
+- **Adding a new task:** open the workbook (Jason's OneDrive or via the edit link), add a row. The embedded iframe picks it up on the next page load (Excel Online caches ~1 minute).
 - **Removing a task:** delete the row. Same.
-- **Re-publishing isn't needed** after the first publish — Google keeps the published view in sync with the live Sheet (1-minute cache).
-- **Pause an embed:** File → Share → Publish to web → "Stop publishing". The iframe will go blank — that's why the static fallback exists.
-- **Force a manual refresh of the published view:** Publish to web → "Automatically republish when changes are made" should already be on.
+- **Re-uploading isn't needed** — the file lives in OneDrive, edits sync instantly to the embed view.
+- **Pause the embed:** in OneDrive, right-click the file → Manage Access → revoke the anonymous view link. The iframe will go blank; the static fallback will not appear automatically (it's hidden by the `:has(iframe)` rule). To restore the fallback in that case, remove the `<iframe>` tag from `index.html` and commit.
 
 ## Granting edit access to a new person
 
-Just share the editable Sheet URL with them. No code change. No deploy.
+Just share the **anonymous edit URL** privately with them. No code change. No deploy. They click the link, the file opens in Excel Online in their browser, they edit their row, changes save automatically.
 
-If you want to **revoke** access from someone specific, change General access to "Restricted" and add named editors instead — same Share dialog.
+If you want to **revoke** anonymous edit access, go to OneDrive → file → Manage Access → remove the "Anyone with the link can edit" entry. You can replace it with named-person edit invites (Brenda, Connie, Howard, Brenda Brown, Lindsay Kepley, Breanne Marsiglia) if the org policy demands it later.
+
+## Tenant Policy Notes
+
+- Jason's tenant **allows anonymous edit links** (confirmed: `createLink` with `scope: anonymous` + `type: edit` returned 201). If a future tenant policy change blocks anonymous edits, fall back to:
+  1. Anonymous view link (still works for the embed)
+  2. Per-person edit invites for the named partners
+  3. "Anyone in [tenant] with the link can edit" — but this requires partner emails to be added as guest users in the tenant first.
+- `type: embed` is **not supported** on SharePoint Online business tenants via Graph (returns `notSupported`). The Doc.aspx `?action=embedview` URL accomplishes the same thing.
 
 ## Fallback Plan (if the embed breaks)
 
-The static `<table class="tracker-table">` is still in `index.html` inside `.tracker-embed-fallback`. If the iframe ever 404s or Google retires `/pubhtml`:
+The static `<table class="tracker-table">` is still in `index.html` inside `.tracker-embed-fallback`. The CSS rule `.tracker-embed-wrap:has(iframe) .tracker-embed-fallback { display: none; }` hides it while the iframe is present.
 
-1. Remove the `<iframe>` block from the tracker section
-2. The fallback table renders automatically
+If the iframe ever 404s or Microsoft retires the embed URL format:
+
+1. Remove the `<iframe>` block from the tracker section in `index.html`
+2. The fallback table renders automatically (the `:has(iframe)` rule no longer matches)
 3. Update the static table by hand for the time being
-4. (Optional) Switch the embed to Airtable: re-import `tracker-seed.csv`, create a free Airtable base, get the embed iframe from Share → Embed this view, paste into `index.html`
+4. (Optional) re-run the upload script with a fresh share link
 
 ## Files
 
 - `index.html` — tracker section at `#tracker`, iframe + fallback wrapper
-- `artifacts/tracker-seed.csv` — 11-row seed for the Sheet
+- `artifacts/tracker-seed.csv` — 11-row seed for the workbook
 - This file (`INTERACTIVE-TRACKER-SETUP.md`) — setup + maintenance reference
