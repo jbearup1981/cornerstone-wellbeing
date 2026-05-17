@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cornerstone Well-Being Program — Operational Walkthrough</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --font-sans:  "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "DM Serif Display", Georgia, "Times New Roman", serif;
+
+  --color-bg:            #FAFAF7;
+  --color-surface:       #E8EADF;
+  --color-surface-alt:   #DDE0D3;
+  --color-muted:         #E5E6DD;
+  --color-border:        #D9DDCC;
+  --color-fg:            #1F3D2E;
+  --color-fg-muted:      #5C7066;
+  --color-primary:       #C75A2C;
+  --color-primary-hover: #B8522A;
+  --color-primary-fg:    #FFFFFF;
+  --color-accent-green:  #10B981;
+  --color-accent-teal:   #0891B2;
+
+  --color-dark-bg:       #0E1F17;
+  --color-dark-fg:       #F2F2EC;
+  --color-dark-surface:  #1A2E22;
+
+  --radius: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-pill: 9999px;
+
+  --tracking-eyebrow: 0.12em;
+  --tracking-heading: -0.01em;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  font-family: var(--font-sans);
+  color: var(--color-fg);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, .display { font-family: var(--font-serif); font-weight: 400; letter-spacing: var(--tracking-heading); line-height: 1.12; margin: 0 0 0.75rem; }
+h3 { font-family: var(--font-sans); font-weight: 600; margin: 0 0 0.5rem; letter-spacing: -0.005em; }
+h4 { font-family: var(--font-sans); font-weight: 600; margin: 0 0 0.5rem; font-size: 1rem; }
+p  { margin: 0 0 1rem; line-height: 1.55; }
+a  { color: var(--color-primary); text-decoration: none; }
+
+.eyebrow {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  font-weight: 600;
+  color: var(--color-fg-muted);
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+/* ====== Slide engine ====== */
+.deck {
+  position: relative;
+  width: 100%;
+}
+.slide {
+  display: none;
+  width: 100%;
+  min-height: 100vh;
+  padding: clamp(2.5rem, 5vw, 5rem) clamp(1.25rem, 5vw, 5rem) 4.5rem;
+  position: relative;
+  page-break-after: always;
+  break-after: page;
+}
+.slide.active { display: block; }
+.slide-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Headline scale */
+.slide h1 { font-size: clamp(2.5rem, 5.5vw, 4.25rem); }
+.slide h2 { font-size: clamp(1.875rem, 3.2vw, 2.625rem); margin-bottom: 1rem; }
+.slide h3 { font-size: 1.25rem; }
+.slide .lead { font-size: clamp(1.0625rem, 1.4vw, 1.25rem); color: var(--color-fg-muted); max-width: 780px; }
+
+/* Title slide */
+.slide--title {
+  display: none;
+  background: var(--color-dark-bg);
+  color: var(--color-dark-fg);
+}
+.slide--title.active { display: flex; align-items: center; }
+.slide--title .slide-inner { color: var(--color-dark-fg); }
+.slide--title h1 { color: var(--color-dark-fg); font-size: clamp(2.75rem, 6vw, 5rem); margin-bottom: 1.25rem; }
+.slide--title .subtitle { color: rgba(242,242,236,0.8); font-size: clamp(1.0625rem, 1.5vw, 1.375rem); max-width: 820px; line-height: 1.45; }
+.slide--title .eyebrow { color: var(--color-primary); }
+.slide--title .footer-meta { color: rgba(242,242,236,0.55); }
+
+/* Section colors variant */
+.slide--section { background: var(--color-surface); }
+
+/* Footer on every slide */
+.slide-footer {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 clamp(1.5rem, 5vw, 5rem);
+  font-size: 0.75rem;
+  color: var(--color-fg-muted);
+  letter-spacing: 0.04em;
+}
+.slide--title .slide-footer { color: rgba(242,242,236,0.55); }
+
+/* Cards */
+.card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.375rem;
+}
+.slide--section .card { background: var(--color-bg); }
+
+/* Grid utilities */
+.grid { display: grid; gap: 1rem; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 820px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+}
+
+/* Step pill blocks (used in flow diagrams) */
+.step-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+}
+.step {
+  flex: 1 1 0;
+  min-width: 130px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.875rem 0.875rem;
+  font-size: 0.875rem;
+  line-height: 1.35;
+  position: relative;
+}
+.step .step-num {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--color-primary);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.step .step-label {
+  font-weight: 600;
+  color: var(--color-fg);
+  font-size: 0.8125rem;
+  letter-spacing: -0.005em;
+}
+.step .step-note {
+  color: var(--color-fg-muted);
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  line-height: 1.4;
+}
+.arrow-svg { color: var(--color-primary); flex: 0 0 24px; align-self: center; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+th, td { text-align: left; padding: 0.625rem 0.75rem; border-bottom: 1px solid var(--color-border); }
+th { font-weight: 600; color: var(--color-fg-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
+td { color: var(--color-fg); vertical-align: top; }
+.table-wrap { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius); overflow: hidden; }
+
+/* Pill / tag */
+.tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-alt);
+  color: var(--color-fg);
+}
+.tag--primary { background: var(--color-primary); color: #fff; }
+.tag--teal { background: rgba(8,145,178,0.12); color: var(--color-accent-teal); }
+.tag--green { background: rgba(16,185,129,0.14); color: #065F46; }
+
+/* Two-column hero layout */
+.split { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 2.5rem; align-items: start; }
+@media (max-width: 900px) { .split { grid-template-columns: 1fr; gap: 1.5rem; } }
+
+ul.tight { margin: 0.25rem 0 0 1.1rem; padding: 0; }
+ul.tight li { margin-bottom: 0.4rem; line-height: 1.45; }
+
+/* Swim lane */
+.lane-grid {
+  display: grid;
+  grid-template-columns: 160px repeat(3, 1fr);
+  gap: 0.4rem;
+  font-size: 0.8125rem;
+  margin-top: 1rem;
+}
+.lane-grid .head {
+  font-weight: 600;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-fg-muted);
+  padding: 0.5rem 0.5rem;
+}
+.lane-grid .lane-label {
+  font-weight: 600;
+  background: var(--color-surface);
+  padding: 0.625rem 0.75rem;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+}
+.lane-grid .cell {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.625rem 0.75rem;
+  line-height: 1.4;
+  color: var(--color-fg);
+}
+.lane-grid .cell.muted { color: var(--color-fg-muted); background: transparent; border-style: dashed; }
+.lane-grid .cell strong { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-primary); margin-bottom: 0.2rem; }
+
+/* Two-bucket layout */
+.bucket {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.375rem;
+}
+.bucket h3 { color: var(--color-fg); }
+.bucket--primary { border-color: var(--color-primary); }
+.bucket--primary h3 { color: var(--color-primary); }
+
+/* Big numbers */
+.metric { display: flex; flex-direction: column; }
+.metric .num { font-family: var(--font-serif); font-size: 2.5rem; color: var(--color-primary); line-height: 1; }
+.metric .label { font-size: 0.8125rem; color: var(--color-fg-muted); margin-top: 0.4rem; }
+
+/* Controls */
+.controls {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 100;
+}
+.controls button {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.45rem 0.85rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+.controls button:hover { background: var(--color-surface); }
+.controls .counter { padding: 0.45rem 0.6rem; font-size: 0.85rem; color: var(--color-fg-muted); }
+
+/* Print */
+@media print {
+  .controls { display: none; }
+  .slide { display: block !important; min-height: auto; page-break-after: always; padding: 1in 0.75in; }
+  .slide--title { display: flex !important; }
+  body { background: white; }
+  .slide-footer { position: static; margin-top: 2rem; padding: 0; }
+}
+
+/* Roles matrix */
+.matrix th:first-child, .matrix td:first-child { width: 42%; }
+.matrix td.r { color: var(--color-primary); font-weight: 600; text-align: center; }
+.matrix td.s { color: var(--color-accent-teal); font-weight: 600; text-align: center; }
+.matrix th:not(:first-child), .matrix td:not(:first-child) { text-align: center; }
+
+/* List dots */
+.dotlist { list-style: none; margin: 0; padding: 0; }
+.dotlist li {
+  position: relative;
+  padding-left: 1.1rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.45;
+}
+.dotlist li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.55rem;
+  width: 6px; height: 6px;
+  background: var(--color-primary);
+  border-radius: 50%;
+}
+
+/* Partner cards (cast slide) */
+.partner {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.125rem 1.25rem;
+}
+.partner .role-tag {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+.partner h3 { font-size: 1.125rem; margin-bottom: 0.3rem; }
+.partner p { font-size: 0.875rem; color: var(--color-fg-muted); margin: 0; line-height: 1.45; }
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+<!-- ===== Slide 1 — Title ===== -->
+<section class="slide slide--title active" data-slide="1">
+  <div class="slide-inner">
+    <span class="eyebrow">Operational Walkthrough · May 16, 2026</span>
+    <h1>Cornerstone Well-Being Program</h1>
+    <p class="subtitle">Section 125 fixed-indemnity wellbeing program. Built on Capitol Group's carrier infrastructure. Delivered by Nexus Benefit Solutions. Operationalized with Insight Benefits. Powered by Amaze Health.</p>
+  </div>
+  <div class="slide-footer">
+    <span>Cornerstone Well-Being Program</span>
+    <span class="footer-meta">Slide 1 / 16 · May 16, 2026</span>
+  </div>
+</section>
+
+<!-- ===== Slide 2 — The Cast ===== -->
+<section class="slide" data-slide="2">
+  <div class="slide-inner">
+    <span class="eyebrow">The Cast</span>
+    <h2>Four partners. One program.</h2>
+    <p class="lead">Each party owns a clean slice. Lanes don't overlap, and that's deliberate.</p>
+
+    <div class="grid grid-2" style="margin-top: 2rem;">
+      <div class="partner">
+        <span class="role-tag">Carrier Rails</span>
+        <h3>Capitol Group</h3>
+        <p>Carrier paper, CEHAS captive, SiriusPoint reinsurance, invoicing and ACH. Four to five years of infrastructure that Nexus does not duplicate.</p>
+      </div>
+      <div class="partner">
+        <span class="role-tag">Distribution &amp; Implementation</span>
+        <h3>Nexus Benefit Solutions</h3>
+        <p>Sales, qualification, quoting and audit platform, employer relationship, compliance documents.</p>
+      </div>
+      <div class="partner">
+        <span class="role-tag">TPA / Operational Labor</span>
+        <h3>Insight Benefits</h3>
+        <p>Payroll setup, biweekly payroll audit, eligibility file maintenance, change communications with the client's payroll admin.</p>
+      </div>
+      <div class="partner">
+        <span class="role-tag">Clinical Experience</span>
+        <h3>Amaze Health</h3>
+        <p>Virtual primary care, concierge engagement, Rx, member education, disenrollment intake.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>Cornerstone Well-Being Program</span>
+    <span>Slide 2 / 16 · May 16, 2026</span>
+  </div>
+</section>
+
+<!-- ===== Slide 3 — What this is ===== -->
+<section class="slide" data-slide="3">
+  <div class="slide-inner">
+    <span class="eyebrow">In Plain English</span>
+    <h2>What this program is.</h2>
+
+    <div class="split" style="margin-top: 1.5rem;">
+      <div>
+        <p class="lead">A pre-tax payroll deduction wraps a fixed-indemnity wellbeing benefit for the employee. The employee sees a larger net paycheck and a monthly wellbeing benefit of roughly $1,200. The employer pays a small admin fee, funded by FICA savings on the same deduction.</p>
+        <p class="lead">No new HR work for the employer. No deductible to chase. No benefit to design. The infrastructure is already built — this is distribution and operations on top of it.</p>
+      </div>
+
+      <div class="card">
+        <h4 style="color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem;">Mechanics, at a glance</h4>
+        <ul class="dotlist" style="margin-top: 0.75rem;">
+          <li>Section 125 pre-tax deduction from the employee's check</li>
+          <li>Carrier issues a scheduled wellbeing benefit (~$1,200/mo)</li>
+          <li>Indemnity payments coded as reimbursement, not wages</li>
+          <li>Employer admin fee funded by FICA savings</li>
+          <li>Bundled virtual primary care + Rx via Amaze Health</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>Cornerstone Well-Being Program</span>
+    <span>Slide 3 / 16 · May 16, 2026</span>
+  </div>
+</section>
+
+<!-- ===== Slide 4 — Structural Acknowledgment ===== -->
+<section class="slide slide--section" data-slide="4">
+  <div class="slide-inner">
+    <span class="eyebrow">Structural Acknowledgment</span>
+    <h2>This program runs on Capitol's rails.</h2>
+    <p class="lead">Capitol Group spent four to five years and significant capital building the carrier, captive, and reinsurance infrastructure underneath this program. None of that gets duplicated. Nexus is the distribution, implementation, and service layer on top. Insight Benefits is the operational labor partner on the Nexus side.</p>
+
+    <div class="grid grid-3" style="margin-top: 2rem;">
+      <div class="card">
+        <span class="tag tag--primary">Capitol</span>
+        <h3 style="margin-top: 0.6rem;">The rails</h3>
+        <p style="font-size: 0.9rem; color: var(--color-fg-muted);">CEHAS captive. SiriusPoint reinsurance. Carrier paper. Invoicing and ACH. The foundational infrastructure.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Nexus</span>
+        <h3 style="margin-top: 0.6rem;">The layer on top</h3>
+        <p style="font-size: 0.9rem; color: var(--color-fg-muted);">Distribution, qualification, implementation discipline, ongoing client relationship, compliance documents.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Insight</span>
+        <h3 style="margin-top: 0.6rem;">The labor partner</h3>
+        <p style="font-size: 0.9rem; color: var(--color-fg-muted);">Payroll setup, biweekly audit, eligibility file maintenance, change communications.</p>
+      </div>
+    </div>
+
+    <p style="margin-top: 2rem; font-size: 0.95rem; color: var(--color-fg-muted); max-width: 760px;">Capitol stays invisible to the client. To the employer, Cornerstone is delivered by Nexus and operated by Insight. Behind that line, Capitol's infrastructure is what makes the program viable on day one.</p>
+  </div>
+  <div class="slide-footer">
+    <span>Cornerstone Well-Being Program</span>
+    <span>Slide 4 / 16 · May 16, 2026</span>
+  </div>
+</section>
+
+<!-- ===== Slide 5 — What Nexus brings ===== -->
+<section class="slide" data-slide="5">
+  <div class="slide-inner">
+    <span class="eyebrow">What Nexus Brings</span>
+    <h2>Discipline at the front door.</h2>
+
+    <div class="grid grid-3" style="margin-top: 2rem;">
+      <div class="card">
+        <h3>Quoting + audit platform</h3>
+        <p style="font-size: 0.9rem; color: var(--color-fg-muted);">Already live on the existing book. Ingests payroll registers and W-4 reports, runs an AI census audit, surfaces qualification issues, generates per-employee before-and-after paycheck statements, and feeds the ongoing biweekly audit cadence.</p>
+      </div>
+      <div class="card">
+        <h3>Tight sales process</h3>
+        <p style="font-size: 0.9rem; color: var(--color-fg-muted);">Two sales teams. Jason on every deal personally — by design, not by default. The owner stays in every conversation so the qualification line holds.</p>
+      </div>
+      <div class="card">
+        <h3>A deliberately narrow lane</h3>
+        <p style="font-size: 0.9rem; color: var(--color-fg-muted);">50–1,000 employees, sweet spot 50–300. Stable populations, real payroll function, qualifying wages. Out-of-profile deals route back to Capitol; Nexus does not force-fit.</p>
+      </div>
+    </div>
+
+    <p style="margin-top: 2rem; font-size: 0.95rem; color: var(--color-fg-muted); max-width: 760px;">The intent is to keep upstream work tight enough that downstream operations — including anything that touches Capitol's invoicing and ACH — stay low-noise. The narrowness is the risk filter.</p>
+  </div>
+  <div class="slide-footer">
+    <span>Cornerstone Well-Being Program</span>
+    <span>Slide 5 / 16 · May 16, 2026</span>
+  </div>
+</section>
+
+<!-- ===== Slide 6 — Three Processes overview ===== -->
+<section class="slide slide--section" data-slide="6">
+  <div class="slide-inner">
+    <span class="eyebrow">Operational Spine</span>
+    <h2>Three processes carry every group.</h2>
+    <p class="lead">Each phase has a defined owner, a defined output, and a clean handoff to the next.</p>
+
+    <div class="grid grid-3" style="margin-top: 2.25rem;">
+      <div class="card">
+        <span class="tag tag--primary">Phase 1</span>
+        <h3 style="margin-top: 0.6rem;">Sales</h3>
+        <p style="font-size: 0.9rem; color: var(--color-fg-muted);">Seven steps from first conversation through signed proposal. Qualification is tight on purpose.</p>
+      </div>
+      <div class="card">
+        <span class="tag tag--teal">Phase 2</span>
+        <h3 style="margin-top: 0.6rem;">Implementation</h3>
+        <p style="font-size: 0.9rem; color: var(--color-fg-muted);">Six-step flow from signed deal to go-live. Insight owns the hands-on payroll work; Nexus owns the relationship.</p>
+      </div>
+      <div class="card">
+        <span class="tag tag--green">Phase 3</span>
+        <h3 style="margin-top: 0.6rem;">Ongoing Service</h3>
+        <p style="font-size: 0.9rem; color: var(--color-fg-muted);">Seven-step biweekly cycle. Payroll register in, audit run, variances reviewed, eligibility file pushed to CEHAS.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>Cornerstone Well-Being Program</span>
+    <span>Slide 6 / 16 · May 16, 2026</span>
+  </div>
+</section>
+
+<!-- ===== Slide 7 — Sales Process ===== -->
+<section class="slide" data-slide="7">
+  <div class="slide-inner">
+    <span class="eyebrow">Phase 1</span>
+    <h2>Sales — the seven-step funnel.</h2>
+
+    <div class="step-row">
+      <div class="step"><span class="step-num">01</span><span class="step-label">Discovery</span><div class="step-note">Qualification against the target profile</div></div>
+      <svg class="arrow-svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="step"><span class="step-num">02</span><span class="step-label">Presentation</span><div class="step-note">Plain-English program walkthrough</div></div>
+      <svg class="arrow-svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="step"><span class="step-num">03</span><span class="step-label">Payroll-report build</span><div class="step-note">Wendy or Shea, with client HR/payroll</div></div>
+      <svg class="arrow-svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="step"><span class="step-num">04</span><span class="step-label">Quoting tool</span><div class="step-note">AI census audit + per-EE before/after</div></div>
+    </div>
+
+    <div class="step-row">
+      <div class="step"><span class="step-num">05</span><span class="step-label">Proposal</span><div class="step-note">Generated from the audit output</div></div>
+      <svg class="arrow-svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="step"><span class="step-num">06</span><span class="step-label">Client review</span><div class="step-note">Either side can walk; eyes-wide-open</div></div>
+      <svg class="arrow-svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="step"><span class="step-num">07</span><span class="step-label">Signature</span><div class="step-note">Handoff to implementation</div></div>
+    </div>
+
+    <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--color-fg-muted); max-width: 760px;">The two data points required from the client are a current payroll register and a W-4 filing status report. Everything downstream — qualification flags, eligibility cheat sheet, before/after view, proposal — is generated from those two files.</p>
+  </div>
+  <div class="slide-footer">
+    <span>Cornerstone Well-Being Program</span>
+    <span>Slide 7 / 16 · May 16, 2026</span>
+  </div>
+</section>
+
+<!-- ===== Slide 8 — Implementation ===== -->
+<section class="slide" data-slide="8">
+  <div class="slide-inner">
+    <span class="eyebrow">Phase 2</span>
+    <h2>Implementation — the six-step flow.</h2>
+
+    <div class="step-row">
+      <div class="step"><span class="step-num">01</span><span class="step-label">Payroll codes</span><div class="step-note">§125 deduction + indemnity reimbursement</div></div>
+      <svg class="arrow-svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="step"><span class="step-num">02</span><span class="step-label">Initial file build</span><div class="step-note">Upload-ready or manual-entry format</div></div>
+      <svg class="arrow-svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="step"><span class="step-num">03</span><span class="step-label">Education window</span><div class="step-note">4–6 weeks: Amaze comms + per-EE statements</div></div>
+    </div>
+
+    <div class="step-row">
+      <div class="step"><span class="step-num">04</span><span class="step-label">Opt-out path</span><div class="step-note">Routed through Amaze Health</div></div>
+      <svg class="arrow-svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="step"><span class="step-num">05</span><span class="step-label">100% first-run audit</span><div class="step-note">Every line; not a spot check</div></div>
+      <svg class="arrow-svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="step"><span class="step-num">06</span><span class="step-label">Go-live</span><div class="step-note">Group moves into ongoing cycle</div></div>
+    </div>
+
+    <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--color-fg-muted); max-width: 760px;">Insight Benefits is the operational labor partner across this phase. They execute the payroll setup, run the audit, and own the change-communication cadence with the client's payroll admin. Nexus stays in the loop and owns the client relationship — but the hands on the keyboard are Insight's.</p>
+  </div>
+  <div class="slide-footer">
+    <span>Cornerstone Well-Being Program</span>
+    <span>Slide 8 / 16 · May 16, 2026</span>
+  </div>
+</section>
+
+<!-- ===== Slide 9 — Ongoing Service ===== -->
+<section class="slide" data-slide="9">
+  <div class="slide-inner">
+    <span class="eyebrow">Phase 3</span>
+    <h2>Ongoing service — the biweekly cycle.</h2>
+
+    <div class="step-row">
+      <div class="step"><span class="step-num">01</span><span class="step-label">Pull register</span><div class="step-note">Client email or direct system access</div></div>
+      <svg class="arrow-svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="step"><span class="step-num">02</span><span class="step-label">Ingest</span><div class="step-note">Nexus eligibility audit system</div></div>
+      <svg class="arrow-svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="step"><span class="step-num">03</span><span class="step-label">Flag changes</span><div class="step-note">Eligible / no longer / new / reclass</div></div>
+      <svg class="arrow-svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="step"><span class="step-num">04</span><span class="step-label">Variance review</span><div class="step-note">Insight reviews; large swings pause</div></div>
+    </div>
+
+    <div class="step-row">
+      <div class="step"><span class="step-num">05</span><span class="step-label">Email payroll admin</span><div class="step-note">The cycle's changes, in writing</div></div>
+      <svg class="arrow-svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="step"><span class="step-num">06</span><span class="step-label">Push to CEHAS</span><div class="step-note">Eligibility file → invoicing → ACH</div></div>
+      <svg class="arrow-svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="step"><span class="step-num">07</span><span class="step-label">Disenrollments</span><div class="step-note">Amaze handles direct; flows back next cycle</div></div>
+    </div>
+
+    <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--color-fg-muted); max-width: 800px;">The pattern we watch for is the wild swing — a count that moves more than the population reasonably should. The posture is "pause, verify, then proceed." A human reviews variances before the file is ever pushed.</p>
+  </div>
+  <div class="slide-footer">
+    <span>Cornerstone Well-Being Program</span>
+    <span>Slide 9 / 16 · May 16, 2026</span>
+  </div>
+</section>
+
+<!-- ===== Slide 10 — Process at a glance (swim lane) ===== -->
+<section class="slide slide--section" data-slide="10">
+  <div class="slide-inner">
+    <span class="eyebrow">Process at a Glance</span>
+    <h2>Who owns what across the three phases.</h2>
+
+    <div class="lane-grid">
+      <div class="head"></div>
+      <div class="head">Sales</div>
+      <div class="head">Implementation</div>
+      <div class="head">Ongoing Service</div>
+
+      <div class="lane-label">Nexus</div>
+      <div class="cell"><strong>Owns</strong>Discovery, qualification, proposal, signature</div>
+      <div class="cell"><strong>Supports</strong>Relationship, compliance docs, client side</div>
+      <div class="cell"><strong>Supports</strong>Relationship, escalations, renewals</div>
+
+      <div class="lane-label">Insight</div>
+      <div class="cell"><strong>Supports</strong>Wendy/Shea on payroll-report build</div>
+      <div class="cell"><strong>Owns</strong>Payroll setup, file build, 100% audit, education cadence</div>
+      <div class="cell"><strong>Owns</strong>Biweekly audit, eligibility file, change comms</div>
+
+      <div class="lane-label">Capitol / CEHAS</div>
+      <div class="cell muted">—</div>
+      <div class="cell"><strong>Owns</strong>Contract execution, carrier paper</div>
+      <div class="cell"><strong>Owns</strong>Eligibility ingest, invoicing, ACH</div>
+
+      <div class="lane-label">Amaze Health</div>
+      <div class="cell muted">—</div>
+      <div class="cell"><strong>Supports</strong>Member education, opt-out intake</div>
+      <div class="cell"><strong>Owns</strong>Care delivery, Rx, disenrollment</div>
+    </div>
+
+    <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--color-fg-muted); max-width: 800px;">Lanes don't overlap. To the client, this looks like one team — Nexus relationship, Insight operational front door. Behind the line, every activity has a single owner.</p>
+  </div>
+  <div class="slide-footer">
+    <span>Cornerstone Well-Being Program</span>
+    <span>Slide 10 / 16 · May 16, 2026</span>
+  </div>
+</section>
+
+<!-- ===== Slide 11 — Two-bucket routing ===== -->
+<section class="slide" data-slide="11">
+  <div class="slide-inner">
+    <span class="eyebrow">Case Routing</span>
+    <h2>Two buckets. Economics follow the work.</h2>
+    <p class="lead">Nexus is not trying to eat Capitol's existing book. Deals outside the Nexus Standard profile route back to Capitol on reduced Nexus comp — distribution partners still get paid, the client still gets placed, and Nexus stays out of the day-to-day.</p>
+
+    <div class="grid grid-2" style="margin-top: 2rem;">
+      <div class="bucket bucket--primary">
+        <span class="tag tag--primary">Bucket 1</span>
+        <h3 style="margin-top: 0.6rem;">Nexus Standard <span style="font-weight: 400; color: var(--color-fg-muted); font-size: 0.875rem;">— end-to-end</span></h3>
+        <ul class="dotlist" style="margin-top: 0.75rem;">
+          <li>50–1,000 EE (sweet spot 50–300)</li>
+          <li>Stable workforce, low turnover</li>
+          <li>Wage bands that genuinely qualify</li>
+          <li>Real payroll function with a competent owner</li>
+          <li>Operational maturity — HR and finance engaged</li>
+        </ul>
+        <p style="margin-top: 0.875rem; font-size: 0.85rem; color: var(--color-fg-muted);">Full Nexus economics. Nexus does the work; Nexus is compensated for it.</p>
+      </div>
+
+      <div class="bucket">
+        <span class="tag">Bucket 2</span>
+        <h3 style="margin-top: 0.6rem;">Capitol-Routed <span style="font-weight: 400; color: var(--color-fg-muted); font-size: 0.875rem;">— reduced Nexus comp</span></h3>
+        <ul class="dotlist" style="margin-top: 0.75rem;">
+          <li>Staffing companies</li>
+          <li>Farming, seasonal, restaurants, food service</li>
+          <li>High-turnover industries generally</li>
+          <li>Groups requiring API-level payroll integration</li>
+          <li>Groups materially larger than the sweet spot</li>
+        </ul>
+        <p style="margin-top: 0.875rem; font-size: 0.85rem; color: var(--color-fg-muted);">Capitol owns the operational lift through its existing broker and TPA network. Nexus contributes distribution only.</p>
+      </div>
+    </div>
+
+    <p style="margin-top: 1.75rem; font-size: 0.9rem; color: var(--color-fg-muted); max-width: 800px;">Said plainly: the less work Nexus does, the less Nexus earns. That keeps the incentive aligned and removes any reason to compete for cases Capitol's existing brokers are already serving well.</p>
+  </div>
+  <div class="slide-footer">
+    <span>Cornerstone Well-Being Program</span>
+    <span>Slide 11 / 16 · May 16, 2026</span>
+  </div>
+</section>
+
+<!-- ===== Slide 12 — Insight Hour Model ===== -->
+<section class="slide" data-slide="12">
+  <div class="slide-inner">
+    <span class="eyebrow">Insight Hour-Workload Model</span>
+    <h2>~20 hours per client per year.</h2>
+    <p class="lead">What Insight can plan against on each Nexus Standard group. Numbers are locked for planning; outliers are exceptions, not re-baselines.</p>
+
+    <div class="split" style="margin-top: 2rem;">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Phase</th><th>Cadence</th><th>Hours</th></tr></thead>
+          <tbody>
+            <tr><td>Sales + Implementation</td><td>One-time, per group</td><td>5.0</td></tr>
+            <tr><td>Ongoing service — audit, eligibility, change comms</td><td>30 min × biweekly × 26</td><td>12.0</td></tr>
+            <tr><td>Buffer — unexpected change management</td><td>Per year</td><td>3.0</td></tr>
+            <tr><td style="font-weight: 600;">Total per client per year (steady state)</td><td></td><td style="font-weight: 600; color: var(--color-primary);">~20.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <h4 style="color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem;">Why this holds</h4>
+        <p style="font-size: 0.9rem;">Nexus is intentionally absorbing the heavier work upstream — qualification, education, system-level audit posture — so Insight's per-client hours stay predictable.</p>
+        <p style="font-size: 0.9rem; color: var(--color-fg-muted);">The model only holds if the Nexus Standard profile is enforced at the front door. That is why the two-bucket routing matters operationally, not just commercially.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>Cornerstone Well-Being Program</span>
+    <span>Slide 12 / 16 · May 16, 2026</span>
+  </div>
+</section>
+
+<!-- ===== Slide 13 — Roles Matrix + Operational Handoffs ===== -->
+<section class="slide slide--section" data-slide="13">
+  <div class="slide-inner">
+    <span class="eyebrow">Roles &amp; Handoffs</span>
+    <h2>Activity matrix and the eligibility loop.</h2>
+
+    <div class="split" style="margin-top: 1.5rem;">
+      <div class="table-wrap">
+        <table class="matrix">
+          <thead><tr><th>Activity</th><th>Nexus</th><th>Capitol</th><th>Insight</th><th>Amaze</th></tr></thead>
+          <tbody>
+            <tr><td>Sales / qualification</td><td class="r">R</td><td></td><td class="s">S</td><td></td></tr>
+            <tr><td>Carrier paper / captive / reinsurance</td><td></td><td class="r">R</td><td></td><td></td></tr>
+            <tr><td>Payroll setup &amp; code config</td><td class="s">S</td><td></td><td class="r">R</td><td></td></tr>
+            <tr><td>Employee education / comms</td><td class="r">R</td><td></td><td class="s">S</td><td class="s">S</td></tr>
+            <tr><td>Biweekly payroll audit</td><td class="s">S</td><td></td><td class="r">R</td><td></td></tr>
+            <tr><td>Eligibility file maintenance</td><td></td><td></td><td class="r">R</td><td class="s">S</td></tr>
+            <tr><td>Invoicing / ACH collection</td><td></td><td class="r">R</td><td class="s">S</td><td></td></tr>
+            <tr><td>Compliance docs (WRAP/SPD/§125)</td><td class="r">R</td><td class="s">S</td><td class="s">S</td><td></td></tr>
+            <tr><td>Member care / Rx</td><td></td><td></td><td></td><td class="r">R</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size: 0.75rem; color: var(--color-fg-muted); padding: 0.5rem 0.75rem; margin: 0;"><strong style="color: var(--color-primary);">R</strong> = owns. <strong style="color: var(--color-accent-teal);">S</strong> = supports.</p>
+      </div>
+
+      <div>
+        <h4 style="color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem;">The Eligibility Loop</h4>
+        <ol style="padding-left: 1.2rem; font-size: 0.9rem; line-height: 1.55;">
+          <li>Nexus system produces and maintains the eligibility file per employer</li>
+          <li>CEHAS ingests the file weekly</li>
+          <li>CEHAS generates invoice → ACH from employer</li>
+        </ol>
+
+        <h4 style="color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem; margin-top: 1.25rem;">Required Fields</h4>
+        <p style="font-size: 0.85rem; color: var(--color-fg-muted); line-height: 1.5;">Employer/employee ID, plan election, enrollment status, opt-out flag, non-qualified flag, employee email, dependents, coverage effective date, term date.</p>
+
+        <h4 style="color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem; margin-top: 1.25rem;">Open Decision</h4>
+        <p style="font-size: 0.85rem; color: var(--color-fg-muted); line-height: 1.5;">CSV push to Capitol's intake, or read access to live Nexus data. Both workable — Capitol's operational preference drives the call.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>Cornerstone Well-Being Program</span>
+    <span>Slide 13 / 16 · May 16, 2026</span>
+  </div>
+</section>
+
+<!-- ===== Slide 14 — Distribution Pipeline ===== -->
+<section class="slide" data-slide="14">
+  <div class="slide-inner">
+    <span class="eyebrow">Distribution Pipeline</span>
+    <h2>Named groups. Real prospects.</h2>
+
+    <div class="split" style="margin-top: 1.5rem; grid-template-columns: 1.4fr 0.6fr;">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Group</th><th>Est. EE</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Cornerstone University</td><td>300</td><td>Active</td></tr>
+            <tr><td>Hillsdale College</td><td>600</td><td>Active</td></tr>
+            <tr><td>Pioneer Construction</td><td>500</td><td>Existing relationship; ancillary product only</td></tr>
+            <tr><td>Big Rapids Products</td><td>400</td><td>Active</td></tr>
+            <tr><td>West MI Janitorial</td><td>500</td><td>Active</td></tr>
+            <tr><td>Display Pack</td><td>250</td><td>Active</td></tr>
+            <tr><td>Harloff Manufacturing</td><td>80</td><td>Live demo case; CFO engaged; Aug–Sep target</td></tr>
+            <tr><td>Augusta Tower</td><td>50</td><td>Active</td></tr>
+            <tr><td>Smaller groups (30–50 EE)</td><td>Various</td><td>Ongoing flow</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <div class="metric" style="margin-bottom: 1.5rem;">
+          <span class="num">1,500–2,500</span>
+          <span class="label">enrolled lives added in 2026</span>
+        </div>
+        <div class="metric" style="margin-bottom: 1.5rem;">
+          <span class="num">5,000–6,000</span>
+          <span class="label">total enrolled, end of 2027</span>
+        </div>
+        <div class="metric">
+          <span class="num">~1,200</span>
+          <span class="label">existing-book lives sequenced for migration across 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--color-fg-muted); max-width: 800px;">Every name on this list is inside the Nexus Standard profile. Pace is deliberate — Nexus is not trying to bring ten groups live in a single month. Implementation quality on every group on the platform is the constraint.</p>
+  </div>
+  <div class="slide-footer">
+    <span>Cornerstone Well-Being Program</span>
+    <span>Slide 14 / 16 · May 16, 2026</span>
+  </div>
+</section>
+
+<!-- ===== Slide 15 — Where we are + what we need + timing ===== -->
+<section class="slide slide--section" data-slide="15">
+  <div class="slide-inner">
+    <span class="eyebrow">Status &amp; Asks</span>
+    <h2>Where we are. What we need. When.</h2>
+
+    <div class="grid grid-3" style="margin-top: 1.5rem;">
+      <div class="card">
+        <h4 style="color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem;">Done</h4>
+        <ul class="dotlist" style="margin-top: 0.75rem; font-size: 0.875rem;">
+          <li>Quoting + audit platform live on existing book</li>
+          <li>Operational handoff framework defined with Connie</li>
+          <li>Insight demo (Howard, Brenda, Lindsay, Breanne) landed</li>
+          <li>v1 hub shipped (May 16)</li>
+          <li>Sample eligibility CSV, invoice, payroll summary built</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h4 style="color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem;">In flight</h4>
+        <ul class="dotlist" style="margin-top: 0.75rem; font-size: 0.875rem;">
+          <li>Eligibility file format with Connie + CEHAS IT</li>
+          <li>Howard ↔ Connie compliance walkthrough being scheduled</li>
+          <li>Payroll vendor priority list (Brenda Manning)</li>
+          <li>Amaze Health intro meeting (Howard requested)</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h4 style="color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem;">What we need from Capitol</h4>
+        <ul class="dotlist" style="margin-top: 0.75rem; font-size: 0.875rem;">
+          <li>Latest ASA, Compliance Protection, Request for Coverage drafts</li>
+          <li>Signature contact details — CEHAS + insurer</li>
+          <li>Decision on eligibility delivery: CSV push vs. system access</li>
+          <li>Compliance officer walkthrough with Howard</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 1.5rem; background: var(--color-bg);">
+      <h4 style="color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem;">Timing</h4>
+      <div class="grid grid-3" style="margin-top: 0.75rem; font-size: 0.9rem;">
+        <div><strong>Fri 5/22</strong><br><span style="color: var(--color-fg-muted);">Scott + Connie walkthrough</span></div>
+        <div><strong>Mon–Tue 5/25–5/26</strong><br><span style="color: var(--color-fg-muted);">Capitol ops team review</span></div>
+        <div><strong>Across 2026</strong><br><span style="color: var(--color-fg-muted);">Existing-book migration sequenced</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>Cornerstone Well-Being Program</span>
+    <span>Slide 15 / 16 · May 16, 2026</span>
+  </div>
+</section>
+
+<!-- ===== Slide 16 — Q&A / Contact ===== -->
+<section class="slide slide--title" data-slide="16">
+  <div class="slide-inner">
+    <span class="eyebrow">Questions &amp; Contact</span>
+    <h1>Thank you.</h1>
+    <p class="subtitle" style="margin-bottom: 2.5rem;">Operational questions, contract drafts, and signature coordination route through the contacts below.</p>
+
+    <div class="grid grid-3" style="margin-top: 1rem;">
+      <div>
+        <span class="eyebrow" style="color: var(--color-primary);">Nexus Benefit Solutions</span>
+        <h3 style="color: var(--color-dark-fg); font-size: 1.125rem; margin-top: 0.4rem;">Jason Bearup</h3>
+        <p style="color: rgba(242,242,236,0.7); font-size: 0.9rem; margin-bottom: 0.5rem;">Owner · Sales lead on every deal</p>
+        <p style="color: rgba(242,242,236,0.85); font-size: 0.9rem;">jason@nexusbenefitsolutions.com</p>
+      </div>
+      <div>
+        <span class="eyebrow" style="color: var(--color-primary);">Nexus Benefit Solutions</span>
+        <h3 style="color: var(--color-dark-fg); font-size: 1.125rem; margin-top: 0.4rem;">Brenda Manning</h3>
+        <p style="color: rgba(242,242,236,0.7); font-size: 0.9rem; margin-bottom: 0.5rem;">Senior advisor · Capitol liaison</p>
+        <p style="color: rgba(242,242,236,0.85); font-size: 0.9rem;">brenda@nexusbenefitsolutions.com</p>
+      </div>
+      <div>
+        <span class="eyebrow" style="color: var(--color-primary);">Insight Benefits</span>
+        <h3 style="color: var(--color-dark-fg); font-size: 1.125rem; margin-top: 0.4rem;">Howard Lancaster</h3>
+        <p style="color: rgba(242,242,236,0.7); font-size: 0.9rem; margin-bottom: 0.5rem;">Principal · TPA partner</p>
+        <p style="color: rgba(242,242,236,0.85); font-size: 0.9rem;">howardl@insightba.net</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>Cornerstone Well-Being Program</span>
+    <span class="footer-meta">Slide 16 / 16 · May 16, 2026</span>
+  </div>
+</section>
+
+</div>
+
+<!-- ===== Navigation controls ===== -->
+<div class="controls" role="toolbar" aria-label="Slide navigation">
+  <button id="prevBtn" type="button" aria-label="Previous slide">‹ Prev</button>
+  <span class="counter" id="counter">1 / 16</span>
+  <button id="nextBtn" type="button" aria-label="Next slide">Next ›</button>
+</div>
+
+<script>
+(function() {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const counter = document.getElementById('counter');
+  const total = slides.length;
+  let idx = 0;
+
+  function show(i) {
+    idx = Math.max(0, Math.min(total - 1, i));
+    slides.forEach((s, n) => s.classList.toggle('active', n === idx));
+    counter.textContent = (idx + 1) + ' / ' + total;
+    // Update URL hash for shareability
+    if (history.replaceState) {
+      history.replaceState(null, '', '#' + (idx + 1));
+    }
+    window.scrollTo(0, 0);
+  }
+
+  document.getElementById('prevBtn').addEventListener('click', () => show(idx - 1));
+  document.getElementById('nextBtn').addEventListener('click', () => show(idx + 1));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+      e.preventDefault();
+      show(idx + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      show(idx - 1);
+    } else if (e.key === 'Home') {
+      show(0);
+    } else if (e.key === 'End') {
+      show(total - 1);
+    }
+  });
+
+  // Hash-based deep link
+  function fromHash() {
+    const m = (location.hash || '').match(/^#(\d+)$/);
+    if (m) {
+      const n = parseInt(m[1], 10) - 1;
+      if (n >= 0 && n < total) show(n);
+    }
+  }
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
+})();
+</script>
+
+</body>
+</html>
