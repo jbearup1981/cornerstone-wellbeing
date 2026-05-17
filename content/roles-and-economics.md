@@ -1,6 +1,11 @@
+---
+title: "Roles And Economics"
+date: "2026-05-17"
+tags: []
+---
 # Cornerstone Well-Being Program — Roles & Economics
 
-*Powered by Amaze Health. Built on Capitol Group's carrier, captive, and reinsurance infrastructure.*
+*Powered by [[Amaze_Health|Amaze Health]]. Built on Capitol Group's carrier, captive, and reinsurance infrastructure.*
 
 This document covers how cases are routed between Nexus and Capitol, the hour-workload model Insight Benefits can plan against, and a role-by-role breakdown across all four parties. It is meant as a working operational reference, not a pitch.
 
@@ -85,7 +90,7 @@ R = Owns (responsible and accountable). S = Supports (contributes, not the owner
 | Weekly / biweekly payroll audit | S | | R | |
 | Eligibility file maintenance | | | R | S |
 | Invoicing / ACH collection | | R | S | |
-| Compliance documentation (WRAP / SPD / Section 125 / COBRA notices) | R | S | S | |
+| Compliance documentation (WRAP / SPD / Section 125 / [[cobra-notice-requirements-and-penalties|COBRA]] notices) | R | S | S | |
 | Ongoing member medical care | | | | R |
 | Concierge medical engagement / Rx | | | | R |
 | Client-facing front door (steady state) | R | | S | |

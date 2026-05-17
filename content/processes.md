@@ -1,3 +1,8 @@
+---
+title: "Processes"
+date: "2026-05-17"
+tags: []
+---
 ## Sales Process
 
 Nexus runs two sales teams. Jason owns both and sits on every deal personally. That isn't a growth-stage quirk — it's the design. Keeping the owner on every conversation is how we hold the qualification line and make sure nothing moves forward that shouldn't. The Cornerstone Well-Being Program rides on carrier and captive infrastructure that Capitol Group has spent years building; the responsibility on our side is to make sure the groups we put through that infrastructure are the right groups.
@@ -22,7 +27,7 @@ A signed proposal triggers implementation. The first piece of work is payroll se
 
 From there, Insight Benefits builds the initial payroll file. For clients with sophisticated payroll systems, we deliver an upload-ready file. For clients who prefer to enter changes manually, we deliver the same data in a format their admin can work from. Either way, the first payroll run after go-live gets a 100 percent audit — not a spot check, every line — to confirm deductions, reimbursements, and eligibility all reconcile to what was sold.
 
-In parallel, the employee education window opens. This runs 4 to 6 weeks before go-live and includes Amaze Health communications, individual before-and-after paycheck statements per employee, and a clearly marked opt-out path that routes through Amaze. Employees see exactly what is changing on their check, what they are getting in return, and how to decline if they don't want to participate.
+In parallel, the employee education window opens. This runs 4 to 6 weeks before go-live and includes [[Amaze_Health|Amaze Health]] communications, individual before-and-after paycheck statements per employee, and a clearly marked opt-out path that routes through Amaze. Employees see exactly what is changing on their check, what they are getting in return, and how to decline if they don't want to participate.
 
 Insight Benefits is the operational labor partner across this phase. They execute the payroll setup, run the audit, and own the change communication cadence with the client's payroll admin. Nexus stays in the loop and owns the client relationship, but the hands on the keyboard during implementation are Insight's.
 
@@ -42,7 +47,7 @@ The system runs an eligibility audit against the new file. It identifies who is 
 
 This review step is intentional. The pattern we watch for is the wild swing — a count that moves more than the population should reasonably move in a single cycle. The Davenport adjunct-faculty episode is the cautionary tale we keep in front of the team: a payroll feed shifted dramatically one cycle because of an adjunct payroll quirk, and the lesson was that when a number doesn't look right, you stop and ask before you push. "Houston, we have a problem" is the posture — pause, verify, then proceed.
 
-Once the variances are reconciled, Insight emails the client's payroll admin with the changes for that cycle and pushes an updated eligibility file to Capitol's CEHAS system. That weekly push is what keeps invoicing and ACH on accurate roster — Capitol bills off the eligibility file we send. Brenda at Insight is likely to own the steady-state cadence; Howard, Brenda Brown, Lindsay, and Breanne are the implementation-side touchpoints who hand work into that cadence. Amaze Health handles disenrollment requests directly — employees who decide they no longer want to participate route through Amaze, and the change flows back to Insight on the next cycle.
+Once the variances are reconciled, Insight emails the client's payroll admin with the changes for that cycle and pushes an updated eligibility file to Capitol's CEHAS system. That weekly push is what keeps invoicing and ACH on accurate roster — Capitol bills off the eligibility file we send. Brenda at Insight is likely to own the steady-state cadence; [[Howard]], Brenda Brown, Lindsay, and Breanne are the implementation-side touchpoints who hand work into that cadence. [[Amaze_Health|Amaze Health]] handles disenrollment requests directly — employees who decide they no longer want to participate route through Amaze, and the change flows back to Insight on the next cycle.
 
 Step summary:
 - Insight pulls payroll register each cycle (client email or direct access)

@@ -1,3 +1,8 @@
+---
+title: "Sample Eligibility README"
+date: "2026-05-17"
+tags: []
+---
 # Cornerstone Well-Being Program — Eligibility File Specification
 
 Companion documentation for `sample-eligibility-acme-manufacturing.csv`. This artifact is a sample of the weekly eligibility extract Nexus Benefit Solutions will deliver to Capitol Group for ingestion into the CEHAS system. CEHAS uses this file to drive invoice generation and ACH reimbursement.
@@ -70,7 +75,7 @@ This file contains PII subject to GLBA and (where applicable) HIPAA-adjacent han
 
 - **PII fields:** `ssn_last4`, `first_name`, `last_name`, `date_of_birth`, `email`, `phone`, `gross_pay`, `w4_filing_status`, `w4_dependents`
 - **Full SSN is NOT transmitted.** Only the last 4 digits, as a secondary match key.
-- **At rest (Nexus):** Files stored in restricted-access OneDrive folder with audit logging; retained 7 years per recordkeeping policy.
+- **At rest (Nexus):** Files stored in restricted-access [[OneDrive]] folder with audit logging; retained 7 years per recordkeeping policy.
 - **In transit (proposed — pending Capitol/CEHAS IT confirmation):**
   1. **Preferred:** SFTP push to a Capitol-designated endpoint with key-based auth. Nexus will provide a public SSH key for whitelisting.
   2. **Acceptable alternative:** Encrypted email (S/MIME or password-protected ZIP with the password delivered out-of-band via phone/SMS to Connie or a CEHAS-designated recipient).

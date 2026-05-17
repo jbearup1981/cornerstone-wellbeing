@@ -1,6 +1,11 @@
+---
+title: "Operational Handoffs"
+date: "2026-05-17"
+tags: []
+---
 # Operational Handoffs — Cornerstone Well-Being Program
 
-This document defines the operational seams between Nexus Benefit Solutions, Capitol Group / CEHAS, and Insight Benefits for the Cornerstone Well-Being Program (Powered by Amaze Health). It is intended as a working spec for the Capitol ops team. Section content reflects the operational substance discussed on the Monday call with Connie.
+This document defines the operational seams between Nexus Benefit Solutions, Capitol Group / CEHAS, and Insight Benefits for the Cornerstone Well-Being Program (Powered by [[Amaze_Health|Amaze Health]]). It is intended as a working spec for the Capitol ops team. Section content reflects the operational substance discussed on the Monday call with Connie.
 
 ---
 
@@ -81,13 +86,13 @@ Nexus and Insight are set up to handle the payroll systems below. "Standard" mea
 | ADP Run | Edge case — manual self-service export required |
 | Gusto | Edge case — manual handling |
 | Heartland | Edge case — manual handling |
-| QuickBooks Payroll | Edge case — manual handling, often used by smaller groups outside Nexus profile |
+| [[QuickBooks]] Payroll | Edge case — manual handling, often used by smaller groups outside Nexus profile |
 
 Nexus is not building integrations for every payroll system on the market — that would explode scope without proportional return. Standard systems get clean exports and flow through the ingestion pipeline. Edge cases get manual workflows, with the same audit and approval gates applied at the end.
 
 The edge-case systems tend to correlate with smaller and less operationally mature employers. That correlation is itself a qualification signal and informs how groups are scoped during the proposal stage.
 
-Brenda Manning is compiling the prioritized payroll vendor list. That work is in flight and will refine this matrix as new systems are encountered in production.
+[[Brenda|Brenda Manning]] is compiling the prioritized payroll vendor list. That work is in flight and will refine this matrix as new systems are encountered in production.
 
 ### Implementation flow context
 

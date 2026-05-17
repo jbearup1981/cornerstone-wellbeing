@@ -1,3 +1,8 @@
+---
+title: "Visual Reference"
+date: "2026-05-17"
+tags: []
+---
 # Visual Reference — Nexus Benefit Solutions / Amaze Pages
 
 Source: extracted from the production bundle at `nexusbenefitsolutions.com/amaze`

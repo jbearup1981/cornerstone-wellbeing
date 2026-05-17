@@ -1,3 +1,8 @@
+---
+title: "Pipeline Team Status"
+date: "2026-05-17"
+tags: []
+---
 ## Distribution Pipeline
 
 | Group | Est. Employees | Target Window | Notes |
@@ -21,36 +26,36 @@ Conversion to enrollment is sequenced deliberately. Nexus is not trying to bring
 ## Team
 
 ### Nexus Benefit Solutions
-- **Jason Bearup** — Owner. Sales lead on every deal. Architect of the platform.
-- **Ken Fortier** — Co-founder, advisor.
-- **Brenda Manning** — Senior advisor; liaison to Capitol Group; deep TPA background.
-- **Cameron Manning** — Advisor.
-- **Tom Snikkers** — Advisor (TBD on platform commitment).
+- **[[Jason Bearup]]** — Owner. Sales lead on every deal. Architect of the platform.
+- **[[Ken Fortier]]** — Co-founder, advisor.
+- **[[Brenda|Brenda Manning]]** — Senior advisor; liaison to Capitol Group; deep TPA background.
+- **[[Cameron Manning]]** — Advisor.
+- **[[Tom Snikkers]]** — Advisor (TBD on platform commitment).
 - **Wendy** — Operations / implementation; builds payroll reports with clients during qualification.
 - **Shea** — Operations / implementation; builds payroll reports with clients during qualification.
 
 ### Insight Benefits (TPA Partner)
-- **Howard Lancaster** — Principal; compliance and operations leadership.
+- **[[Howard]] Lancaster** — [[Principal]]; compliance and operations leadership.
 - **Brenda Brown** — Operations.
 - **Lindsay Kepley** — Operations / implementation.
 - **Breanne Marsiglia** — Operations.
 
 ### Capitol Group (Carrier / Captive / Reinsurance Rails)
-- **Scott** — Principal contact for the carrier relationship.
+- **Scott** — [[Principal]] contact for the carrier relationship.
 - **Connie** — Compliance officer; operational handoff lead.
 - **April** — Eligibility and invoicing operations.
 - **CEHAS IT** — Eligibility file format and delivery.
 
 ### Amaze Health (Virtual Primary Care Partner)
-- **Dave Silverstein** — Principal contact.
-- Amaze Health team — member education, concierge medicine, disenrollment requests.
+- **Dave Silverstein** — [[Principal]] contact.
+- [[Amaze_Health|Amaze Health]] team — member education, concierge medicine, disenrollment requests.
 
 ## Status
 
 ### Partnership status
 - Capitol Group — handshake May 1; structure under operational review.
 - Insight Benefits — committed; demo'd; operational coordination underway.
-- Amaze Health — committed; integration patterns proven on existing book.
+- [[Amaze_Health|Amaze Health]] — committed; integration patterns proven on existing book.
 
 ### Operational readiness
 - Quoting and payroll-audit platform — live and in use on the existing book.
@@ -69,5 +74,5 @@ Conversion to enrollment is sequenced deliberately. Nexus is not trying to bring
 - Eligibility file delivery method (CSV push vs. system access) — pending decision with Capitol.
 - ASA / Compliance Protection / Request for Coverage latest drafts — pending from Capitol.
 - CEHAS and insurer signature contact details — pending from Capitol.
-- Howard ↔ Connie compliance call — scheduled for next week.
+- [[Howard]] ↔ Connie compliance call — scheduled for next week.
 - Payroll vendor priority list — Brenda compiling.

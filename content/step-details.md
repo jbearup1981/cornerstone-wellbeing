@@ -1,3 +1,8 @@
+---
+title: "Step Details"
+date: "2026-05-17"
+tags: []
+---
 # Cornerstone Well-Being Program — Step-by-Step Runbook Detail
 
 Operational detail for every step in every flow diagram on the project hub. Each block is written for the Capitol Group ops team (Scott, Connie, CEHAS IT) primary, with Insight Benefits secondary. Read as an internal operations runbook — no marketing language.
@@ -15,11 +20,11 @@ Operational detail for every step in every flow diagram on the project hub. Each
   - Basic company profile (headcount, industry, location)
   - Any prior benefit history the advisor already knows
 - **Outputs:**
-  - Discovery notes captured in NexHub CRM
+  - Discovery notes captured in [[NexHub CRM]]
   - A first read on whether the group fits the Nexus Standard profile
   - Decision to advance to Qualification or to redirect to the Capitol-routed bucket
 - **Duration:** 30–60 minutes per prospect
-- **Tools:** NexHub CRM, Microsoft Teams or in-person meeting, Outlook calendar
+- **Tools:** [[NexHub CRM|NexHub]] CRM, Microsoft Teams or in-person meeting, Outlook calendar
 - **Dependencies:** Prospect agrees to a conversation; advisor has cleared the meeting with Jason
 - **What can go wrong:** Advisor goes too deep into product before establishing fit, which forces a harder qualification reversal later. Discovery notes get stored in the advisor's head instead of the CRM, so handoff suffers downstream.
 - **Escalation:** Jason directly — he is already on the call
@@ -37,7 +42,7 @@ Operational detail for every step in every flow diagram on the project hub. Each
   - Documented rationale in CRM
   - Green light to request payroll data
 - **Duration:** 15–30 minutes of decision work, often inside the discovery call
-- **Tools:** NexHub CRM, two-bucket routing reference on the hub
+- **Tools:** [[NexHub CRM]], two-bucket routing reference on the hub
 - **Dependencies:** Discovery complete; enough data to assess against the profile
 - **What can go wrong:** Forcing a borderline group through Standard to keep the deal alive. The Davenport adjunct-faculty story is the cautionary tale — population volatility downstream comes from qualification slippage upstream.
 - **Escalation:** Jason has final call; if the advisor disagrees, escalate same-day rather than push through
@@ -54,9 +59,9 @@ Operational detail for every step in every flow diagram on the project hub. Each
   - Cleaned payroll dataset loaded into the Nexus quoting platform
   - Initial flag list (qualification, W-4 discrepancies, wage-band edge cases)
 - **Duration:** 30–90 minutes of live work, plus async cleanup
-- **Tools:** Client payroll system, Nexus quoting platform, secure file transfer (email or SharePoint), Teams screen-share
+- **Tools:** Client payroll system, Nexus quoting platform, secure file transfer (email or [[SharePoint]]), Teams screen-share
 - **Dependencies:** Qualification passed; client has identified the payroll owner and authorized the data pull
-- **What can go wrong:** Client payroll owner is slow to respond, dragging out the funnel. Edge-case payroll systems (ADP Run, Gusto, Heartland, QuickBooks) require manual export, which is error-prone if the admin is junior.
+- **What can go wrong:** Client payroll owner is slow to respond, dragging out the funnel. Edge-case payroll systems (ADP Run, Gusto, Heartland, [[QuickBooks]]) require manual export, which is error-prone if the admin is junior.
 - **Escalation:** Wendy / Shea → Jason if the client is non-responsive; advisor re-engages the relationship
 
 ### Step 1.4 — Quote Generation
@@ -73,7 +78,7 @@ Operational detail for every step in every flow diagram on the project hub. Each
   - Eligibility cheat sheet (who qualifies, who doesn't, who's borderline)
   - Discrepancy report (W-4 vs. actual withholding)
 - **Duration:** 15–30 minutes of platform time; longer if the dataset needs cleanup passes
-- **Tools:** Nexus quoting platform (Replit-built, integrated in NexHub CRM)
+- **Tools:** Nexus quoting platform ([[Replit]]-built, integrated in [[NexHub CRM]])
 - **Dependencies:** Step 1.3 complete and data cleaned; plan tier confirmed
 - **What can go wrong:** Bad source data flows through to bad output. High-earner Social Security wage-base cases need the platform's flag to fire correctly so projected savings aren't overstated.
 - **Escalation:** Wendy/Shea → Jason for any flagged anomaly before the proposal goes out
@@ -85,7 +90,7 @@ Operational detail for every step in every flow diagram on the project hub. Each
 - **Inputs:**
   - Quote output from Step 1.4
   - Employer proposal PDF and per-employee packet zip from the platform
-  - Plan summary materials (Amaze Health, indemnity schedule, opt-out path)
+  - Plan summary materials ([[Amaze_Health|Amaze Health]], indemnity schedule, opt-out path)
 - **Outputs:**
   - Employer-facing proposal delivered
   - Employee-facing packet ready for distribution after sign
@@ -94,7 +99,7 @@ Operational detail for every step in every flow diagram on the project hub. Each
 - **Tools:** Nexus quoting platform exports, PDF, Outlook, Teams
 - **Dependencies:** Step 1.4 complete and reviewed by Jason
 - **What can go wrong:** Client gets the proposal and goes dark. Internal champion (CFO or HR director) loses momentum if there isn't a clear next step on calendar. Compliance questions surface late because Capitol's contract package wasn't on the table early.
-- **Escalation:** Originating advisor owns follow-up cadence; Jason re-engages at the principal level if the deal stalls past two weeks
+- **Escalation:** Originating advisor owns follow-up cadence; Jason re-engages at the [[Principal|principal]] level if the deal stalls past two weeks
 
 ### Step 1.6 — Sign
 
@@ -106,13 +111,13 @@ Operational detail for every step in every flow diagram on the project hub. Each
   - CEHAS e-sign envelope configured
 - **Outputs:**
   - Employer signature captured
-  - Deal status flipped to Won in NexHub
+  - Deal status flipped to Won in [[NexHub CRM|NexHub]]
   - Trigger sent to CEHAS for countersignature (Step 5.2)
 - **Duration:** Same-day to one week after proposal acceptance
-- **Tools:** CEHAS e-sign system, NexHub CRM, Outlook
+- **Tools:** CEHAS e-sign system, [[NexHub CRM]], Outlook
 - **Dependencies:** Proposal accepted; contract templates received from Connie; CEHAS and insurer signature contacts confirmed
 - **What can go wrong:** Contract templates not yet finalized between Connie's team and Nexus, causing a stall at the signature stage. Employer's counsel asks for red-lines that need to round-trip through Capitol.
-- **Escalation:** Jason → Brenda Manning → Scott / Connie for any contract red-line that requires Capitol-side change
+- **Escalation:** Jason → [[Brenda|Brenda Manning]] → Scott / Connie for any contract red-line that requires Capitol-side change
 
 ### Step 1.7 — Handoff to Implementation
 
@@ -128,7 +133,7 @@ Operational detail for every step in every flow diagram on the project hub. Each
   - Kickoff call on calendar
   - Project timeline shared with client (4–6 week education window targeted)
 - **Duration:** Internal handoff complete within 1–2 business days of signature
-- **Tools:** NexHub CRM, Outlook calendar, shared OneDrive/SharePoint folder for client artifacts
+- **Tools:** [[NexHub CRM]], Outlook calendar, shared [[OneDrive]]/[[SharePoint]] folder for client artifacts
 - **Dependencies:** Employer signature captured (Step 1.6); CEHAS countersignature in progress (Step 5.2) — implementation does not need to wait on full countersignature to begin payroll setup work
 - **What can go wrong:** Sales hands off without complete CRM notes and the implementation team rebuilds context the client has already given. The client experiences "telling the same story twice," which damages trust early.
 - **Escalation:** Jason if the handoff stalls past five business days
@@ -150,14 +155,14 @@ Operational detail for every step in every flow diagram on the project hub. Each
   - Kickoff call on calendar
   - Internal RACI confirmed (Nexus / Insight / Capitol roles)
 - **Duration:** 1–2 business days after signature
-- **Tools:** NexHub CRM, OneDrive/SharePoint, Outlook
+- **Tools:** [[NexHub CRM]], [[OneDrive]]/[[SharePoint]], Outlook
 - **Dependencies:** Step 1.7 handoff complete
 - **What can go wrong:** Missing artifacts force implementation to re-engage the client for items that should already be in hand. Insight does not yet know the group is incoming.
-- **Escalation:** Wendy/Shea → Jason; Jason loops Insight (Brenda Brown or Howard) into the kickoff invite
+- **Escalation:** Wendy/Shea → Jason; Jason loops Insight (Brenda Brown or [[Howard]]) into the kickoff invite
 
 ### Step 2.2 — Payroll System Setup
 
-- **Owner:** Insight Benefits — Brenda Brown / Howard's team, supported by Nexus (Wendy)
+- **Owner:** Insight Benefits — Brenda Brown / [[Howard]]'s team, supported by Nexus (Wendy)
 - **What happens:** Two payroll codes are configured in the client's payroll system: a Section 125 pre-tax deduction code for the employee contribution, and a separate reimbursement code for the indemnity payments, which are not wages and must be coded as such. Getting both codes correct here is the single biggest determinant of whether the downstream cycle stays clean.
 - **Inputs:**
   - Client payroll system access
@@ -168,10 +173,10 @@ Operational detail for every step in every flow diagram on the project hub. Each
   - Indemnity reimbursement code live in client payroll system
   - Test record run end-to-end (where the system supports it)
 - **Duration:** 1–3 business days, depending on payroll system and admin responsiveness
-- **Tools:** Client payroll system (ADP, I-Solved, Paycom, Paychex, Kronos for Standard; ADP Run, Gusto, Heartland, QuickBooks for Edge case)
+- **Tools:** Client payroll system (ADP, I-Solved, Paycom, Paychex, Kronos for Standard; ADP Run, Gusto, Heartland, [[QuickBooks]] for Edge case)
 - **Dependencies:** Step 2.1 complete; client payroll admin available
 - **What can go wrong:** Reimbursement coded as wages (gets FICA'd, defeats the model). Edge-case payroll systems don't expose the configuration cleanly; manual workarounds carry forward into the audit cycle.
-- **Escalation:** Insight → Wendy → Jason; Brenda Manning if a payroll vendor needs Capitol-level intervention
+- **Escalation:** Insight → Wendy → Jason; [[Brenda|Brenda Manning]] if a payroll vendor needs Capitol-level intervention
 
 ### Step 2.3 — Initial File Build
 
@@ -212,7 +217,7 @@ Operational detail for every step in every flow diagram on the project hub. Each
 ### Step 2.5 — Employee Education
 
 - **Owner:** Nexus — originating advisor and Jason own the message; Amaze supplies clinical content; Insight supports operationally
-- **What happens:** A 4–6 week education window opens before go-live. Each employee receives a personalized before/after paycheck statement, Amaze Health welcome materials, and a clearly marked opt-out path that routes through Amaze. Employees see exactly what is changing on their check, what they are getting in return, and how to decline.
+- **What happens:** A 4–6 week education window opens before go-live. Each employee receives a personalized before/after paycheck statement, [[Amaze_Health|Amaze Health]] welcome materials, and a clearly marked opt-out path that routes through Amaze. Employees see exactly what is changing on their check, what they are getting in return, and how to decline.
 - **Inputs:**
   - Per-employee paycheck packets from Step 1.4
   - Amaze Health welcome and onboarding materials
@@ -223,7 +228,7 @@ Operational detail for every step in every flow diagram on the project hub. Each
   - Employee questions logged and answered
   - Final enrollment file reflecting opt-outs ready for go-live
 - **Duration:** 4–6 weeks
-- **Tools:** Email, employer comms channels, Amaze portal, optional Employee Navigator content
+- **Tools:** Email, employer comms channels, Amaze portal, optional [[Employee Navigator]] content
 - **Dependencies:** Steps 2.2 and 2.3 in progress; education timeline agreed with client leadership
 - **What can go wrong:** Employer pushes the education window short to chase a go-live date — opt-out rate spikes after go-live because employees felt rushed. Communication channel mismatch (email-only at a manufacturing site, for example) leaves part of the population uninformed.
 - **Escalation:** Originating advisor → Jason if the employer compresses the window beyond what's reasonable
@@ -245,7 +250,7 @@ Operational detail for every step in every flow diagram on the project hub. Each
 - **Tools:** Client payroll system, Nexus audit system, CEHAS ingest channel
 - **Dependencies:** Steps 2.1–2.5 complete; coverage effective date confirmed in carrier paper
 - **What can go wrong:** Effective date misalignment between payroll cycle and carrier coverage start, which creates a partial-cycle invoicing oddity that CEHAS has to reconcile manually. Last-minute opt-outs that miss the file freeze.
-- **Escalation:** Wendy → Jason → Brenda Manning / Connie for any cross-org coordination on the effective date
+- **Escalation:** Wendy → Jason → [[Brenda|Brenda Manning]] / Connie for any cross-org coordination on the effective date
 
 ---
 
@@ -264,10 +269,10 @@ Operational detail for every step in every flow diagram on the project hub. Each
   - Documented rationale
   - Economics path locked for this deal
 - **Duration:** A single decision moment, usually inside or right after the qualification call
-- **Tools:** NexHub CRM, two-bucket routing reference
+- **Tools:** [[NexHub CRM]], two-bucket routing reference
 - **Dependencies:** Discovery and qualification complete
 - **What can go wrong:** Soft routing — calling something Standard because the advisor wants the full economics, when the profile says otherwise. That kind of slippage shows up six months later as Insight hour overruns.
-- **Escalation:** Jason; for genuine edge cases Jason can consult Brenda Manning on the political read with Capitol
+- **Escalation:** Jason; for genuine edge cases Jason can consult [[Brenda|Brenda Manning]] on the political read with Capitol
 
 ### Step 3.2 — Nexus Standard Routing (YES)
 
@@ -280,7 +285,7 @@ Operational detail for every step in every flow diagram on the project hub. Each
   - Insight notified that a Standard group is incoming
   - Full Nexus comp structure applied
 - **Duration:** N/A — this is a routing step, not a workflow step
-- **Tools:** NexHub CRM (deal record with bucket flag)
+- **Tools:** [[NexHub CRM]] (deal record with bucket flag)
 - **Dependencies:** Step 3.1 routing decision
 - **What can go wrong:** Group profile drifts post-routing (acquisition, leadership change, turnover spike) and the bucket should be revisited. Currently there is no formal "re-bucket" trigger — TBD with team whether to define one at, say, 12 months in service.
 - **Escalation:** Jason on any mid-life rerouting question
@@ -297,10 +302,10 @@ Operational detail for every step in every flow diagram on the project hub. Each
   - Reduced Nexus comp structure applied
   - Capitol-side onboarding initiated through their existing channels
 - **Duration:** Handoff completes within five business days of bucket assignment
-- **Tools:** NexHub CRM (deal flagged as Capitol-routed), email to Capitol intake (TBD with team — formal intake address pending)
+- **Tools:** [[NexHub CRM]] (deal flagged as Capitol-routed), email to Capitol intake (TBD with team — formal intake address pending)
 - **Dependencies:** Step 3.1 routing decision; Capitol has confirmed the operational receiving channel for these handoffs (TBD with Connie / Scott)
 - **What can go wrong:** No defined Capitol receiving channel means deals stall at the handoff. The originating advisor loses visibility into the deal status and feels like the relationship went into a black hole.
-- **Escalation:** Jason → Brenda Manning → Scott; longer-term, a defined Capitol intake contact resolves this
+- **Escalation:** Jason → [[Brenda|Brenda Manning]] → Scott; longer-term, a defined Capitol intake contact resolves this
 
 ---
 
@@ -335,7 +340,7 @@ Operational detail for every step in every flow diagram on the project hub. Each
 - **Tools:** CEHAS captive admin system, agreed delivery channel (CSV push or system access)
 - **Dependencies:** Step 4.1 delivered; delivery method decision locked; CEHAS IT format finalized
 - **What can go wrong:** File rejected for format / schema issue and the cycle has to be reworked. No receipt mechanism means Nexus doesn't know whether the file landed clean.
-- **Escalation:** Connie / April / CEHAS IT; Nexus loops in Brenda Manning if cross-org delay
+- **Escalation:** Connie / April / CEHAS IT; Nexus loops in [[Brenda|Brenda Manning]] if cross-org delay
 
 ### Step 4.3 — Invoice generation
 
@@ -368,7 +373,7 @@ Operational detail for every step in every flow diagram on the project hub. Each
 - **Tools:** CEHAS ACH processing
 - **Dependencies:** Step 4.3 invoice generated; employer ACH authorization in place from onboarding
 - **What can go wrong:** ACH return for insufficient funds or revoked authorization. Employer banking change not communicated to CEHAS.
-- **Escalation:** CEHAS → Connie → Brenda Manning → Jason for client-facing collection conversations
+- **Escalation:** CEHAS → Connie → [[Brenda|Brenda Manning]] → Jason for client-facing collection conversations
 
 ---
 
@@ -389,7 +394,7 @@ Operational detail for every step in every flow diagram on the project hub. Each
 - **Tools:** CEHAS e-sign system, Outlook for routing
 - **Dependencies:** Contract templates finalized (pending Connie); employer signatory identified
 - **What can go wrong:** Employer's counsel requests red-lines after the envelope is already configured, forcing a re-route. Wrong signatory inside the employer's org delays execution.
-- **Escalation:** Originating advisor → Jason → Brenda Manning / Connie on any contract red-line
+- **Escalation:** Originating advisor → Jason → [[Brenda|Brenda Manning]] / Connie on any contract red-line
 
 ### Step 5.2 — CEHAS countersigns
 
@@ -404,7 +409,7 @@ Operational detail for every step in every flow diagram on the project hub. Each
 - **Tools:** CEHAS e-sign system
 - **Dependencies:** Step 5.1 complete; CEHAS signatory contact confirmed (currently pending)
 - **What can go wrong:** Pending signatory contact means the envelope sits idle. Operational acceptance criteria CEHAS uses for countersignature aren't documented externally — TBD with team whether there's a checklist Nexus should pre-clear.
-- **Escalation:** Connie → CEHAS internal; Brenda Manning if the stall is more than three business days
+- **Escalation:** Connie → CEHAS internal; [[Brenda|Brenda Manning]] if the stall is more than three business days
 
 ### Step 5.3 — Insurer countersigns
 
@@ -419,7 +424,7 @@ Operational detail for every step in every flow diagram on the project hub. Each
 - **Tools:** CEHAS e-sign system, carrier signature workflow
 - **Dependencies:** Step 5.2 complete; insurer signature contact confirmed (currently pending from Connie)
 - **What can go wrong:** Carrier-side review introduces unexpected questions that bounce the package back. Signature contact unavailability creates calendar delay.
-- **Escalation:** Connie owns the carrier-side relationship; Brenda Manning if escalation is needed
+- **Escalation:** Connie owns the carrier-side relationship; [[Brenda|Brenda Manning]] if escalation is needed
 
 ### Step 5.4 — Distribution to all parties
 
@@ -430,10 +435,10 @@ Operational detail for every step in every flow diagram on the project hub. Each
   - Distribution list with current contact emails for all four parties
 - **Outputs:**
   - Executed package delivered to all parties
-  - Copy archived in NexHub deal record
+  - Copy archived in [[NexHub CRM|NexHub]] deal record
   - Implementation team formally green-lit (Diagram 2 already running in parallel)
 - **Duration:** Same-day to one business day after Step 5.3
-- **Tools:** Email, SharePoint/OneDrive archive, CEHAS distribution mechanism
+- **Tools:** Email, [[SharePoint]]/[[OneDrive]] archive, CEHAS distribution mechanism
 - **Dependencies:** Step 5.3 complete
 - **What can go wrong:** Distribution list out of date — copy goes to a stale email at the client or at Nexus. Nexus's local archive isn't kept in sync with what CEHAS holds as canonical.
 - **Escalation:** Wendy/Shea on archive issues; Connie on CEHAS distribution issues
@@ -534,7 +539,7 @@ This is the recurring service cycle that runs for the life of the group. Insight
 
 ### Bonus Step 7 — Amaze handles disenrollment requests
 
-- **Owner:** Amaze Health — direct member channel
+- **Owner:** [[Amaze_Health|Amaze Health]] — direct member channel
 - **What happens:** Employees who decide they no longer want to participate route through Amaze directly. Amaze processes the disenrollment, and the change flows back to Insight on the next eligibility cycle, where it appears as a flag on the variance view and is reflected in the next file push to CEHAS.
 - **Inputs:**
   - Employee disenrollment request to Amaze

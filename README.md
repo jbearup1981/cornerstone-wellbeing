@@ -1,6 +1,11 @@
+---
+title: "README"
+date: "2026-05-17"
+tags: []
+---
 # Cornerstone Well-Being Program
 
-Working project hub for the Cornerstone Well-Being Program — a Section 125 fixed-indemnity wellbeing program delivered through Nexus Benefit Solutions, with Insight Benefits as TPA and Capitol Group as carrier/captive/reinsurance rails. Powered by Amaze Health.
+Working project hub for the Cornerstone Well-Being Program — a Section 125 fixed-indemnity wellbeing program delivered through Nexus Benefit Solutions, with Insight Benefits as TPA and Capitol Group as carrier/captive/reinsurance rails. Powered by [[Amaze_Health|Amaze Health]].
 
 ## What this repo is
 
@@ -11,7 +16,7 @@ Hosted via GitHub Pages at: <https://jbearup1981.github.io/cornerstone-wellbeing
 ## Audience
 
 - **Primary:** Capitol Group (Scott, Connie, ops/compliance teams)
-- **Secondary:** Insight Benefits (Howard, Brenda Brown, Lindsay, Breanne)
+- **Secondary:** Insight Benefits ([[Howard]], Brenda Brown, Lindsay, Breanne)
 - **Internal:** Nexus Benefit Solutions team
 
 ## Status

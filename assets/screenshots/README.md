@@ -1,6 +1,11 @@
+---
+title: "README"
+date: "2026-05-17"
+tags: []
+---
 # Quoting Platform Screenshots
 
-Captured from the live NexHub CRM quoting platform (`nexhub.nexusbenefitsolutions.com/tools/proforma/`) on May 16, 2026. All shots use the **Harloff Manufacturing Company** demo group (quote ID 12, flagged "demo" in the CRM) — synthetic group built for the Insight team demo and Capitol walkthroughs, not a real client.
+Captured from the live [[NexHub CRM]] quoting platform (`[[NexHub CRM|nexhub]].nexusbenefitsolutions.com/tools/proforma/`) on May 16, 2026. All shots use the **Harloff Manufacturing Company** demo group (quote ID 12, flagged "demo" in the CRM) — synthetic group built for the Insight team demo and Capitol walkthroughs, not a real client.
 
 ## Inventory
 
@@ -23,4 +28,4 @@ Captured from the live NexHub CRM quoting platform (`nexhub.nexusbenefitsolution
 
 ## Capture Method
 
-Driven via raw Chrome DevTools Protocol over the Comet debug port (`localhost:9222`), reusing the existing authenticated NexHub tab. Source script: `5-technology/browser-automation/cwb_shoot.mjs`. Microsoft SSO completed silently via Comet's LastPass extension. Full-page captures use `Emulation.setDeviceMetricsOverride` + `captureBeyondViewport`.
+Driven via raw Chrome DevTools Protocol over the Comet debug port (`localhost:9222`), reusing the existing authenticated [[NexHub CRM|NexHub]] tab. Source script: `5-technology/browser-automation/cwb_shoot.mjs`. Microsoft SSO completed silently via Comet's [[LastPass]] extension. Full-page captures use `Emulation.setDeviceMetricsOverride` + `captureBeyondViewport`.
