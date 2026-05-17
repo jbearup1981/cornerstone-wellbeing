@@ -897,6 +897,155 @@ td strong { color: var(--color-fg); }
 .team-col li strong { color: var(--color-fg); display: block; font-weight: 600; }
 .team-col li span { color: var(--color-fg-muted); }
 
+/* Step-detail accordion — click-to-expand operational detail under each step */
+[data-step-id] {
+  cursor: pointer;
+  transition: box-shadow 150ms ease, border-color 150ms ease, transform 120ms ease;
+}
+[data-step-id]:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 1px 4px rgba(199, 90, 44, 0.15);
+}
+/* .steps li doesn't have a border by default — give it a subtle hover background */
+.steps li[data-step-id]:hover {
+  background: rgba(199, 90, 44, 0.05);
+  box-shadow: none;
+  border-color: var(--color-border);
+}
+.steps li[data-step-id][aria-expanded="true"] {
+  background: rgba(199, 90, 44, 0.07);
+  box-shadow: inset 3px 0 0 0 var(--color-primary);
+}
+[data-step-id]:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+[data-step-id][aria-expanded="true"] {
+  border-color: var(--color-primary);
+  box-shadow: inset 0 -3px 0 0 var(--color-primary);
+}
+/* SVG nodes inside loop diagram — give them pointer + subtle hover */
+g[data-step-id] { cursor: pointer; }
+g[data-step-id] rect { transition: stroke 150ms ease, stroke-width 150ms ease; }
+g[data-step-id]:hover rect { stroke: var(--color-primary); stroke-width: 1.75; }
+g[data-step-id][aria-expanded="true"] rect { stroke: var(--color-primary); stroke-width: 2; }
+
+.step-detail-panels {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.step-detail {
+  background: rgba(232, 234, 223, 0.55);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-primary);
+  border-radius: var(--radius);
+  padding: 1.125rem 1.25rem;
+}
+.step-detail[hidden] { display: none; }
+.step-detail .sd-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+.step-detail .sd-eyebrow {
+  font-size: var(--fs-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+.step-detail .sd-title {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-fg);
+  margin: 0;
+}
+.step-detail .sd-close {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--color-fg-muted);
+  padding: 0.25rem 0.625rem;
+  cursor: pointer;
+}
+.step-detail .sd-close:hover { color: var(--color-primary); border-color: var(--color-primary); }
+.step-detail .sd-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.875rem 1.5rem;
+}
+.step-detail .sd-field { font-size: var(--fs-sm); }
+.step-detail .sd-field.full { grid-column: 1 / -1; }
+.step-detail .sd-label {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--color-primary);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.step-detail .sd-value { color: var(--color-fg); line-height: 1.5; }
+.step-detail .sd-value ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+.step-detail .sd-value ul li { margin-bottom: 0.2rem; }
+
+/* Assets section */
+.asset-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+.asset-card:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(199, 90, 44, 0.12);
+}
+.asset-card .asset-eyebrow {
+  font-size: var(--fs-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  font-weight: 600;
+  color: var(--color-fg-muted);
+}
+.asset-card h4 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  color: var(--color-fg);
+  margin: 0;
+}
+.asset-card p {
+  font-size: var(--fs-sm);
+  color: var(--color-fg-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+.asset-card .asset-link {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+.asset-card .asset-link::after { content: " →"; }
+
 /* Footer */
 .footer {
   background: var(--color-dark-bg);
@@ -950,6 +1099,7 @@ section[id] { scroll-margin-top: 72px; }
     <a class="nav-link" href="#pipeline">Pipeline</a>
     <a class="nav-link" href="#documents">Documents</a>
     <a class="nav-link" href="#status">Status</a>
+    <a class="nav-link" href="#assets">Assets</a>
   </div>
 </nav>
 
@@ -1140,7 +1290,7 @@ section[id] { scroll-margin-top: 72px; }
     <div class="diagram-frame" aria-label="Sales-to-handoff funnel">
       <span class="frame-label">Sales Flow</span>
       <div class="funnel">
-        <div class="step">
+        <div class="step" data-step-id="1.1" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-sales-flow">
           <div class="step-head">
             <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg>
             <span class="num">Step 01</span>
@@ -1149,7 +1299,7 @@ section[id] { scroll-margin-top: 72px; }
           <span class="sub">Open conversation; needs map</span>
         </div>
         <div class="arrow" aria-hidden="true"><svg class="flow-arrow-svg" viewBox="0 0 28 14"><path d="M2 7 H22 M16 2 L22 7 L16 12"/></svg></div>
-        <div class="step">
+        <div class="step" data-step-id="1.2" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-sales-flow">
           <div class="step-head">
             <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h6"/><path d="M14 16l2 2 4-4"/></svg>
             <span class="num">Step 02</span>
@@ -1158,7 +1308,7 @@ section[id] { scroll-margin-top: 72px; }
           <span class="sub">Profile fit against target lane</span>
         </div>
         <div class="arrow" aria-hidden="true"><svg class="flow-arrow-svg" viewBox="0 0 28 14"><path d="M2 7 H22 M16 2 L22 7 L16 12"/></svg></div>
-        <div class="step">
+        <div class="step" data-step-id="1.3" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-sales-flow">
           <div class="step-head">
             <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
             <span class="num">Step 03</span>
@@ -1167,7 +1317,7 @@ section[id] { scroll-margin-top: 72px; }
           <span class="sub">Register + W-4 status</span>
         </div>
         <div class="arrow" aria-hidden="true"><svg class="flow-arrow-svg" viewBox="0 0 28 14"><path d="M2 7 H22 M16 2 L22 7 L16 12"/></svg></div>
-        <div class="step">
+        <div class="step" data-step-id="1.4" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-sales-flow">
           <div class="step-head">
             <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17l5-5 3 3 8-8"/><path d="M14 7h6v6"/></svg>
             <span class="num">Step 04</span>
@@ -1176,7 +1326,7 @@ section[id] { scroll-margin-top: 72px; }
           <span class="sub">AI census audit · paycheck deltas</span>
         </div>
         <div class="arrow" aria-hidden="true"><svg class="flow-arrow-svg" viewBox="0 0 28 14"><path d="M2 7 H22 M16 2 L22 7 L16 12"/></svg></div>
-        <div class="step">
+        <div class="step" data-step-id="1.5" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-sales-flow">
           <div class="step-head">
             <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v6h6"/></svg>
             <span class="num">Step 05</span>
@@ -1185,7 +1335,7 @@ section[id] { scroll-margin-top: 72px; }
           <span class="sub">Client review</span>
         </div>
         <div class="arrow" aria-hidden="true"><svg class="flow-arrow-svg" viewBox="0 0 28 14"><path d="M2 7 H22 M16 2 L22 7 L16 12"/></svg></div>
-        <div class="step">
+        <div class="step" data-step-id="1.6" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-sales-flow">
           <div class="step-head">
             <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19c2-3 6-4 10-2"/><path d="M14 17l2-7 4 2-3 7z"/></svg>
             <span class="num">Step 06</span>
@@ -1194,7 +1344,7 @@ section[id] { scroll-margin-top: 72px; }
           <span class="sub">Eyes-wide-open both sides</span>
         </div>
         <div class="arrow" aria-hidden="true"><svg class="flow-arrow-svg" viewBox="0 0 28 14"><path d="M2 7 H22 M16 2 L22 7 L16 12"/></svg></div>
-        <div class="step terminal">
+        <div class="step terminal" data-step-id="1.7" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-sales-flow">
           <div class="step-head">
             <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h14"/><path d="M13 6l6 6-6 6"/></svg>
             <span class="num">Step 07</span>
@@ -1203,7 +1353,8 @@ section[id] { scroll-margin-top: 72px; }
           <span class="sub">File transfers to ops</span>
         </div>
       </div>
-      <p class="diagram-caption">Two sales teams, both led by Jason. Every deal qualified upfront before downstream work begins.</p>
+      <div class="step-detail-panels" id="panels-sales-flow" aria-live="polite"></div>
+      <p class="diagram-caption">Two sales teams, both led by Jason. Every deal qualified upfront before downstream work begins. Click any step for full operational detail.</p>
     </div>
   </div>
 </section>
@@ -1230,7 +1381,7 @@ section[id] { scroll-margin-top: 72px; }
     <div class="diagram-frame" aria-label="Implementation process flow">
       <span class="frame-label">Implementation Flow</span>
       <div class="funnel">
-        <div class="step">
+        <div class="step" data-step-id="2.1" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-impl-flow">
           <div class="step-head">
             <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M9 14l2 2 4-4"/></svg>
             <span class="num">Step 01</span>
@@ -1239,7 +1390,7 @@ section[id] { scroll-margin-top: 72px; }
           <span class="sub">Trigger for ops handoff</span>
         </div>
         <div class="arrow" aria-hidden="true"><svg class="flow-arrow-svg" viewBox="0 0 28 14"><path d="M2 7 H22 M16 2 L22 7 L16 12"/></svg></div>
-        <div class="step">
+        <div class="step" data-step-id="2.2" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-impl-flow">
           <div class="step-head">
             <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6A7 7 0 0 0 5 12"/></svg>
             <span class="num">Step 02</span>
@@ -1248,7 +1399,7 @@ section[id] { scroll-margin-top: 72px; }
           <span class="sub">§125 + indemnity codes</span>
         </div>
         <div class="arrow" aria-hidden="true"><svg class="flow-arrow-svg" viewBox="0 0 28 14"><path d="M2 7 H22 M16 2 L22 7 L16 12"/></svg></div>
-        <div class="step">
+        <div class="step" data-step-id="2.3" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-impl-flow">
           <div class="step-head">
             <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v6h6"/><path d="M8 14h8M8 18h6"/></svg>
             <span class="num">Step 03</span>
@@ -1257,7 +1408,7 @@ section[id] { scroll-margin-top: 72px; }
           <span class="sub">Upload-ready or manual format</span>
         </div>
         <div class="arrow" aria-hidden="true"><svg class="flow-arrow-svg" viewBox="0 0 28 14"><path d="M2 7 H22 M16 2 L22 7 L16 12"/></svg></div>
-        <div class="step">
+        <div class="step" data-step-id="2.4" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-impl-flow">
           <div class="step-head">
             <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/><path d="M8 11l2.5 2.5L14 9"/></svg>
             <span class="num">Step 04</span>
@@ -1266,7 +1417,7 @@ section[id] { scroll-margin-top: 72px; }
           <span class="sub">Every line, not a spot check</span>
         </div>
         <div class="arrow" aria-hidden="true"><svg class="flow-arrow-svg" viewBox="0 0 28 14"><path d="M2 7 H22 M16 2 L22 7 L16 12"/></svg></div>
-        <div class="step">
+        <div class="step" data-step-id="2.5" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-impl-flow">
           <div class="step-head">
             <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><path d="M17 11l2 2 4-4"/></svg>
             <span class="num">Step 05</span>
@@ -1275,7 +1426,7 @@ section[id] { scroll-margin-top: 72px; }
           <span class="sub">4–6 weeks · Amaze comms · opt-out path</span>
         </div>
         <div class="arrow" aria-hidden="true"><svg class="flow-arrow-svg" viewBox="0 0 28 14"><path d="M2 7 H22 M16 2 L22 7 L16 12"/></svg></div>
-        <div class="step terminal">
+        <div class="step terminal" data-step-id="2.6" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-impl-flow">
           <div class="step-head">
             <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12a7 7 0 1 1 14 0a7 7 0 0 1-14 0"/><path d="M12 8v4l3 2"/></svg>
             <span class="num">Step 06</span>
@@ -1284,7 +1435,8 @@ section[id] { scroll-margin-top: 72px; }
           <span class="sub">First cycle in production</span>
         </div>
       </div>
-      <p class="diagram-caption">Insight Benefits executes payroll setup, audit, and change communications. Nexus stays in the room through go-live to ensure quality of handoff.</p>
+      <div class="step-detail-panels" id="panels-impl-flow" aria-live="polite"></div>
+      <p class="diagram-caption">Insight Benefits executes payroll setup, audit, and change communications. Nexus stays in the room through go-live to ensure quality of handoff. Click any step for full operational detail.</p>
     </div>
   </div>
 </section>
@@ -1299,15 +1451,17 @@ section[id] { scroll-margin-top: 72px; }
       <p>This review step is intentional. The pattern we watch for is the wild swing — a count that moves more than the population should reasonably move in a single cycle. The Davenport adjunct-faculty episode is the cautionary tale we keep in front of the team: a payroll feed shifted dramatically one cycle because of an adjunct payroll quirk, and the lesson was that when a number doesn't look right, you stop and ask before you push. "Houston, we have a problem" is the posture — pause, verify, then proceed.</p>
       <p>Once the variances are reconciled, Insight emails the client's payroll admin with the changes for that cycle and pushes an updated eligibility file to Capitol's CEHAS system. That weekly push is what keeps invoicing and ACH on an accurate roster — Capitol bills off the eligibility file we send. Brenda at Insight is likely to own the steady-state cadence; Howard, Brenda Brown, Lindsay, and Breanne are the implementation-side touchpoints who hand work into that cadence. Amaze Health handles disenrollment requests directly — employees who decide they no longer want to participate route through Amaze, and the change flows back to Insight on the next cycle.</p>
     </div>
-    <ol class="steps">
-      <li>Insight pulls payroll register each cycle (client email or direct access)</li>
-      <li>File ingested into Nexus eligibility audit system</li>
-      <li>System flags still-qualified, no-longer-qualified, newly eligible, and reclassifications</li>
-      <li>Insight reviews variances; large swings pause for verification before push</li>
-      <li>Insight emails payroll admin with the cycle's changes</li>
-      <li>Updated eligibility file pushed to Capitol CEHAS weekly for invoicing and ACH</li>
-      <li>Amaze handles employee disenrollment requests directly</li>
+    <ol class="steps" id="service-steps">
+      <li data-step-id="b.1" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-service">Insight pulls payroll register each cycle (client email or direct access)</li>
+      <li data-step-id="b.2" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-service">File ingested into Nexus eligibility audit system</li>
+      <li data-step-id="b.3" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-service">System flags still-qualified, no-longer-qualified, newly eligible, and reclassifications</li>
+      <li data-step-id="b.4" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-service">Insight reviews variances; large swings pause for verification before push</li>
+      <li data-step-id="b.5" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-service">Insight emails payroll admin with the cycle's changes</li>
+      <li data-step-id="b.6" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-service">Updated eligibility file pushed to Capitol CEHAS weekly for invoicing and ACH</li>
+      <li data-step-id="b.7" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-service">Amaze handles employee disenrollment requests directly</li>
     </ol>
+    <div class="step-detail-panels" id="panels-service" aria-live="polite" style="margin-top:1.25rem;"></div>
+    <p class="diagram-caption" style="margin-top:1rem;">Click any step for full operational detail (owner, inputs, outputs, duration, dependencies, escalation).</p>
   </div>
 </section>
 
@@ -1367,7 +1521,7 @@ section[id] { scroll-margin-top: 72px; }
     <div class="diagram-frame" aria-label="Two-bucket routing decision tree">
       <span class="frame-label">Routing Decision</span>
       <div class="decision-tree">
-        <div class="node">
+        <div class="node" data-step-id="3.1" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-buckets">
           <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h14"/><path d="M3 12h14"/><path d="M3 17h10"/><path d="M19 5v14"/></svg>
           Incoming Deal
         </div>
@@ -1389,21 +1543,22 @@ section[id] { scroll-margin-top: 72px; }
         <div class="branches">
           <div class="branch yes">
             <span class="pill">Yes</span>
-            <div class="outcome">
+            <div class="outcome" data-step-id="3.2" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-buckets">
               <strong>Nexus Standard</strong>
               <span>Full Nexus economics</span>
             </div>
           </div>
           <div class="branch no">
             <span class="pill">No</span>
-            <div class="outcome">
+            <div class="outcome" data-step-id="3.3" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-buckets">
               <strong>Capitol-Routed</strong>
               <span>Reduced Nexus comp · Capitol owns lift</span>
             </div>
           </div>
         </div>
       </div>
-      <p class="diagram-caption">Every incoming deal runs through the same upfront filter. The economics follow the work.</p>
+      <div class="step-detail-panels" id="panels-buckets" aria-live="polite"></div>
+      <p class="diagram-caption">Every incoming deal runs through the same upfront filter. The economics follow the work. Click any node for full operational detail.</p>
     </div>
 
     <div class="card-grid-2" style="margin-top:1.5rem;">
@@ -1567,7 +1722,7 @@ section[id] { scroll-margin-top: 72px; }
           <!-- Nodes: 12 (top), 3 (right), 6 (bottom), 9 (left) -->
           <g font-family="DM Sans, sans-serif" fill="#1F3D2E" text-anchor="middle">
             <!-- 12 o'clock: Nexus Eligibility File -->
-            <g>
+            <g data-step-id="4.1" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-eligibility-loop">
               <rect x="205" y="20" width="130" height="60" rx="6" fill="#FAFAF7" stroke="#D9DDCC"/>
               <g transform="translate(218,32)" fill="none" stroke="#C75A2C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="0" y="0" width="11" height="14" rx="1.5"/>
@@ -1577,7 +1732,7 @@ section[id] { scroll-margin-top: 72px; }
               <text x="270" y="69" font-size="11.5" font-weight="600">File</text>
             </g>
             <!-- 3 o'clock: CEHAS Ingestion -->
-            <g>
+            <g data-step-id="4.2" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-eligibility-loop">
               <rect x="380" y="160" width="140" height="60" rx="6" fill="#FAFAF7" stroke="#D9DDCC"/>
               <g transform="translate(393,172)" fill="none" stroke="#C75A2C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5.5 0 L11 4 L5.5 8 L0 4 Z"/>
@@ -1587,7 +1742,7 @@ section[id] { scroll-margin-top: 72px; }
               <text x="450" y="209" font-size="11.5" font-weight="600">Ingestion</text>
             </g>
             <!-- 6 o'clock: Invoice Generation -->
-            <g>
+            <g data-step-id="4.3" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-eligibility-loop">
               <rect x="205" y="300" width="130" height="60" rx="6" fill="#FAFAF7" stroke="#D9DDCC"/>
               <g transform="translate(218,312)" fill="none" stroke="#C75A2C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M0 0h11v15l-2.75-2l-2.75 2l-2.75-2L0 15z"/>
@@ -1597,7 +1752,7 @@ section[id] { scroll-margin-top: 72px; }
               <text x="270" y="349" font-size="11.5" font-weight="600">Generation</text>
             </g>
             <!-- 9 o'clock: ACH Collection -->
-            <g>
+            <g data-step-id="4.4" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-eligibility-loop">
               <rect x="20" y="160" width="140" height="60" rx="6" fill="#FAFAF7" stroke="#D9DDCC"/>
               <g transform="translate(33,172)" fill="none" stroke="#C75A2C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M0 12h11"/>
@@ -1610,7 +1765,8 @@ section[id] { scroll-margin-top: 72px; }
           </g>
         </svg>
       </div>
-      <p class="diagram-caption">Weekly cadence, aligned to the client payroll cycle.</p>
+      <div class="step-detail-panels" id="panels-eligibility-loop" aria-live="polite"></div>
+      <p class="diagram-caption">Weekly cadence, aligned to the client payroll cycle. Click any node for full operational detail.</p>
     </div>
 
     <div class="card-grid-2" style="margin-top:1rem;">
@@ -1642,7 +1798,7 @@ section[id] { scroll-margin-top: 72px; }
     <div class="diagram-frame" aria-label="Contract signature sequence">
       <span class="frame-label">Signature Cascade</span>
       <div class="signature-seq">
-        <div class="sig-step">
+        <div class="sig-step" data-step-id="5.1" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-signature">
           <span class="order">
             <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20c2-5 6-5 8-5s6 0 8 5"/><circle cx="12" cy="8" r="4"/></svg>
             Step 01
@@ -1652,7 +1808,7 @@ section[id] { scroll-margin-top: 72px; }
           <div class="sig-line" aria-hidden="true"></div>
         </div>
         <div class="sig-arrow" aria-hidden="true"><svg class="flow-arrow-svg" viewBox="0 0 28 14"><path d="M2 7 H22 M16 2 L22 7 L16 12"/></svg></div>
-        <div class="sig-step">
+        <div class="sig-step" data-step-id="5.2" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-signature">
           <span class="order">
             <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h10l4 4v12H5z"/><path d="M14 4v5h5"/><path d="M8 14l2 2 4-4"/></svg>
             Step 02
@@ -1662,7 +1818,7 @@ section[id] { scroll-margin-top: 72px; }
           <div class="sig-line" aria-hidden="true"></div>
         </div>
         <div class="sig-arrow" aria-hidden="true"><svg class="flow-arrow-svg" viewBox="0 0 28 14"><path d="M2 7 H22 M16 2 L22 7 L16 12"/></svg></div>
-        <div class="sig-step">
+        <div class="sig-step" data-step-id="5.3" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-signature">
           <span class="order">
             <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
             Step 03
@@ -1672,7 +1828,7 @@ section[id] { scroll-margin-top: 72px; }
           <div class="sig-line" aria-hidden="true"></div>
         </div>
         <div class="sig-arrow" aria-hidden="true"><svg class="flow-arrow-svg" viewBox="0 0 28 14"><path d="M2 7 H22 M16 2 L22 7 L16 12"/></svg></div>
-        <div class="sig-step distribute">
+        <div class="sig-step distribute" data-step-id="5.4" role="button" tabindex="0" aria-expanded="false" aria-controls="panels-signature">
           <span class="order">
             <svg class="step-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 4v5M12 15v5M4 12h5M15 12h5"/></svg>
             Step 04
@@ -1681,7 +1837,8 @@ section[id] { scroll-margin-top: 72px; }
           <span class="what">Client · Nexus · CEHAS · Carrier</span>
         </div>
       </div>
-      <p class="diagram-caption">Sequenced — each signature triggers the next. Final executed copies distributed to all four parties.</p>
+      <div class="step-detail-panels" id="panels-signature" aria-live="polite"></div>
+      <p class="diagram-caption">Sequenced — each signature triggers the next. Final executed copies distributed to all four parties. Click any step for full operational detail.</p>
     </div>
 
     <div class="card" style="margin-top:1rem;">
@@ -1822,6 +1979,53 @@ section[id] { scroll-margin-top: 72px; }
   </div>
 </section>
 
+<section class="section" id="assets">
+  <div class="container">
+    <span class="eyebrow">Downloads · Artifacts · Deck</span>
+    <h2>Assets</h2>
+    <p class="lead">Downloadable materials supporting the project — presentation deck, sample artifacts for CEHAS review, and platform screenshots. Updated as the project moves.</p>
+
+    <div class="card-grid-3" style="margin-top:1.5rem;">
+      <a class="asset-card" href="deck/">
+        <span class="asset-eyebrow">Presentation</span>
+        <h4>Cornerstone Program Deck</h4>
+        <p>Slide-by-slide overview of the program, partnership structure, and operational handoffs.</p>
+        <span class="asset-link">Open deck</span>
+      </a>
+      <a class="asset-card" href="artifacts/sample-eligibility-acme-manufacturing.csv">
+        <span class="asset-eyebrow">Artifact · CSV</span>
+        <h4>Sample Eligibility File</h4>
+        <p>25-row CSV demonstrating the weekly eligibility data Nexus produces for CEHAS ingestion.</p>
+        <span class="asset-link">Download CSV</span>
+      </a>
+      <a class="asset-card" href="artifacts/sample-eligibility-README.md">
+        <span class="asset-eyebrow">Artifact · Spec</span>
+        <h4>Eligibility File Spec</h4>
+        <p>Column definitions, allowed values, delivery convention.</p>
+        <span class="asset-link">View spec</span>
+      </a>
+      <a class="asset-card" href="artifacts/sample-payroll-summary.html">
+        <span class="asset-eyebrow">Artifact · HTML</span>
+        <h4>Sample Payroll Cycle Audit</h4>
+        <p>Nexus's internal biweekly cycle audit document with variance flags.</p>
+        <span class="asset-link">View sample</span>
+      </a>
+      <a class="asset-card" href="artifacts/sample-invoice.html">
+        <span class="asset-eyebrow">Artifact · HTML</span>
+        <h4>Sample CEHAS Invoice</h4>
+        <p>Capitol/CEHAS-generated invoice from a typical month's eligibility data.</p>
+        <span class="asset-link">View sample</span>
+      </a>
+      <a class="asset-card" href="assets/screenshots/">
+        <span class="asset-eyebrow">Platform · Screens</span>
+        <h4>Quoting Platform Screenshots</h4>
+        <p>Real screens from the Nexus quoting + payroll-audit platform.</p>
+        <span class="asset-link">Browse screenshots</span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="team">
   <div class="container">
     <span class="eyebrow">Who's who</span>
@@ -1887,6 +2091,486 @@ section[id] { scroll-margin-top: 72px; }
     <div>Questions? <a href="mailto:jason@nexusbenefitsolutions.com">jason@nexusbenefitsolutions.com</a></div>
   </div>
 </footer>
+
+<script>
+// Step-detail data — every step in every flow diagram, populated from step-details.md
+// Keyed by the data-step-id attribute on each step. Lists become <ul>; strings become inline.
+const STEP_DETAILS = {
+  "1.1": {
+    title: "Step 1.1 — Discovery",
+    owner: "Nexus — Jason plus the originating advisor (Ken, Cam, Tom, or a GA-channel advisor)",
+    what: "First substantive conversation with the prospect. The advisor learns the business — headcount, industry, payroll system, turnover pattern, benefit philosophy, who owns HR and payroll internally. Jason sits on this call personally; the design of the sales function is that the owner is on every deal during qualification, not after.",
+    inputs: ["Prospect referral or warm intro", "Basic company profile (headcount, industry, location)", "Any prior benefit history the advisor already knows"],
+    outputs: ["Discovery notes captured in NexHub CRM", "A first read on whether the group fits the Nexus Standard profile", "Decision to advance to Qualification or to redirect to the Capitol-routed bucket"],
+    duration: "30–60 minutes per prospect",
+    tools: "NexHub CRM, Microsoft Teams or in-person meeting, Outlook calendar",
+    deps: "Prospect agrees to a conversation; advisor has cleared the meeting with Jason",
+    risks: "Advisor goes too deep into product before establishing fit, which forces a harder qualification reversal later. Discovery notes get stored in the advisor's head instead of the CRM, so handoff suffers downstream.",
+    escalation: "Jason directly — he is already on the call"
+  },
+  "1.2": {
+    title: "Step 1.2 — Qualification",
+    owner: "Nexus — Jason (final call), supported by the originating advisor",
+    what: "The deal is measured against the Nexus Standard profile: 50–1,000 employees (sweet spot 50–300), stable workforce, qualifying wages, a real payroll function, and operational maturity. This is deliberately a tight filter. Groups that do not clear it either route to the Capitol bucket on reduced Nexus comp, or do not move forward at all.",
+    inputs: ["Discovery notes", "Prospect-provided headcount, turnover read, payroll system, and industry", "Two-bucket routing criteria"],
+    outputs: ["Bucket decision (Nexus Standard, Capitol-routed, or pass)", "Documented rationale in CRM", "Green light to request payroll data"],
+    duration: "15–30 minutes of decision work, often inside the discovery call",
+    tools: "NexHub CRM, two-bucket routing reference on the hub",
+    deps: "Discovery complete; enough data to assess against the profile",
+    risks: "Forcing a borderline group through Standard to keep the deal alive. The Davenport adjunct-faculty story is the cautionary tale — population volatility downstream comes from qualification slippage upstream.",
+    escalation: "Jason has final call; if the advisor disagrees, escalate same-day rather than push through"
+  },
+  "1.3": {
+    title: "Step 1.3 — Payroll Report Build",
+    owner: "Nexus — Wendy or Shea (Implementation), supported by client HR/payroll contact",
+    what: "Wendy or Shea pulls the current payroll register and the W-4 filing status report directly with the client's payroll owner. This is technically still sales, but it is the first place sales bleeds into implementation. The two files feed the quoting tool's AI census audit.",
+    inputs: ["Client's current payroll register (export from ADP, I-Solved, Paycom, Paychex, Kronos, or a manual export from an edge-case system)", "W-4 filing status report", "Read access to or a screen-share with the client's payroll system, where granted"],
+    outputs: ["Cleaned payroll dataset loaded into the Nexus quoting platform", "Initial flag list (qualification, W-4 discrepancies, wage-band edge cases)"],
+    duration: "30–90 minutes of live work, plus async cleanup",
+    tools: "Client payroll system, Nexus quoting platform, secure file transfer (email or SharePoint), Teams screen-share",
+    deps: "Qualification passed; client has identified the payroll owner and authorized the data pull",
+    risks: "Client payroll owner is slow to respond, dragging out the funnel. Edge-case payroll systems (ADP Run, Gusto, Heartland, QuickBooks) require manual export, which is error-prone if the admin is junior.",
+    escalation: "Wendy / Shea → Jason if the client is non-responsive; advisor re-engages the relationship"
+  },
+  "1.4": {
+    title: "Step 1.4 — Quote Generation",
+    owner: "Nexus — Wendy/Shea operate the platform; Jason reviews",
+    what: "The Nexus quoting platform runs the AI census audit, flags qualification issues, surfaces W-4-versus-paycheck discrepancies, builds an eligibility cheat sheet, and generates per-employee before-and-after paycheck views. Output is a proposal-ready dataset.",
+    inputs: ["Cleaned payroll dataset from Step 1.3", "Selected plan tier (Plan 1500 / 1200 / 900 — subject to Capitol confirmation on Cornerstone benefit schedule)", "Current IRS Pub 15-T tax tables (loaded in the platform)"],
+    outputs: ["Per-employee before/after paycheck statements", "Employer-level FICA savings summary", "Eligibility cheat sheet (who qualifies, who doesn't, who's borderline)", "Discrepancy report (W-4 vs. actual withholding)"],
+    duration: "15–30 minutes of platform time; longer if the dataset needs cleanup passes",
+    tools: "Nexus quoting platform (Replit-built, integrated in NexHub CRM)",
+    deps: "Step 1.3 complete and data cleaned; plan tier confirmed",
+    risks: "Bad source data flows through to bad output. High-earner Social Security wage-base cases need the platform's flag to fire correctly so projected savings aren't overstated.",
+    escalation: "Wendy/Shea → Jason for any flagged anomaly before the proposal goes out"
+  },
+  "1.5": {
+    title: "Step 1.5 — Proposal",
+    owner: "Nexus — Jason plus originating advisor; Wendy/Shea support with materials",
+    what: "The quoting output is packaged into the formal proposal. Employer sees the FICA savings model and admin fee structure; each employee gets a personalized before/after statement. The presentation is intentionally transparent — if the data tells a borderline story, that story gets told, not buried.",
+    inputs: ["Quote output from Step 1.4", "Employer proposal PDF and per-employee packet zip from the platform", "Plan summary materials (Amaze Health, indemnity schedule, opt-out path)"],
+    outputs: ["Employer-facing proposal delivered", "Employee-facing packet ready for distribution after sign", "Documented client questions / objections"],
+    duration: "60–90 minute proposal meeting; 1–3 weeks of client-side review thereafter",
+    tools: "Nexus quoting platform exports, PDF, Outlook, Teams",
+    deps: "Step 1.4 complete and reviewed by Jason",
+    risks: "Client gets the proposal and goes dark. Internal champion (CFO or HR director) loses momentum if there isn't a clear next step on calendar. Compliance questions surface late because Capitol's contract package wasn't on the table early.",
+    escalation: "Originating advisor owns follow-up cadence; Jason re-engages at the principal level if the deal stalls past two weeks"
+  },
+  "1.6": {
+    title: "Step 1.6 — Sign",
+    owner: "Nexus — originating advisor closes; Jason countersigns Nexus-side",
+    what: "Employer signs the Request for Coverage and the surrounding contract package (ASA, Compliance Protection Document). The employer signature is the first step in the CEHAS e-sign sequence — see the Signature Cascade diagram. Both sides go in eyes wide open; if anything in the conversation says this isn't a fit, the deal does not move.",
+    inputs: ["Final proposal accepted by the employer", "Contract package (ASA, Compliance Protection, Request for Coverage) — currently pending from Connie", "CEHAS e-sign envelope configured"],
+    outputs: ["Employer signature captured", "Deal status flipped to Won in NexHub", "Trigger sent to CEHAS for countersignature (Step 5.2)"],
+    duration: "Same-day to one week after proposal acceptance",
+    tools: "CEHAS e-sign system, NexHub CRM, Outlook",
+    deps: "Proposal accepted; contract templates received from Connie; CEHAS and insurer signature contacts confirmed",
+    risks: "Contract templates not yet finalized between Connie's team and Nexus, causing a stall at the signature stage. Employer's counsel asks for red-lines that need to round-trip through Capitol.",
+    escalation: "Jason → Brenda Manning → Scott / Connie for any contract red-line that requires Capitol-side change"
+  },
+  "1.7": {
+    title: "Step 1.7 — Handoff to Implementation",
+    owner: "Nexus — Wendy or Shea (Implementation) receives; Jason owns the warm handoff",
+    what: "With the employer signed, the file formally transitions from sales to implementation. Because Wendy/Shea were already in the payroll report build during sales, the handoff is a continuation, not a cold transfer. The implementation kickoff call is scheduled within five business days of signature.",
+    inputs: ["Signed contract package", "Quoting platform dataset (already loaded)", "Sales notes from CRM", "Client payroll owner contact and any access already established"],
+    outputs: ["Implementation file opened", "Kickoff call on calendar", "Project timeline shared with client (4–6 week education window targeted)"],
+    duration: "Internal handoff complete within 1–2 business days of signature",
+    tools: "NexHub CRM, Outlook calendar, shared OneDrive/SharePoint folder for client artifacts",
+    deps: "Employer signature captured (Step 1.6); CEHAS countersignature in progress (Step 5.2) — implementation does not need to wait on full countersignature to begin payroll setup work",
+    risks: "Sales hands off without complete CRM notes and the implementation team rebuilds context the client has already given. The client experiences \"telling the same story twice,\" which damages trust early.",
+    escalation: "Jason if the handoff stalls past five business days"
+  },
+  "2.1": {
+    title: "Step 2.1 — Signed Proposal (received)",
+    owner: "Nexus — Wendy/Shea (Implementation)",
+    what: "The signed proposal lands with implementation. Wendy/Shea confirm all source artifacts are in place: signed contracts, quoting dataset, payroll system access, named payroll owner on the client side. Implementation kickoff is scheduled.",
+    inputs: ["Signed contract package", "Client payroll system credentials or access method", "Sales handoff packet from Step 1.7"],
+    outputs: ["Implementation file confirmed complete", "Kickoff call on calendar", "Internal RACI confirmed (Nexus / Insight / Capitol roles)"],
+    duration: "1–2 business days after signature",
+    tools: "NexHub CRM, OneDrive/SharePoint, Outlook",
+    deps: "Step 1.7 handoff complete",
+    risks: "Missing artifacts force implementation to re-engage the client for items that should already be in hand. Insight does not yet know the group is incoming.",
+    escalation: "Wendy/Shea → Jason; Jason loops Insight (Brenda Brown or Howard) into the kickoff invite"
+  },
+  "2.2": {
+    title: "Step 2.2 — Payroll System Setup",
+    owner: "Insight Benefits — Brenda Brown / Howard's team, supported by Nexus (Wendy)",
+    what: "Two payroll codes are configured in the client's payroll system: a Section 125 pre-tax deduction code for the employee contribution, and a separate reimbursement code for the indemnity payments, which are not wages and must be coded as such. Getting both codes correct here is the single biggest determinant of whether the downstream cycle stays clean.",
+    inputs: ["Client payroll system access", "Plan tier and contribution amounts", "Indemnity reimbursement spec from carrier"],
+    outputs: ["Section 125 deduction code live in client payroll system", "Indemnity reimbursement code live in client payroll system", "Test record run end-to-end (where the system supports it)"],
+    duration: "1–3 business days, depending on payroll system and admin responsiveness",
+    tools: "Client payroll system (ADP, I-Solved, Paycom, Paychex, Kronos for Standard; ADP Run, Gusto, Heartland, QuickBooks for Edge case)",
+    deps: "Step 2.1 complete; client payroll admin available",
+    risks: "Reimbursement coded as wages (gets FICA'd, defeats the model). Edge-case payroll systems don't expose the configuration cleanly; manual workarounds carry forward into the audit cycle.",
+    escalation: "Insight → Wendy → Jason; Brenda Manning if a payroll vendor needs Capitol-level intervention"
+  },
+  "2.3": {
+    title: "Step 2.3 — Initial File Build",
+    owner: "Insight Benefits — Brenda Brown / implementation team, supported by Nexus",
+    what: "Insight builds the first payroll/eligibility file using the quoting dataset and the freshly configured payroll codes. For sophisticated payroll systems, the deliverable is an upload-ready file. For systems that require manual entry, Insight delivers the same data in a format the client admin can work from line by line.",
+    inputs: ["Quoting platform dataset (employee list, elections, contributions)", "Confirmed payroll codes from Step 2.2", "Client payroll system capability profile"],
+    outputs: ["Initial payroll file (upload-ready or manual-entry format)", "First eligibility file in the agreed format for CEHAS ingest", "Audit baseline saved in the Nexus system"],
+    duration: "1–3 business days",
+    tools: "Nexus eligibility/audit platform, Insight workflow tools, client payroll system",
+    deps: "Step 2.2 codes live; CEHAS eligibility file format finalized (currently pending CEHAS IT)",
+    risks: "Format drift between what Nexus produces and what CEHAS expects, requiring a rework cycle on file 1. Manual-entry clients fat-finger the import.",
+    escalation: "Insight → Wendy; Connie / CEHAS IT for any format question"
+  },
+  "2.4": {
+    title: "Step 2.4 — 100% First-Run Audit",
+    owner: "Insight Benefits — operations team, with Nexus reviewing flagged exceptions",
+    what: "The first payroll run after go-live is audited line by line — not a spot check. Every deduction, every reimbursement, every eligibility flag is reconciled against what was sold and what was set up. The intent is to catch any setup error before it compounds across a second cycle.",
+    inputs: ["First post-go-live payroll register", "Initial eligibility file from Step 2.3", "Quoting platform baseline"],
+    outputs: ["100% reconciliation report", "Exception list (if any) with assigned owners", "Sign-off that the group is in cycle"],
+    duration: "2–4 hours of audit work the day of / day after the first run",
+    tools: "Nexus eligibility/audit platform, client payroll system, Excel for exception tracking",
+    deps: "Step 2.3 complete; first payroll run has executed",
+    risks: "Variances surface that trace back to Step 2.2 coding errors — the cost of catching them here is small; the cost of not catching them grows every cycle. Client admin disagrees with a flagged variance and the conversation has to happen real-time.",
+    escalation: "Insight ops → Wendy → Jason for any variance that requires a client conversation above the payroll admin level"
+  },
+  "2.5": {
+    title: "Step 2.5 — Employee Education",
+    owner: "Nexus — originating advisor and Jason own the message; Amaze supplies clinical content; Insight supports operationally",
+    what: "A 4–6 week education window opens before go-live. Each employee receives a personalized before/after paycheck statement, Amaze Health welcome materials, and a clearly marked opt-out path that routes through Amaze. Employees see exactly what is changing on their check, what they are getting in return, and how to decline.",
+    inputs: ["Per-employee paycheck packets from Step 1.4", "Amaze Health welcome and onboarding materials", "Opt-out instructions"],
+    outputs: ["Education materials distributed (employer-facilitated)", "Opt-out elections collected", "Employee questions logged and answered", "Final enrollment file reflecting opt-outs ready for go-live"],
+    duration: "4–6 weeks",
+    tools: "Email, employer comms channels, Amaze portal, optional Employee Navigator content",
+    deps: "Steps 2.2 and 2.3 in progress; education timeline agreed with client leadership",
+    risks: "Employer pushes the education window short to chase a go-live date — opt-out rate spikes after go-live because employees felt rushed. Communication channel mismatch (email-only at a manufacturing site, for example) leaves part of the population uninformed.",
+    escalation: "Originating advisor → Jason if the employer compresses the window beyond what's reasonable"
+  },
+  "2.6": {
+    title: "Step 2.6 — Go-Live",
+    owner: "Nexus + Insight jointly; Capitol/CEHAS receives the first eligibility push",
+    what: "The group goes live on the agreed effective date. First payroll runs with the Section 125 deduction and the indemnity reimbursement code active for enrolled employees. First eligibility file flows to CEHAS for invoicing. The 100% first-run audit (Step 2.4) catches any issue before cycle two.",
+    inputs: ["Completed setup (Steps 2.2 / 2.3)", "Final enrollment file post-education window", "Coverage effective date confirmed"],
+    outputs: ["First payroll cycle complete with new codes live", "First eligibility file delivered to CEHAS", "First invoice generated by CEHAS", "Group flipped from \"Implementation\" to \"In Service\" in the CRM"],
+    duration: "Effective date is a single day; the surrounding go-live window spans the first full payroll cycle",
+    tools: "Client payroll system, Nexus audit system, CEHAS ingest channel",
+    deps: "Steps 2.1–2.5 complete; coverage effective date confirmed in carrier paper",
+    risks: "Effective date misalignment between payroll cycle and carrier coverage start, which creates a partial-cycle invoicing oddity that CEHAS has to reconcile manually. Last-minute opt-outs that miss the file freeze.",
+    escalation: "Wendy → Jason → Brenda Manning / Connie for any cross-org coordination on the effective date"
+  },
+  "3.1": {
+    title: "Step 3.1 — Incoming Deal Evaluation",
+    owner: "Nexus — Jason makes the final call; advisor presents the facts",
+    what: "Every incoming deal is evaluated against the Nexus Standard criteria during qualification. The evaluation is not a soft preference — it is a routing decision that determines economics and operational ownership for the life of the case.",
+    inputs: ["Discovery and qualification notes", "Group size, industry, turnover, payroll system, operational maturity read", "Originating advisor's read on client comfort with the model"],
+    outputs: ["Bucket assignment (Standard, Capitol-routed, or pass)", "Documented rationale", "Economics path locked for this deal"],
+    duration: "A single decision moment, usually inside or right after the qualification call",
+    tools: "NexHub CRM, two-bucket routing reference",
+    deps: "Discovery and qualification complete",
+    risks: "Soft routing — calling something Standard because the advisor wants the full economics, when the profile says otherwise. That kind of slippage shows up six months later as Insight hour overruns.",
+    escalation: "Jason; for genuine edge cases Jason can consult Brenda Manning on the political read with Capitol"
+  },
+  "3.2": {
+    title: "Step 3.2 — Nexus Standard Routing (YES)",
+    owner: "Nexus — end-to-end for the life of the case",
+    what: "Deal proceeds through the full Nexus funnel (Sales Flow), the full Nexus implementation (Implementation Flow), and the full Nexus ongoing service cycle. Insight provides TPA-side labor; Capitol holds the carrier paper but is invisible to the client. Nexus runs full economics.",
+    inputs: ["Standard bucket assignment from Step 3.1"],
+    outputs: ["Deal moves to Discovery (Step 1.1) and continues through full funnel", "Insight notified that a Standard group is incoming", "Full Nexus comp structure applied"],
+    duration: "N/A — this is a routing step, not a workflow step",
+    tools: "NexHub CRM (deal record with bucket flag)",
+    deps: "Step 3.1 routing decision",
+    risks: "Group profile drifts post-routing (acquisition, leadership change, turnover spike) and the bucket should be revisited. Currently there is no formal \"re-bucket\" trigger — TBD with team whether to define one at, say, 12 months in service.",
+    escalation: "Jason on any mid-life rerouting question"
+  },
+  "3.3": {
+    title: "Step 3.3 — Capitol-Routed Bucket (NO)",
+    owner: "Capitol Group — operations and existing broker/TPA network",
+    what: "Deal is handed back to Capitol. Capitol owns the operational lift — onboarding, payroll handling, ongoing service — through its existing broker and TPA network. Nexus stays out of the day-to-day work and receives reduced comp for distribution only. Distribution partners (the advisor or external broker who brought the deal) still get paid; the client still gets placed.",
+    inputs: ["Capitol-routed assignment from Step 3.1", "Originating advisor / broker information for the comp split"],
+    outputs: ["Deal warm-handed to Capitol with originating advisor introduced", "Reduced Nexus comp structure applied", "Capitol-side onboarding initiated through their existing channels"],
+    duration: "Handoff completes within five business days of bucket assignment",
+    tools: "NexHub CRM (deal flagged as Capitol-routed), email to Capitol intake (TBD with team — formal intake address pending)",
+    deps: "Step 3.1 routing decision; Capitol has confirmed the operational receiving channel for these handoffs (TBD with Connie / Scott)",
+    risks: "No defined Capitol receiving channel means deals stall at the handoff. The originating advisor loses visibility into the deal status and feels like the relationship went into a black hole.",
+    escalation: "Jason → Brenda Manning → Scott; longer-term, a defined Capitol intake contact resolves this"
+  },
+  "4.1": {
+    title: "Step 4.1 — Nexus produces eligibility file",
+    owner: "Insight Benefits operations, using the Nexus eligibility/audit system",
+    what: "On the agreed weekly cadence (aligned to the client's payroll cycle), Insight produces the eligibility file for each participating employer. The file reflects the current cycle's payroll audit — who is still qualified, who is no longer qualified, newly eligible employees, terminations, and any reclassifications.",
+    inputs: ["Current cycle payroll register from the client", "Prior cycle eligibility baseline", "Audit output from the Nexus system (see Ongoing Service steps 1–4)"],
+    outputs: ["Updated eligibility file in the agreed format containing: employer ID, employee ID, SSN or masked equivalent, plan election, enrollment status, opt-out flag, non-qualified flag, employee email, dependent info, coverage effective date, termination date"],
+    duration: "30 minutes per group per cycle on average (within the 12-hour annual Insight budget)",
+    tools: "Nexus eligibility/audit platform, secure delivery channel to CEHAS",
+    deps: "Client payroll register received; cycle audit complete; CEHAS file format finalized (currently pending CEHAS IT)",
+    risks: "Format drift if CEHAS spec evolves without coordinated update on the Nexus side. Late payroll register from the client pushes the file delivery past CEHAS's ingest window.",
+    escalation: "Insight → Wendy; Connie / CEHAS IT for any format-side question"
+  },
+  "4.2": {
+    title: "Step 4.2 — CEHAS ingests",
+    owner: "Capitol Group — CEHAS captive admin system; April / CEHAS IT on the operational side",
+    what: "CEHAS receives the eligibility file and ingests it into the captive admin system on the weekly cadence. Delivery method is open — either CSV push from Nexus (Option A) or CEHAS-side pull via system access (Option B). Decision pending Capitol's operational preference.",
+    inputs: ["Eligibility file from Step 4.1"],
+    outputs: ["Updated roster in CEHAS captive admin", "Ingest confirmation / exception report back to Nexus/Insight (TBD with team — confirm whether CEHAS sends a receipt)"],
+    duration: "Same-day ingest after delivery",
+    tools: "CEHAS captive admin system, agreed delivery channel (CSV push or system access)",
+    deps: "Step 4.1 delivered; delivery method decision locked; CEHAS IT format finalized",
+    risks: "File rejected for format / schema issue and the cycle has to be reworked. No receipt mechanism means Nexus doesn't know whether the file landed clean.",
+    escalation: "Connie / April / CEHAS IT; Nexus loops in Brenda Manning if cross-org delay"
+  },
+  "4.3": {
+    title: "Step 4.3 — Invoice generation",
+    owner: "Capitol Group — CEHAS / April",
+    what: "CEHAS generates the invoice for the employer based on the current eligibility roster. Invoice reflects the active enrolled population per plan tier. This is the financial side of the loop — Capitol bills off whatever Nexus sent.",
+    inputs: ["Current ingested eligibility roster", "Plan tier rates"],
+    outputs: ["Employer invoice", "Invoice copy to Nexus/Insight for reference and reconciliation"],
+    duration: "Generated within one business day of ingest",
+    tools: "CEHAS captive admin / billing system",
+    deps: "Step 4.2 ingest clean",
+    risks: "Invoice variance from prior cycle goes out without a heads-up to the employer, generating a payroll-admin support call. The accident-coverage one-payroll-cycle grace period on terminations needs to be reflected in the billing or a termed employee gets billed an extra cycle.",
+    escalation: "April → Connie; Insight loops in Wendy if the employer disputes the invoice"
+  },
+  "4.4": {
+    title: "Step 4.4 — ACH collection",
+    owner: "Capitol Group — CEHAS",
+    what: "CEHAS initiates ACH collection from the employer for the invoiced amount. ACH settles on the standard cycle. This closes the loop: Nexus produced eligibility, CEHAS billed off it, employer paid against it.",
+    inputs: ["Generated invoice from Step 4.3", "Employer ACH authorization on file"],
+    outputs: ["Funds collected", "Settlement record back to CEHAS", "Downstream carrier and reinsurance economics settle from this collection"],
+    duration: "Standard ACH settlement (1–3 business days)",
+    tools: "CEHAS ACH processing",
+    deps: "Step 4.3 invoice generated; employer ACH authorization in place from onboarding",
+    risks: "ACH return for insufficient funds or revoked authorization. Employer banking change not communicated to CEHAS.",
+    escalation: "CEHAS → Connie → Brenda Manning → Jason for client-facing collection conversations"
+  },
+  "5.1": {
+    title: "Step 5.1 — Employer signs",
+    owner: "Nexus — originating advisor and Jason on the relationship; Insight supports the operational signature mechanics",
+    what: "The employer signs the contract package (ASA, Compliance Protection Document, Request for Coverage) first. This is the entry into the formal signature sequence. The CEHAS e-sign workflow captures the employer signature and triggers the next leg.",
+    inputs: ["Final contract package", "Employer signatory identified (typically CFO or owner)", "CEHAS e-sign envelope configured"],
+    outputs: ["Employer signature captured", "Trigger to CEHAS for countersignature"],
+    duration: "Same-day to one week after proposal acceptance",
+    tools: "CEHAS e-sign system, Outlook for routing",
+    deps: "Contract templates finalized (pending Connie); employer signatory identified",
+    risks: "Employer's counsel requests red-lines after the envelope is already configured, forcing a re-route. Wrong signatory inside the employer's org delays execution.",
+    escalation: "Originating advisor → Jason → Brenda Manning / Connie on any contract red-line"
+  },
+  "5.2": {
+    title: "Step 5.2 — CEHAS countersigns",
+    owner: "Capitol Group — CEHAS signatory (contact details pending from Connie)",
+    what: "CEHAS countersigns the executed contract package after employer signature. This confirms Capitol-side acceptance of the operational and captive relationship for this employer.",
+    inputs: ["Employer-signed contract package"],
+    outputs: ["CEHAS countersignature captured", "Trigger to insurer for the final countersignature"],
+    duration: "1–3 business days after Step 5.1",
+    tools: "CEHAS e-sign system",
+    deps: "Step 5.1 complete; CEHAS signatory contact confirmed (currently pending)",
+    risks: "Pending signatory contact means the envelope sits idle. Operational acceptance criteria CEHAS uses for countersignature aren't documented externally — TBD with team whether there's a checklist Nexus should pre-clear.",
+    escalation: "Connie → CEHAS internal; Brenda Manning if the stall is more than three business days"
+  },
+  "5.3": {
+    title: "Step 5.3 — Insurer countersigns",
+    owner: "Insurance carrier (under Capitol's captive/reinsurance structure)",
+    what: "The insurance carrier countersigns the package as the final signature. This is what makes the coverage formally bound for the employer.",
+    inputs: ["CEHAS-countersigned contract package"],
+    outputs: ["Insurer countersignature captured", "Fully executed contract package"],
+    duration: "1–3 business days after Step 5.2",
+    tools: "CEHAS e-sign system, carrier signature workflow",
+    deps: "Step 5.2 complete; insurer signature contact confirmed (currently pending from Connie)",
+    risks: "Carrier-side review introduces unexpected questions that bounce the package back. Signature contact unavailability creates calendar delay.",
+    escalation: "Connie owns the carrier-side relationship; Brenda Manning if escalation is needed"
+  },
+  "5.4": {
+    title: "Step 5.4 — Distribution to all parties",
+    owner: "Capitol Group — CEHAS distributes; Nexus archives",
+    what: "Once fully executed, copies of the contract package are distributed to the client (employer), Nexus Benefit Solutions, CEHAS, and the insurance carrier. All four parties hold a copy of the executed package.",
+    inputs: ["Fully executed contract package", "Distribution list with current contact emails for all four parties"],
+    outputs: ["Executed package delivered to all parties", "Copy archived in NexHub deal record", "Implementation team formally green-lit (Implementation Flow already running in parallel)"],
+    duration: "Same-day to one business day after Step 5.3",
+    tools: "Email, SharePoint/OneDrive archive, CEHAS distribution mechanism",
+    deps: "Step 5.3 complete",
+    risks: "Distribution list out of date — copy goes to a stale email at the client or at Nexus. Nexus's local archive isn't kept in sync with what CEHAS holds as canonical.",
+    escalation: "Wendy/Shea on archive issues; Connie on CEHAS distribution issues"
+  },
+  "b.1": {
+    title: "Ongoing Service · Step 1 — Pull payroll register from client",
+    owner: "Insight Benefits — operations team",
+    what: "Each payroll cycle, Insight pulls the payroll register from the client. Two delivery patterns: the client emails the report on a standing schedule, or Insight accesses the client's payroll system directly when that has been set up during implementation.",
+    inputs: ["Standing pull schedule with the client", "Payroll system access or scheduled email delivery"],
+    outputs: ["Current cycle payroll register in hand at Insight"],
+    duration: "5 minutes if the client is on schedule; longer if Insight has to chase",
+    tools: "Client payroll system, email, secure file transfer",
+    deps: "Standing schedule established during implementation; access provisioned",
+    risks: "Client misses the standing send and the cycle starts late. Payroll admin turnover at the client means the access pattern breaks.",
+    escalation: "Insight → Wendy; advisor re-engages the relationship if the access pattern needs to be re-established"
+  },
+  "b.2": {
+    title: "Ongoing Service · Step 2 — Ingest into Nexus audit system",
+    owner: "Insight Benefits operations, using the Nexus eligibility/audit system",
+    what: "The payroll register is ingested into the Nexus quoting and audit system — the same engine that ran the initial census audit during sales. The system loads the file, normalizes the data, and prepares the baseline for the eligibility audit.",
+    inputs: ["Current payroll register from Step 1", "Prior cycle baseline in the system"],
+    outputs: ["Cycle data loaded and ready for audit"],
+    duration: "5 minutes for Standard payroll systems; longer for Edge-case manual workflows",
+    tools: "Nexus eligibility/audit platform",
+    deps: "Step 1 complete; Standard vs. Edge-case payroll system handling defined",
+    risks: "Edge-case manual exports fat-fingered on ingest. Schema change at the client's payroll system breaks the ingest mapping.",
+    escalation: "Insight → Wendy on mapping or schema issues"
+  },
+  "b.3": {
+    title: "Ongoing Service · Step 3 — Eligibility audit (qualification check)",
+    owner: "Nexus audit system (automated), reviewed by Insight",
+    what: "The system runs the eligibility audit against the new file. It identifies who is still qualified, who is no longer qualified due to a pay change, leave, or status shift, who is newly eligible because a new hire has cleared the waiting period, and who needs to be reclassified. Output is a variance view.",
+    inputs: ["Ingested current cycle data", "Prior cycle eligibility baseline"],
+    outputs: ["Variance view: still-qualified, no-longer-qualified, newly eligible, reclassifications"],
+    duration: "Minutes — automated",
+    tools: "Nexus eligibility/audit platform",
+    deps: "Step 2 complete",
+    risks: "Edge case at the wage-band boundary slips through the qualification logic. High-earner Social Security wage-base cliffs need the system flag to fire correctly mid-year.",
+    escalation: "Insight ops → Wendy on any logic question"
+  },
+  "b.4": {
+    title: "Ongoing Service · Step 4 — Variance review",
+    owner: "Insight Benefits — operations reviewer (human-in-the-loop)",
+    what: "Insight reviews the variance view at a glance before anything is pushed downstream. Pattern watched for is the wild swing — a count that moves more than the population should reasonably move in a single cycle. The posture is \"Houston, we have a problem\" — pause, verify, then proceed. The Davenport adjunct-faculty episode is the in-house cautionary tale for this step.",
+    inputs: ["Variance view from Step 3"],
+    outputs: ["Approved variance set, or a paused cycle with verification questions for the client"],
+    duration: "5–10 minutes on a clean cycle; longer on any pause",
+    tools: "Nexus eligibility/audit platform",
+    deps: "Step 3 complete",
+    risks: "Reviewer rubber-stamps a wild swing because the cycle is \"due.\" That's exactly the failure mode the step exists to prevent.",
+    escalation: "Insight → Wendy → originating advisor if a client conversation is needed before push"
+  },
+  "b.5": {
+    title: "Ongoing Service · Step 5 — Email payroll admin with changes",
+    owner: "Insight Benefits — operations",
+    what: "Insight emails the client's payroll admin with the changes for the current cycle. This keeps the client informed in real time and creates an audit trail of every cycle's deltas. The communication is operational and routine — it doesn't escalate unless the changes are material.",
+    inputs: ["Approved variance set from Step 4"],
+    outputs: ["Payroll admin email sent with the cycle's changes", "Reply / acknowledgment logged"],
+    duration: "5 minutes",
+    tools: "Outlook",
+    deps: "Step 4 approved",
+    risks: "Payroll admin doesn't read the email and a change surprises them next cycle. Payroll admin turnover means the standing distribution is stale.",
+    escalation: "Insight → Wendy if the admin is non-responsive across multiple cycles"
+  },
+  "b.6": {
+    title: "Ongoing Service · Step 6 — Push eligibility file to Capitol/CEHAS",
+    owner: "Insight Benefits — operations, delivering to CEHAS",
+    what: "Insight pushes the updated eligibility file to CEHAS on the weekly cadence. This is the file that drives invoicing and ACH. Without this push the entire downstream financial loop sits on stale data.",
+    inputs: ["Approved eligibility file from Steps 4–5"],
+    outputs: ["Eligibility file delivered to CEHAS via agreed channel (CSV push or system access)"],
+    duration: "2–5 minutes",
+    tools: "Agreed delivery channel",
+    deps: "Step 4 approved; CEHAS format finalized; delivery method locked",
+    risks: "Delivery slips past the CEHAS ingest window and the cycle's invoicing lags. Format drift between Nexus output and CEHAS expectation.",
+    escalation: "Insight → Wendy; Connie / CEHAS IT for any format issue"
+  },
+  "b.7": {
+    title: "Ongoing Service · Step 7 — Amaze handles disenrollment requests",
+    owner: "Amaze Health — direct member channel",
+    what: "Employees who decide they no longer want to participate route through Amaze directly. Amaze processes the disenrollment, and the change flows back to Insight on the next eligibility cycle, where it appears as a flag on the variance view and is reflected in the next file push to CEHAS.",
+    inputs: ["Employee disenrollment request to Amaze"],
+    outputs: ["Disenrollment recorded at Amaze", "Change flowed to Insight for the next cycle"],
+    duration: "Same-day at Amaze; visible to the rest of the system on the next cycle",
+    tools: "Amaze member channel, eventual reflection in the Nexus audit system",
+    deps: "Member knows the opt-out path routes through Amaze (set during education in Step 2.5)",
+    risks: "Employee tells the employer instead of Amaze, change doesn't reach Insight cleanly, and the next eligibility file is stale by one cycle. Coverage-grace handling on the accident layer needs to be respected in the termination date on the file.",
+    escalation: "Amaze → Insight → Wendy if a disenrollment reconciliation issue surfaces"
+  }
+};
+
+(function() {
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function(c) {
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+  function renderValue(v) {
+    if (Array.isArray(v)) {
+      return '<ul>' + v.map(function(x){ return '<li>' + escapeHtml(x) + '</li>'; }).join('') + '</ul>';
+    }
+    return escapeHtml(v);
+  }
+  function buildPanel(id, d) {
+    var fields = [
+      {label: 'Owner', value: d.owner},
+      {label: 'Duration', value: d.duration},
+      {label: 'What happens', value: d.what, full: true},
+      {label: 'Inputs', value: d.inputs},
+      {label: 'Outputs', value: d.outputs},
+      {label: 'Tools', value: d.tools},
+      {label: 'Dependencies', value: d.deps},
+      {label: 'What can go wrong', value: d.risks, full: true},
+      {label: 'Escalation', value: d.escalation, full: true}
+    ];
+    var html = '<div class="step-detail" data-panel-id="' + escapeHtml(id) + '">' +
+      '<div class="sd-head">' +
+        '<div><span class="sd-eyebrow">Operational detail</span>' +
+        '<h4 class="sd-title">' + escapeHtml(d.title) + '</h4></div>' +
+        '<button type="button" class="sd-close" data-close-id="' + escapeHtml(id) + '" aria-label="Close detail">Close ×</button>' +
+      '</div>' +
+      '<div class="sd-grid">';
+    fields.forEach(function(f) {
+      if (!f.value) return;
+      html += '<div class="sd-field' + (f.full ? ' full' : '') + '">' +
+        '<span class="sd-label">' + escapeHtml(f.label) + '</span>' +
+        '<div class="sd-value">' + renderValue(f.value) + '</div>' +
+      '</div>';
+    });
+    html += '</div></div>';
+    return html;
+  }
+
+  function toggleStep(trigger) {
+    var id = trigger.getAttribute('data-step-id');
+    if (!id) return;
+    var data = STEP_DETAILS[id];
+    if (!data) return;
+    var panelsContainerId = trigger.getAttribute('aria-controls');
+    var container = panelsContainerId ? document.getElementById(panelsContainerId) : null;
+    if (!container) return;
+
+    var existing = container.querySelector('[data-panel-id="' + id.replace(/"/g, '\\"') + '"]');
+    if (existing) {
+      existing.remove();
+      trigger.setAttribute('aria-expanded', 'false');
+      return;
+    }
+    container.insertAdjacentHTML('beforeend', buildPanel(id, data));
+    trigger.setAttribute('aria-expanded', 'true');
+    var newPanel = container.querySelector('[data-panel-id="' + id.replace(/"/g, '\\"') + '"]');
+    if (newPanel && typeof newPanel.scrollIntoView === 'function') {
+      newPanel.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+    }
+  }
+
+  function init() {
+    var triggers = document.querySelectorAll('[data-step-id]');
+    triggers.forEach(function(t) {
+      t.addEventListener('click', function(e) {
+        // Avoid double-fire when nested elements are clicked
+        e.stopPropagation();
+        toggleStep(t);
+      });
+      t.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          toggleStep(t);
+        }
+      });
+    });
+
+    // Close-button delegation on the document
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('.sd-close');
+      if (!btn) return;
+      e.stopPropagation();
+      var id = btn.getAttribute('data-close-id');
+      if (!id) return;
+      // Find any trigger with that data-step-id and collapse
+      var trigger = document.querySelector('[data-step-id="' + id.replace(/"/g, '\\"') + '"]');
+      if (trigger) toggleStep(trigger);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
 
 </body>
 </html>
