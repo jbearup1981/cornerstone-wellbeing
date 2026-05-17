@@ -306,6 +306,256 @@ td strong { color: var(--color-fg); }
 .swimlane-legend .swatch.owner { background: var(--color-primary); }
 .swimlane-legend .swatch.support { background: var(--color-accent-teal); }
 
+/* Swim-lane directional arrows between phase columns */
+.swimlane-flow {
+  display: grid;
+  grid-template-columns: 140px repeat(3, 1fr);
+  gap: 1px;
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  color: var(--color-fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+.swimlane-flow > div { padding: 0 1rem; position: relative; }
+.swimlane-flow .flow-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: var(--color-primary);
+}
+.swimlane-flow .flow-arrow::after {
+  content: "→";
+  font-size: 1rem;
+  line-height: 1;
+}
+@media (max-width: 720px) {
+  .swimlane-flow { grid-template-columns: 100px repeat(3, 1fr); font-size: 0.625rem; }
+  .swimlane-flow > div { padding: 0 0.25rem; }
+}
+
+/* Diagram — generic */
+.diagram {
+  margin: 1.75rem 0 0.5rem;
+}
+.diagram-caption {
+  margin: 0.75rem 0 0;
+  font-size: var(--fs-sm);
+  color: var(--color-fg-muted);
+  max-width: var(--prose-max);
+  font-style: italic;
+}
+
+/* Funnel — sales-to-handoff */
+.funnel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+.funnel .step {
+  flex: 1 1 140px;
+  min-width: 140px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-primary);
+  border-radius: var(--radius);
+  padding: 0.75rem 0.875rem;
+  font-size: 0.8125rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  position: relative;
+}
+.funnel .step .num {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  color: var(--color-primary);
+  letter-spacing: 0.02em;
+}
+.funnel .step .label {
+  font-weight: 600;
+  color: var(--color-fg);
+  line-height: 1.3;
+}
+.funnel .arrow {
+  display: flex;
+  align-items: center;
+  color: var(--color-primary);
+  font-size: 1rem;
+  flex: 0 0 auto;
+}
+.funnel .step.terminal {
+  border-left-color: var(--color-accent-teal);
+  background: var(--color-muted);
+}
+.funnel .step.terminal .num { color: var(--color-accent-teal); }
+@media (max-width: 720px) {
+  .funnel .arrow { display: none; }
+  .funnel .step { flex-basis: 100%; }
+}
+
+/* Decision tree — two-bucket */
+.decision-tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 1.5rem 1rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+.decision-tree .node {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.625rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-fg);
+  text-align: center;
+}
+.decision-tree .diamond {
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-primary);
+  border-radius: var(--radius);
+  padding: 0.875rem 1.25rem;
+  text-align: center;
+  max-width: 28rem;
+}
+.decision-tree .diamond .q-title {
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.375rem;
+}
+.decision-tree .diamond ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--color-fg);
+  line-height: 1.5;
+}
+.decision-tree .down { color: var(--color-primary); font-size: 1.125rem; line-height: 1; }
+.decision-tree .branches {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 36rem;
+  margin-top: 0.25rem;
+}
+.decision-tree .branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+}
+.decision-tree .branch .label-y,
+.decision-tree .branch .label-n {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.decision-tree .branch .label-y { color: var(--color-primary); }
+.decision-tree .branch .label-n { color: var(--color-fg-muted); }
+.decision-tree .branch .outcome {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-primary);
+  border-radius: var(--radius);
+  padding: 0.625rem 0.875rem;
+  text-align: center;
+  width: 100%;
+}
+.decision-tree .branch.no .outcome { border-top-color: var(--color-accent-teal); }
+.decision-tree .branch .outcome strong {
+  display: block;
+  color: var(--color-fg);
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+.decision-tree .branch .outcome span {
+  font-size: 0.75rem;
+  color: var(--color-fg-muted);
+  font-weight: 400;
+}
+@media (max-width: 560px) {
+  .decision-tree .branches { grid-template-columns: 1fr; max-width: 18rem; }
+}
+
+/* Eligibility loop — circular */
+.loop-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+.loop-svg {
+  max-width: 540px;
+  width: 100%;
+  height: auto;
+}
+
+/* Contract signature sequence */
+.signature-seq {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+.signature-seq .sig-step {
+  flex: 1 1 160px;
+  min-width: 160px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-primary);
+  border-radius: var(--radius);
+  padding: 0.875rem 1rem;
+  font-size: 0.8125rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.signature-seq .sig-step .order {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  color: var(--color-primary);
+}
+.signature-seq .sig-step .who {
+  font-weight: 600;
+  color: var(--color-fg);
+  line-height: 1.3;
+}
+.signature-seq .sig-step .what {
+  font-size: 0.75rem;
+  color: var(--color-fg-muted);
+}
+.signature-seq .sig-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--color-primary);
+  font-size: 1rem;
+}
+.signature-seq .sig-step.distribute {
+  border-top-color: var(--color-accent-teal);
+  background: var(--color-muted);
+}
+.signature-seq .sig-step.distribute .order { color: var(--color-accent-teal); }
+@media (max-width: 720px) {
+  .signature-seq .sig-arrow { display: none; }
+  .signature-seq .sig-step { flex-basis: 100%; }
+}
+
 /* Highlight tile */
 .highlight {
   border-left: 3px solid var(--color-primary);
@@ -605,6 +855,25 @@ section[id] { scroll-margin-top: 72px; }
       <li>Proposal generation, client review, signature</li>
       <li>Handoff to implementation</li>
     </ol>
+
+    <div class="diagram" aria-label="Sales-to-handoff funnel">
+      <div class="funnel">
+        <div class="step"><span class="num">01</span><span class="label">Discovery</span></div>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div class="step"><span class="num">02</span><span class="label">Qualification</span></div>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div class="step"><span class="num">03</span><span class="label">Payroll Report Build</span></div>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div class="step"><span class="num">04</span><span class="label">Quote Generation</span></div>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div class="step"><span class="num">05</span><span class="label">Proposal</span></div>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div class="step"><span class="num">06</span><span class="label">Sign</span></div>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div class="step terminal"><span class="num">07</span><span class="label">Handoff to Implementation</span></div>
+      </div>
+      <p class="diagram-caption">Two sales teams, both led by Jason. Every deal qualified upfront before downstream work begins.</p>
+    </div>
   </div>
 </section>
 
@@ -684,6 +953,13 @@ section[id] { scroll-margin-top: 72px; }
       <div class="cell-owner"><strong>Owns.</strong> Clinical care, Rx, member engagement, disenrollment intake.</div>
     </div>
 
+    <div class="swimlane-flow" aria-hidden="true">
+      <div></div>
+      <div class="flow-arrow">Sales</div>
+      <div class="flow-arrow">Implementation</div>
+      <div>Ongoing Service</div>
+    </div>
+
     <div class="swimlane-legend">
       <span class="key"><span class="swatch owner"></span>Owner</span>
       <span class="key"><span class="swatch support"></span>Supports</span>
@@ -696,6 +972,40 @@ section[id] { scroll-margin-top: 72px; }
     <span class="eyebrow">Routing</span>
     <h2>Two-Bucket Case Routing</h2>
     <p class="lead">Nexus operates a narrow lane by design. Cases that fit get full Nexus economics; cases that don't route back to Capitol on a different structure. The less work Nexus does, the less Nexus earns — that's how the incentive stays clean.</p>
+
+    <div class="diagram" aria-label="Two-bucket routing decision tree">
+      <div class="decision-tree">
+        <div class="node">Incoming Deal</div>
+        <div class="down" aria-hidden="true">↓</div>
+        <div class="diamond">
+          <div class="q-title">Qualification check</div>
+          <ul>
+            <li>50–300 EE sweet spot?</li>
+            <li>Stable population?</li>
+            <li>Real payroll function?</li>
+          </ul>
+        </div>
+        <div class="down" aria-hidden="true">↓</div>
+        <div class="branches">
+          <div class="branch yes">
+            <span class="label-y">Yes</span>
+            <div class="down" aria-hidden="true">↓</div>
+            <div class="outcome">
+              <strong>Nexus Standard</strong>
+              <span>Full Nexus economics</span>
+            </div>
+          </div>
+          <div class="branch no">
+            <span class="label-n">No</span>
+            <div class="down" aria-hidden="true">↓</div>
+            <div class="outcome">
+              <strong>Capitol-Routed</strong>
+              <span>Reduced Nexus comp · Capitol owns lift</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="card-grid-2" style="margin-top:1.5rem;">
       <div class="card">
@@ -828,6 +1138,59 @@ section[id] { scroll-margin-top: 72px; }
     <h3 style="margin-top:2rem;">Eligibility File &amp; Invoicing</h3>
     <p style="max-width: var(--prose-max);">Weekly cadence aligned to the client's payroll cycle. Nexus produces and maintains the eligibility file. Capitol's CEHAS ingests it weekly, generates the invoice, and initiates ACH collection from the employer.</p>
 
+    <div class="diagram loop-wrap" aria-label="Eligibility to invoicing weekly loop">
+      <svg class="loop-svg" viewBox="0 0 540 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="loopTitle">
+        <title id="loopTitle">Eligibility to invoicing weekly loop</title>
+        <defs>
+          <marker id="arrowhead-loop" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#C75A2C"/>
+          </marker>
+        </defs>
+        <!-- Ellipse path (invisible reference) -->
+        <!-- Curved connector arrows between nodes around an ellipse cx=270 cy=160 rx=220 ry=120 -->
+        <!-- Top -->
+        <path d="M 200,55 Q 270,40 340,55" fill="none" stroke="#C75A2C" stroke-width="1.5" marker-end="url(#arrowhead-loop)"/>
+        <!-- Right -->
+        <path d="M 430,110 Q 470,160 430,210" fill="none" stroke="#C75A2C" stroke-width="1.5" marker-end="url(#arrowhead-loop)"/>
+        <!-- Bottom-right to bottom-left -->
+        <path d="M 340,265 Q 270,280 200,265" fill="none" stroke="#C75A2C" stroke-width="1.5" marker-end="url(#arrowhead-loop)"/>
+        <!-- Bottom-left to top-left (back up, completing the cycle) -->
+        <path d="M 110,210 Q 70,160 110,110" fill="none" stroke="#C75A2C" stroke-width="1.5" marker-end="url(#arrowhead-loop)"/>
+
+        <!-- Nodes -->
+        <g font-family="DM Sans, sans-serif" font-size="11" fill="#1F3D2E" text-anchor="middle">
+          <!-- Top-left -->
+          <g>
+            <rect x="65" y="70" width="130" height="50" rx="6" fill="#E8EADF" stroke="#D9DDCC"/>
+            <text x="130" y="92" font-weight="600">Nexus Eligibility</text>
+            <text x="130" y="107" font-weight="600">File</text>
+          </g>
+          <!-- Top-right -->
+          <g>
+            <rect x="345" y="70" width="130" height="50" rx="6" fill="#E8EADF" stroke="#D9DDCC"/>
+            <text x="410" y="92" font-weight="600">CEHAS</text>
+            <text x="410" y="107" font-weight="600">Ingestion</text>
+          </g>
+          <!-- Bottom-right -->
+          <g>
+            <rect x="345" y="200" width="130" height="50" rx="6" fill="#E8EADF" stroke="#D9DDCC"/>
+            <text x="410" y="222" font-weight="600">Invoice</text>
+            <text x="410" y="237" font-weight="600">Generation</text>
+          </g>
+          <!-- Bottom-left -->
+          <g>
+            <rect x="65" y="200" width="130" height="50" rx="6" fill="#E8EADF" stroke="#D9DDCC"/>
+            <text x="130" y="222" font-weight="600">ACH</text>
+            <text x="130" y="237" font-weight="600">Collection</text>
+          </g>
+          <!-- Center label -->
+          <text x="270" y="158" font-family="DM Serif Display, serif" font-size="14" fill="#5C7066" font-style="italic">Weekly cycle</text>
+          <text x="270" y="178" font-size="10" fill="#5C7066">aligned to payroll</text>
+        </g>
+      </svg>
+    </div>
+    <p class="diagram-caption" style="text-align:center; margin-left:auto; margin-right:auto;">Weekly cadence, aligned to client payroll cycle.</p>
+
     <div class="card-grid-2" style="margin-top:1rem;">
       <div class="card">
         <h4>Required fields</h4>
@@ -853,6 +1216,36 @@ section[id] { scroll-margin-top: 72px; }
 
     <h3 style="margin-top:2.5rem;">Contract Package &amp; E-Sign Flow</h3>
     <p style="max-width: var(--prose-max);">Three core contracts execute at employer onboarding: the Administrative Services Agreement (ASA), the Compliance Protection Document, and the Request for Coverage. Signatures sequence employer → CEHAS → insurer. Fully executed copies distribute to the client, Nexus, CEHAS, and the carrier.</p>
+
+    <div class="diagram" aria-label="Contract signature sequence">
+      <div class="signature-seq">
+        <div class="sig-step">
+          <span class="order">Step 1</span>
+          <span class="who">Employer signs</span>
+          <span class="what">ASA · Compliance Protection · Request for Coverage</span>
+        </div>
+        <div class="sig-arrow" aria-hidden="true">→</div>
+        <div class="sig-step">
+          <span class="order">Step 2</span>
+          <span class="who">CEHAS countersigns</span>
+          <span class="what">Captive administrator review</span>
+        </div>
+        <div class="sig-arrow" aria-hidden="true">→</div>
+        <div class="sig-step">
+          <span class="order">Step 3</span>
+          <span class="who">Insurer countersigns</span>
+          <span class="what">Carrier paper executes</span>
+        </div>
+        <div class="sig-arrow" aria-hidden="true">→</div>
+        <div class="sig-step distribute">
+          <span class="order">Step 4</span>
+          <span class="who">Distribution to all parties</span>
+          <span class="what">Client · Nexus · CEHAS · Carrier</span>
+        </div>
+      </div>
+      <p class="diagram-caption">Sequenced — each signature triggers the next. Final executed copies distributed to client, Nexus, CEHAS, and the insurance carrier.</p>
+    </div>
+
     <div class="card" style="margin-top:1rem;">
       <h4>Pending from Capitol</h4>
       <ul style="padding-left:1.1rem; margin:0; font-size: var(--fs-sm);">
