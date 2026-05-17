@@ -317,6 +317,60 @@ td strong { color: var(--color-fg); }
 }
 .highlight strong { color: var(--color-fg); }
 
+/* Tracker */
+.tracker-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  font-size: var(--fs-sm);
+  color: var(--color-fg-muted);
+}
+.tracker-meta .updated {
+  font-weight: 600;
+  color: var(--color-fg);
+}
+.tracker-table td.owner {
+  color: var(--color-fg-muted);
+  font-size: 0.8125rem;
+}
+.tracker-table td.task { font-weight: 500; color: var(--color-fg); }
+.tracker-table td.status-cell { white-space: nowrap; }
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  border: 1px solid transparent;
+}
+.status-pill.open {
+  background: rgba(199, 90, 44, 0.12);
+  color: var(--color-primary);
+  border-color: rgba(199, 90, 44, 0.3);
+}
+.status-pill.done {
+  background: rgba(16, 185, 129, 0.12);
+  color: #0F7A5C;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+.status-pill.blocked {
+  background: rgba(220, 38, 38, 0.12);
+  color: #B91C1C;
+  border-color: rgba(220, 38, 38, 0.3);
+}
+.status-pill.future {
+  background: var(--color-muted);
+  color: var(--color-fg-muted);
+  border-color: var(--color-border);
+}
+
 /* Status blocks */
 .status-grid {
   display: grid;
@@ -397,6 +451,7 @@ section[id] { scroll-margin-top: 72px; }
 <nav class="nav" aria-label="Section navigation">
   <div class="nav-inner">
     <span class="nav-brand">Cornerstone Well-Being</span>
+    <a class="nav-link" href="#tracker">Tracker</a>
     <a class="nav-link" href="#overview">Overview</a>
     <a class="nav-link" href="#sales">Sales</a>
     <a class="nav-link" href="#implementation">Implementation</a>
@@ -417,6 +472,88 @@ section[id] { scroll-margin-top: 72px; }
     <p class="frame">A Section 125 fixed-indemnity wellbeing program built on Capitol Group's carrier infrastructure, delivered through Nexus Benefit Solutions with Insight Benefits as TPA.</p>
   </div>
 </header>
+
+<section class="section" id="tracker">
+  <div class="container">
+    <span class="eyebrow">What's Moving</span>
+    <h2>Project Tracker</h2>
+    <p class="lead">Live view of in-flight workstreams across Nexus, Capitol, Insight, and Amaze. Updated as the project moves.</p>
+
+    <div class="table-wrap">
+      <table class="tracker-table">
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Owner</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="task">Latest ASA / Compliance Protection / Request for Coverage drafts</td>
+            <td class="owner">Capitol — Connie</td>
+            <td class="status-cell"><span class="status-pill open">Open</span></td>
+          </tr>
+          <tr>
+            <td class="task">Eligibility file format finalization</td>
+            <td class="owner">Capitol CEHAS IT + Nexus</td>
+            <td class="status-cell"><span class="status-pill open">In flight</span></td>
+          </tr>
+          <tr>
+            <td class="task">CEHAS + insurer signature contact details</td>
+            <td class="owner">Capitol — Connie</td>
+            <td class="status-cell"><span class="status-pill open">Open</span></td>
+          </tr>
+          <tr>
+            <td class="task">Sample eligibility CSV review</td>
+            <td class="owner">Capitol — Connie / CEHAS IT</td>
+            <td class="status-cell"><span class="status-pill open">Delivered — awaiting review</span></td>
+          </tr>
+          <tr>
+            <td class="task">Sample payroll summary + invoice review</td>
+            <td class="owner">Capitol — Connie</td>
+            <td class="status-cell"><span class="status-pill open">Delivered — awaiting review</span></td>
+          </tr>
+          <tr>
+            <td class="task">Compliance walkthrough (Insight TPA checklist vs. Capitol)</td>
+            <td class="owner">Insight — Howard ↔ Capitol — Connie</td>
+            <td class="status-cell"><span class="status-pill open">Scheduling</span></td>
+          </tr>
+          <tr>
+            <td class="task">Amaze Health intro meeting</td>
+            <td class="owner">Nexus — Jason + Amaze + Insight</td>
+            <td class="status-cell"><span class="status-pill open">Scheduling</span></td>
+          </tr>
+          <tr>
+            <td class="task">Payroll vendor priority list</td>
+            <td class="owner">Nexus — Brenda Manning</td>
+            <td class="status-cell"><span class="status-pill open">In flight</span></td>
+          </tr>
+          <tr>
+            <td class="task">Friday 5/22 walkthrough with Scott</td>
+            <td class="owner">Nexus — Jason + Brenda Manning</td>
+            <td class="status-cell"><span class="status-pill open">Scheduled</span></td>
+          </tr>
+          <tr>
+            <td class="task">Capitol ops team presentation</td>
+            <td class="owner">Capitol ops + Nexus</td>
+            <td class="status-cell"><span class="status-pill open">Mon/Tue 5/25–5/26</span></td>
+          </tr>
+          <tr>
+            <td class="task">White-labeling / marketing strategy</td>
+            <td class="owner">Nexus + Insight</td>
+            <td class="status-cell"><span class="status-pill future">Phase 2 — post-Capitol greenlight</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tracker-meta">
+      <span class="updated">Last updated: May 16, 2026</span>
+      <span>This tracker is maintained as the project moves. Status reflects current state of in-flight work across all parties.</span>
+    </div>
+  </div>
+</section>
 
 <section class="section" id="overview">
   <div class="container">
