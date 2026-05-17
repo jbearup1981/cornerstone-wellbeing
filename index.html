@@ -760,7 +760,53 @@ td strong { color: var(--color-fg); }
 }
 .highlight strong { color: var(--color-fg); }
 
-/* Tracker */
+/* Tracker — interactive */
+.tracker-cta {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0 1.5rem;
+  background: rgba(199, 90, 44, 0.06);
+  border: 1px solid rgba(199, 90, 44, 0.25);
+  border-radius: var(--radius-md, 8px);
+  font-size: var(--fs-sm);
+  color: var(--color-fg);
+}
+.tracker-cta .tracker-cta-icon {
+  flex: 0 0 auto;
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+.tracker-cta strong { color: var(--color-primary); }
+.tracker-embed-wrap {
+  position: relative;
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md, 8px);
+  overflow: hidden;
+  background: var(--color-bg, #FBF7EE);
+  min-height: 560px;
+}
+.tracker-embed-wrap iframe {
+  display: block;
+  width: 100%;
+  height: 620px;
+  border: 0;
+  background: #fff;
+}
+.tracker-embed-fallback {
+  padding: 1.5rem;
+}
+.tracker-embed-fallback .fallback-note {
+  display: block;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(0,0,0,0.04);
+  border-left: 3px solid var(--color-primary);
+  font-size: var(--fs-sm);
+  color: var(--color-fg-muted);
+}
 .tracker-meta {
   display: flex;
   justify-content: space-between;
@@ -920,10 +966,45 @@ section[id] { scroll-margin-top: 72px; }
   <div class="container">
     <span class="eyebrow">What's Moving</span>
     <h2>Project Tracker</h2>
-    <p class="lead">Live view of in-flight workstreams across Nexus, Capitol, Insight, and Amaze. Updated as the project moves.</p>
+    <p class="lead">Live view of in-flight workstreams across Nexus, Capitol, Insight, and Amaze. Owners update their own rows; the view below refreshes automatically.</p>
 
-    <div class="table-wrap">
-      <table class="tracker-table">
+    <div class="tracker-cta">
+      <span class="tracker-cta-icon" aria-hidden="true">✏️</span>
+      <div>
+        <strong>Update your status:</strong> Capitol and Insight team members — ping Jason (jason@nexusbenefitsolutions.com) for the editable link. Update your row's <em>Status</em> and <em>Notes</em>; this page reflects changes within a minute.
+      </div>
+    </div>
+
+    <!--
+      INTERACTIVE TRACKER (Google Sheets embed)
+      To wire this up:
+        1. Create a Google Sheet from artifacts/tracker-seed.csv
+           (File → Import → Upload → tracker-seed.csv → Replace spreadsheet)
+        2. File → Share → Publish to web → choose the tracker tab,
+           "Embed", "Web page" → copy the iframe src URL
+        3. Replace TRACKER_EMBED_URL below with that URL and
+           remove the .tracker-embed-fallback block (or leave it; it stays hidden
+           once an iframe is present and loads).
+        4. Share the editable Sheet URL privately with Capitol/Insight ops people
+           (Share → "Anyone with the link" → Editor). Do NOT publish the edit link.
+      Full setup: see INTERACTIVE-TRACKER-SETUP.md in the repo root.
+    -->
+    <div class="tracker-embed-wrap">
+      <!-- BEGIN: iframe (uncomment + replace src once Sheet is published) -->
+      <!--
+      <iframe
+        title="Cornerstone Well-Being Program — Live Project Tracker"
+        src="TRACKER_EMBED_URL"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+      -->
+      <!-- END: iframe -->
+
+      <!-- BEGIN: static fallback (shows until iframe is wired up) -->
+      <div class="tracker-embed-fallback">
+        <span class="fallback-note">Showing the most recent static snapshot. The live, partner-editable view will appear here once the shared Google Sheet is published — no account needed to view.</span>
+        <div class="table-wrap">
+          <table class="tracker-table">
         <thead>
           <tr>
             <th>Task</th>
@@ -989,11 +1070,14 @@ section[id] { scroll-margin-top: 72px; }
           </tr>
         </tbody>
       </table>
+        </div>
+      </div>
+      <!-- END: static fallback -->
     </div>
 
     <div class="tracker-meta">
       <span class="updated">Last updated: May 16, 2026</span>
-      <span>This tracker is maintained as the project moves. Status reflects current state of in-flight work across all parties.</span>
+      <span>Live tracker hosted on Google Sheets. Status reflects current state of in-flight work across all parties.</span>
     </div>
   </div>
 </section>
