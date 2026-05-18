@@ -1463,108 +1463,123 @@ section[id] { scroll-margin-top: 72px; }
   <div class="container">
     <span class="eyebrow">What's Moving</span>
     <h2>Project Tracker</h2>
-    <p class="lead">Live view of in-flight workstreams across Nexus, Capitol, Insight, and Amaze. Owners update their own rows; the view below refreshes automatically.</p>
-
-    <div class="tracker-cta">
-      <span class="tracker-cta-icon" aria-hidden="true">✏️</span>
-      <div>
-        <strong>Update your status:</strong> Capitol and Insight team members — ping Jason (jason@nexusbenefitsolutions.com) for the editable Excel link. Update your row's <em>Status</em> and <em>Notes</em> directly in Excel Online (no Microsoft account required); this page reflects changes within a minute.
-      </div>
-    </div>
+    <p class="lead">Snapshot of in-flight workstreams across Nexus, Capitol, Insight, and Amaze. The editable workbook lives in OneDrive — owners update their rows there, and this view reflects the latest state.</p>
 
     <!--
-      INTERACTIVE TRACKER (Excel Online / OneDrive embed)
-      File lives at: OneDrive › CornerstoneProgram › Cornerstone_Project_Tracker.xlsx
-      Embed URL appends ?action=embedview to the anonymous view-only share link.
-      Editable link is a SEPARATE anonymous edit-share — DO NOT publish it here.
+      Tracker data sourced from artifacts/tracker-seed.csv — update both when task status changes.
+      Live editable workbook lives in OneDrive (Capitol / Insight / Nexus can edit anonymously);
+      this hub view is a static-rendered snapshot for clean presentation.
       Full setup + maintenance: see INTERACTIVE-TRACKER-SETUP.md
     -->
-    <div class="tracker-embed-wrap">
-      <iframe
-        title="Cornerstone Well-Being Program — Live Project Tracker"
-        src="https://nexusbenefitsolutions-my.sharepoint.com/:x:/p/jason/IQC0pvmc1hLhQoV0orwGIDpPAXZhwa7YQ7GEYnHA-LY6cAk?action=embedview&amp;wdAllowInteractivity=True&amp;wdHideGridlines=True&amp;wdDownloadButton=True"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        frameborder="0"></iframe>
-
-      <!-- BEGIN: static fallback (shows until iframe is wired up) -->
-      <div class="tracker-embed-fallback">
-        <span class="fallback-note">Showing the most recent static snapshot. The live, partner-editable view loads from the shared Excel workbook on OneDrive — no Microsoft account needed to view.</span>
-        <div class="table-wrap">
-          <table class="tracker-table">
-        <thead>
-          <tr>
-            <th>Task</th>
-            <th>Owner</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="task">Latest ASA / Compliance Protection / Request for Coverage drafts</td>
-            <td class="owner">Capitol — Connie</td>
-            <td class="status-cell"><span class="status-pill open">Open</span></td>
-          </tr>
-          <tr>
-            <td class="task">Eligibility file format finalization</td>
-            <td class="owner">Capitol CEHAS IT + Nexus</td>
-            <td class="status-cell"><span class="status-pill open">In flight</span></td>
-          </tr>
-          <tr>
-            <td class="task">CEHAS + insurer signature contact details</td>
-            <td class="owner">Capitol — Connie</td>
-            <td class="status-cell"><span class="status-pill open">Open</span></td>
-          </tr>
-          <tr>
-            <td class="task">Sample eligibility CSV review</td>
-            <td class="owner">Capitol — Connie / CEHAS IT</td>
-            <td class="status-cell"><span class="status-pill open">Delivered — awaiting review</span></td>
-          </tr>
-          <tr>
-            <td class="task">Sample payroll summary + invoice review</td>
-            <td class="owner">Capitol — Connie</td>
-            <td class="status-cell"><span class="status-pill open">Delivered — awaiting review</span></td>
-          </tr>
-          <tr>
-            <td class="task">Compliance walkthrough (Insight TPA checklist vs. Capitol)</td>
-            <td class="owner">Insight — Howard ↔ Capitol — Connie</td>
-            <td class="status-cell"><span class="status-pill open">Scheduling</span></td>
-          </tr>
-          <tr>
-            <td class="task">Amaze Health intro meeting</td>
-            <td class="owner">Nexus — Jason + Amaze + Insight</td>
-            <td class="status-cell"><span class="status-pill open">Scheduling</span></td>
-          </tr>
-          <tr>
-            <td class="task">Payroll vendor priority list</td>
-            <td class="owner">Nexus — Brenda Manning</td>
-            <td class="status-cell"><span class="status-pill open">In flight</span></td>
-          </tr>
-          <tr>
-            <td class="task">Friday 5/22 walkthrough with Scott</td>
-            <td class="owner">Nexus — Jason + Brenda Manning</td>
-            <td class="status-cell"><span class="status-pill open">Scheduled</span></td>
-          </tr>
-          <tr>
-            <td class="task">Capitol ops team presentation</td>
-            <td class="owner">Capitol ops + Nexus</td>
-            <td class="status-cell"><span class="status-pill open">Mon/Tue 5/25–5/26</span></td>
-          </tr>
-          <tr>
-            <td class="task">White-labeling / marketing strategy</td>
-            <td class="owner">Nexus + Insight</td>
-            <td class="status-cell"><span class="status-pill future">Phase 2 — post-Capitol greenlight</span></td>
-          </tr>
-        </tbody>
-      </table>
-        </div>
+    <div class="tracker-cta">
+      <div class="tracker-cta-text">
+        <strong>Live tracker maintained in OneDrive</strong>
+        <span>Capitol, Insight, and Nexus team members can update status and notes directly in Excel — no Microsoft account required.</span>
       </div>
-      <!-- END: static fallback -->
+      <a class="tracker-cta-btn"
+         href="https://nexusbenefitsolutions-my.sharepoint.com/:x:/p/jason/IQC0pvmc1hLhQoV0orwGIDpPAUNHgS_CXn_SVt12RpeW8Og"
+         target="_blank"
+         rel="noopener noreferrer">Open editable tracker</a>
+    </div>
+
+    <div class="tracker-card">
+      <div class="tracker-table-wrap">
+        <table class="tracker-table">
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Owner</th>
+              <th>Detail</th>
+              <th>Status</th>
+              <th style="text-align:right;">Updated</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="task">Latest ASA / Compliance Protection / Request for Coverage drafts</td>
+              <td class="owner-cell"><span class="owner-badge capitol">Capitol</span></td>
+              <td class="owner-detail">Connie</td>
+              <td class="status-cell"><span class="status-pill open">🟠 Open</span></td>
+              <td class="updated-cell">May 16, 2026</td>
+            </tr>
+            <tr>
+              <td class="task">Eligibility file format finalization</td>
+              <td class="owner-cell"><span class="owner-badge capitol">Capitol</span></td>
+              <td class="owner-detail">CEHAS IT + Nexus</td>
+              <td class="status-cell"><span class="status-pill in-flight">🟠 In flight</span></td>
+              <td class="updated-cell">May 16, 2026</td>
+            </tr>
+            <tr>
+              <td class="task">CEHAS + insurer signature contact details</td>
+              <td class="owner-cell"><span class="owner-badge capitol">Capitol</span></td>
+              <td class="owner-detail">Connie</td>
+              <td class="status-cell"><span class="status-pill open">🟠 Open</span></td>
+              <td class="updated-cell">May 16, 2026</td>
+            </tr>
+            <tr>
+              <td class="task">Sample eligibility CSV review</td>
+              <td class="owner-cell"><span class="owner-badge capitol">Capitol</span></td>
+              <td class="owner-detail">Connie / CEHAS IT</td>
+              <td class="status-cell"><span class="status-pill delivered">🔵 Delivered — awaiting review</span></td>
+              <td class="updated-cell">May 16, 2026</td>
+            </tr>
+            <tr>
+              <td class="task">Sample payroll summary + invoice review</td>
+              <td class="owner-cell"><span class="owner-badge capitol">Capitol</span></td>
+              <td class="owner-detail">Connie</td>
+              <td class="status-cell"><span class="status-pill delivered">🔵 Delivered — awaiting review</span></td>
+              <td class="updated-cell">May 16, 2026</td>
+            </tr>
+            <tr>
+              <td class="task">Compliance walkthrough (Insight TPA checklist vs. Capitol)</td>
+              <td class="owner-cell"><span class="owner-badge insight">Insight</span></td>
+              <td class="owner-detail">Howard ↔ Connie (Capitol)</td>
+              <td class="status-cell"><span class="status-pill scheduled">🟢 Scheduled</span></td>
+              <td class="updated-cell">May 16, 2026</td>
+            </tr>
+            <tr>
+              <td class="task">Amaze Health intro meeting</td>
+              <td class="owner-cell"><span class="owner-badge nexus">Nexus</span></td>
+              <td class="owner-detail">Jason + Amaze + Insight</td>
+              <td class="status-cell"><span class="status-pill scheduled">🟢 Scheduled</span></td>
+              <td class="updated-cell">May 16, 2026</td>
+            </tr>
+            <tr>
+              <td class="task">Payroll vendor priority list</td>
+              <td class="owner-cell"><span class="owner-badge nexus">Nexus</span></td>
+              <td class="owner-detail">Brenda Manning</td>
+              <td class="status-cell"><span class="status-pill in-flight">🟠 In flight</span></td>
+              <td class="updated-cell">May 16, 2026</td>
+            </tr>
+            <tr>
+              <td class="task">Friday 5/22 walkthrough with Scott</td>
+              <td class="owner-cell"><span class="owner-badge nexus">Nexus</span></td>
+              <td class="owner-detail">Jason + Brenda Manning</td>
+              <td class="status-cell"><span class="status-pill scheduled">🟢 Scheduled</span></td>
+              <td class="updated-cell">May 16, 2026</td>
+            </tr>
+            <tr>
+              <td class="task">Capitol ops team presentation</td>
+              <td class="owner-cell"><span class="owner-badge capitol">Capitol</span></td>
+              <td class="owner-detail">Capitol ops + Nexus · Mon/Tue 5/25–5/26</td>
+              <td class="status-cell"><span class="status-pill scheduled">🟢 Scheduled</span></td>
+              <td class="updated-cell">May 16, 2026</td>
+            </tr>
+            <tr>
+              <td class="task">White-labeling / marketing strategy</td>
+              <td class="owner-cell"><span class="owner-badge nexus">Nexus</span></td>
+              <td class="owner-detail">Nexus + Insight</td>
+              <td class="status-cell"><span class="status-pill future">⚪ Future phase</span></td>
+              <td class="updated-cell">May 16, 2026</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <div class="tracker-meta">
       <span class="updated">Last updated: May 16, 2026</span>
-      <span>Live tracker hosted on Microsoft Excel Online (OneDrive). Status reflects current state of in-flight work across all parties.</span>
+      <span>Source of truth: live Excel workbook in OneDrive. This view is refreshed manually as status changes.</span>
     </div>
   </div>
 </section>
