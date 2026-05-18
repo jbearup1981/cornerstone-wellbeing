@@ -537,14 +537,15 @@ td strong { color: var(--color-fg); }
   align-items: center;
   flex: 0 0 auto;
 }
+/* Terminal step — last in sequence. No special color treatment;
+   the absence of a following arrow is the only signal needed. */
 .funnel .step.terminal {
-  background: var(--color-surface);
-  border-color: var(--color-accent-teal);
-  border-width: 1px;
-  box-shadow: inset 3px 0 0 0 var(--color-accent-teal);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  box-shadow: none;
 }
-.funnel .step.terminal .num { color: var(--color-accent-teal); }
-.funnel .step.terminal .step-icon { color: var(--color-accent-teal); }
+.funnel .step.terminal .num { color: var(--color-fg-muted); }
+.funnel .step.terminal .step-icon { color: var(--color-primary); }
 @media (max-width: 720px) {
   .funnel { flex-direction: column; }
   .funnel .arrow { transform: rotate(90deg); align-self: center; }
@@ -753,12 +754,14 @@ td strong { color: var(--color-fg); }
   display: flex;
   align-items: center;
 }
+/* Distribute (terminal) step — match the rest of the sequence visually.
+   It's just the last pill; no arrow follows it, that's the only signal needed. */
 .signature-seq .sig-step.distribute {
-  background: var(--color-surface);
-  border-color: var(--color-accent-teal);
-  box-shadow: inset 3px 0 0 0 var(--color-accent-teal);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  box-shadow: none;
 }
-.signature-seq .sig-step.distribute .order .step-icon { color: var(--color-accent-teal); }
+.signature-seq .sig-step.distribute .order .step-icon { color: var(--color-primary); }
 .signature-seq .sig-step.distribute .sig-line { display: none; }
 @media (max-width: 720px) {
   .signature-seq { flex-direction: column; }
