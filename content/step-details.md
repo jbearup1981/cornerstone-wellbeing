@@ -220,7 +220,7 @@ Operational detail for every step in every flow diagram on the project hub. Each
 - **What happens:** A 4–6 week education window opens before go-live. Each employee receives a personalized before/after paycheck statement, [[Amaze_Health|Amaze Health]] welcome materials, and a clearly marked opt-out path that routes through Amaze. Employees see exactly what is changing on their check, what they are getting in return, and how to decline.
 - **Inputs:**
   - Per-employee paycheck packets from Step 1.4
-  - Amaze Health welcome and onboarding materials
+  - [[Amaze_Health|Amaze Health]] welcome and onboarding materials
   - Opt-out instructions
 - **Outputs:**
   - Education materials distributed (employer-facilitated)

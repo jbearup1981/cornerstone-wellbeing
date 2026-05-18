@@ -56,4 +56,4 @@ Step summary:
 - Insight reviews variances; large swings pause for verification before push
 - Insight emails payroll admin with the cycle's changes
 - Updated eligibility file pushed to Capitol CEHAS weekly for invoicing and ACH
-- Amaze Health handles employee disenrollment requests directly
+- [[Amaze_Health|Amaze Health]] handles employee disenrollment requests directly
