@@ -34,7 +34,7 @@
   --radius-pill: 9999px;
 
   --section-py: clamp(3.5rem, 7vw, 6.5rem);
-  --container-max: 1180px;
+  --container-max: 1040px;
   --prose-max: 68ch;
 
   --fs-eyebrow: 0.75rem;
@@ -78,12 +78,8 @@ a:hover { color: var(--color-primary-hover); text-decoration: underline; }
 .container { max-width: var(--container-max); margin: 0 auto; padding: 0 1.75rem; }
 .section { padding-block: var(--section-py); border-bottom: 1px solid var(--color-border); }
 .section:last-of-type { border-bottom: none; }
-/* Center editorial prose within sections — eyebrow, h2, lead all sit in a centered column.
-   Wider content (tables, grids, diagrams) still uses the full container width. */
-.section > .container > .eyebrow,
-.section > .container > h2,
-.section > .container > .lead,
-.section > .container > .prose { margin-left: auto; margin-right: auto; max-width: var(--prose-max); }
+/* Left-anchored editorial layout — content flows to container edges, no centering.
+   The container itself is centered in the viewport; content within is left-aligned. */
 .section > .container > .eyebrow { display: block; }
 .prose { max-width: var(--prose-max); }
 .prose p { font-size: var(--fs-lead); color: var(--color-fg); }
