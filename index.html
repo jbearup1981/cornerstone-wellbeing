@@ -33,21 +33,22 @@
   --radius-lg: 0.75rem;
   --radius-pill: 9999px;
 
-  --section-py: clamp(3rem, 6vw, 6rem);
-  --container-max: 1200px;
-  --prose-max: 720px;
+  --section-py: clamp(3.5rem, 7vw, 6.5rem);
+  --container-max: 1180px;
+  --prose-max: 68ch;
 
   --fs-eyebrow: 0.75rem;
   --fs-sm:      0.875rem;
-  --fs-base:    1rem;
-  --fs-lead:    1.125rem;
-  --fs-h3:      1.375rem;
-  --fs-h2:      clamp(1.75rem, 3vw, 2.375rem);
+  --fs-base:    1.0625rem;
+  --fs-lead:    1.1875rem;
+  --fs-h3:      1.4375rem;
+  --fs-h2:      clamp(1.875rem, 3.2vw, 2.5rem);
   --fs-h1:      clamp(2.25rem, 5vw, 4rem);
   --lh-tight:   1.15;
-  --lh-body:    1.6;
+  --lh-body:    1.65;
   --tracking-eyebrow: 0.12em;
   --tracking-heading: -0.01em;
+  --radius-md:  0.625rem;
 }
 
 * { box-sizing: border-box; }
@@ -73,12 +74,20 @@ a:hover { color: var(--color-primary-hover); text-decoration: underline; }
   margin-bottom: 0.75rem;
 }
 
-.container { max-width: var(--container-max); margin: 0 auto; padding: 0 1.5rem; }
+.container { max-width: var(--container-max); margin: 0 auto; padding: 0 1.75rem; }
 .section { padding-block: var(--section-py); border-bottom: 1px solid var(--color-border); }
 .section:last-of-type { border-bottom: none; }
+.section > .container > .eyebrow,
+.section > .container > h2,
+.section > .container > .lead,
+.section > .container > .prose { margin-left: auto; margin-right: auto; }
+.section > .container > .eyebrow,
+.section > .container > h2 { display: block; max-width: var(--prose-max); }
 .prose { max-width: var(--prose-max); }
 .prose p { font-size: var(--fs-lead); color: var(--color-fg); }
-.lead { font-size: var(--fs-lead); color: var(--color-fg-muted); max-width: var(--prose-max); }
+.lead { font-size: var(--fs-lead); color: var(--color-fg-muted); max-width: var(--prose-max); line-height: 1.6; }
+.section > .container > h2 + .lead,
+.section > .container > .lead { margin-bottom: 1.25rem; }
 
 /* Sticky nav */
 .nav {
@@ -152,31 +161,37 @@ a:hover { color: var(--color-primary-hover); text-decoration: underline; }
 /* Partner cards — consistent white tile under every logo, fixed rendered height */
 .partner-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
-  margin-top: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2.25rem;
 }
 .partner-card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+.partner-card:hover {
+  border-color: rgba(199, 90, 44, 0.35);
+  box-shadow: 0 4px 14px rgba(31, 61, 46, 0.06);
+  transform: translateY(-1px);
 }
 .partner-card .logo {
-  height: 88px;
-  margin-bottom: 1rem;
+  height: 120px;
+  margin-bottom: 1.125rem;
   background: #ffffff;
   border: 1px solid var(--color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1rem;
+  padding: 1rem 1.25rem;
 }
 .partner-card .logo img {
-  max-height: 56px;
+  max-height: 80px;
   max-width: 100%;
   width: auto;
   height: auto;
@@ -185,7 +200,7 @@ a:hover { color: var(--color-primary-hover); text-decoration: underline; }
 }
 .partner-card .logo-text {
   font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-size: 1.875rem;
   color: var(--color-fg);
   letter-spacing: 0.04em;
   line-height: 1;
@@ -193,7 +208,7 @@ a:hover { color: var(--color-primary-hover); text-decoration: underline; }
 }
 .partner-card .name {
   font-family: var(--font-serif);
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   color: var(--color-fg);
   margin-bottom: 0.375rem;
   display: block;
@@ -209,40 +224,40 @@ a:hover { color: var(--color-primary-hover); text-decoration: underline; }
 .footer-partners {
   border-top: 1px solid rgba(242, 242, 236, 0.12);
   border-bottom: 1px solid rgba(242, 242, 236, 0.12);
-  padding: 1.25rem 0;
-  margin-bottom: 1.5rem;
+  padding: 1.75rem 0;
+  margin-bottom: 1.75rem;
 }
 .footer-partners .container {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 1.25rem;
+  gap: 2rem;
 }
 .footer-partners .label {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: rgba(242, 242, 236, 0.55);
-  margin-right: 0.25rem;
+  color: rgba(242, 242, 236, 0.6);
+  margin-right: 0.5rem;
 }
 .footer-partners .partner-mark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 32px;
+  height: 44px;
   background: transparent;
   border: none;
   padding: 0;
 }
 .footer-partners .partner-mark img {
-  max-height: 32px;
+  max-height: 44px;
   width: auto;
   height: auto;
   object-fit: contain;
   display: block;
   filter: brightness(0) invert(1);
-  opacity: 0.7;
+  opacity: 0.8;
   transition: opacity 200ms ease;
 }
 .footer-partners .partner-mark:hover img {
