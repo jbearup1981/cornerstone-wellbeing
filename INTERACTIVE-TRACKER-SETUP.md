@@ -3,13 +3,13 @@ title: "Interactive Tracker Setup"
 date: "2026-05-18"
 tags: []
 ---
-# Cornerstone Hub — Project Tracker Setup
+# Everyday Wellbeing Hub — Project Tracker Setup
 
 The Project Tracker section on [the hub](https://jbearup1981.github.io/cornerstone-wellbeing/) is a **statically rendered HTML table** styled to match the rest of the hub. The **source of truth for collaboration** is a Microsoft Excel workbook in Jason's [[OneDrive]] for Business — Capitol, Insight, and Nexus team members edit there. The hub view is refreshed manually from that workbook as status changes.
 
 ## Why this split
 
-The earlier design embedded Excel Online directly via an iframe. That was killed because the embed looked out-of-place against the parchment / forest green / DM Serif visual identity of the rest of the hub. The new pattern keeps the collaboration upside of OneDrive (anonymous edit, no login, native M365 tool for partners) but presents the data to the audience in the hub's native style.
+The earlier design embedded Excel Online directly via an iframe. That was killed because the embed looked out-of-place against the cream / navy / rust / DM Serif visual identity of the rest of the hub. The new pattern keeps the collaboration upside of [[OneDrive]] (anonymous edit, no login, native [[M365]] tool for partners) but presents the data to the audience in the hub's native style.
 
 | Layer | Where | Who touches it |
 |---|---|---|
@@ -19,10 +19,10 @@ The earlier design embedded Excel Online directly via an iframe. That was killed
 
 ## File location
 
-**[[OneDrive]] path:** `CornerstoneProgram/Cornerstone_Project_Tracker.xlsx`
+**[[OneDrive]] path:** `EverydayWellbeing/EverydayWellbeing_Project_Tracker.xlsx`
 
 **Anonymous edit URL (shared with Capitol / Insight ops):**
-`https://nexusbenefitsolutions-my.sharepoint.com/:x:/p/jason/IQC0pvmc1hLhQoV0orwGIDpPAUNHgS_CXn_SVt12RpeW8Og`
+`https://nexusbenefitsolutions-my.[[SharePoint|sharepoint]].com/:x:/p/jason/IQC0pvmc1hLhQoV0orwGIDpPAUNHgS_CXn_SVt12RpeW8Og`
 
 This URL is wired into the **"Open editable tracker"** CTA button at the top of the tracker section on the hub. Anonymous edit — no Microsoft account required.
 
@@ -63,9 +63,9 @@ The hub tracker is static HTML, so it does **not** auto-sync from Excel. When st
 |---|---|---|
 | `.status-pill.open` | terracotta tint | "Open" |
 | `.status-pill.in-flight` | terracotta tint | "In flight" |
-| `.status-pill.scheduled` | forest green tint | "Scheduled" |
+| `.status-pill.scheduled` | slate / muted tint | "Scheduled" |
 | `.status-pill.delivered` | teal tint | "Delivered — awaiting review" |
-| `.status-pill.done` | sage green tint | "Done" |
+| `.status-pill.done` | navy tint | "Done" |
 | `.status-pill.blocked` | red tint | "Blocked" |
 | `.status-pill.future` | muted gray tint | "Future phase" |
 
@@ -74,7 +74,7 @@ The hub tracker is static HTML, so it does **not** auto-sync from Excel. When st
 | CSS class | Org | Color |
 |---|---|---|
 | `.owner-badge.nexus` | Nexus | terracotta |
-| `.owner-badge.capitol` | Capitol | forest green (dark) |
+| `.owner-badge.capitol` | Capitol | dark navy |
 | `.owner-badge.insight` | Insight | violet / purple (~#5B2F8A) |
 | `.owner-badge.amaze` | Amaze | teal |
 

@@ -3,11 +3,11 @@ title: "Sample Eligibility README"
 date: "2026-05-17"
 tags: []
 ---
-# Cornerstone Well-Being Program — Eligibility File Specification
+# Everyday Wellbeing — Eligibility File Specification
 
 Companion documentation for `sample-eligibility-acme-manufacturing.csv`. This artifact is a sample of the weekly eligibility extract Nexus Benefit Solutions will deliver to Capitol Group for ingestion into the CEHAS system. CEHAS uses this file to drive invoice generation and ACH reimbursement.
 
-**Program:** Cornerstone Well-Being Program (Section 125 fixed-indemnity wellbeing plan with virtual primary care via [[Amaze_Health|Amaze Health]])
+**Program:** Everyday Wellbeing — Powered by Amaze Health (Section 125 fixed-indemnity wellbeing plan with virtual primary care via [[Amaze_Health|Amaze Health]])
 **Producer:** Nexus Benefit Solutions
 **Consumer:** Capitol Group / CEHAS
 **Format:** CSV, UTF-8, comma-delimited, header row required, RFC 4180 quoting
@@ -23,7 +23,7 @@ Companion documentation for `sample-eligibility-acme-manufacturing.csv`. This ar
 | 3 | `first_name` | string | free text | Legal first name. |
 | 4 | `last_name` | string | free text | Legal last name. Hyphens and apostrophes allowed. |
 | 5 | `date_of_birth` | date | `YYYY-MM-DD` | Required for all rows. Used for member matching and Amaze enrollment. |
-| 6 | `plan_election` | enum | `Plan 1500`, `Plan 1200`, `Plan 900`, `Plan 700`, `Plan 500`, `Plan 350` | The 6 plan levels. For Opt-Out, Pending, Non-Qualified, or Terminated rows this reflects the elected/intended plan; premium will be zero. |
+| 6 | `plan_election` | enum | `Plan 1500`, `Plan 1200`, `Plan 1050`, `Plan 900`, `Plan 750`, `Plan 600` | The 6 plan levels (canonical V2026.1 schedule). For Opt-Out, Pending, Non-Qualified, or Terminated rows this reflects the elected/intended plan; premium will be zero. |
 | 7 | `enrollment_status` | enum | `Enrolled`, `Opt-Out`, `Non-Qualified`, `Pending`, `Terminated` | Current eligibility state. Drives whether CEHAS bills/reimburses for the period. |
 | 8 | `effective_date` | date | `YYYY-MM-DD` | Date of program enrollment or status assignment. |
 | 9 | `term_date` | date | `YYYY-MM-DD` or empty | Populated only when `enrollment_status = Terminated`. Last day of coverage. |
@@ -48,10 +48,10 @@ Companion documentation for `sample-eligibility-acme-manufacturing.csv`. This ar
 ## File Naming Convention
 
 ```
-cornerstone-eligibility_<group-id>_<YYYY-MM-DD>.csv
+everyday-wellbeing-eligibility_<group-id>_<YYYY-MM-DD>.csv
 ```
 
-Example: `cornerstone-eligibility_ACME-MI-001_2026-05-16.csv`
+Example: `everyday-wellbeing-eligibility_ACME-MI-001_2026-05-19.csv`
 
 - `<group-id>` matches the `group_id` column value
 - `<YYYY-MM-DD>` is the file generation date (typically the Friday of the payroll week)

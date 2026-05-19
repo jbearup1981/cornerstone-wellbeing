@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cornerstone Well-Being Program</title>
+<title>Everyday Wellbeing — Operations Hub</title>
+<meta name="description" content="Everyday Wellbeing — Powered by Amaze Health. Section 125 fixed-indemnity wellbeing program built on Capitol Group's carrier infrastructure, delivered through Nexus Benefit Solutions with Insight Benefits as TPA.">
+<link rel="icon" type="image/png" href="assets/logos/everyday-wellbeing.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
@@ -12,22 +14,24 @@
   --font-sans:  "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-serif: "DM Serif Display", Georgia, "Times New Roman", serif;
 
-  --color-bg:            #FAFAF7;
-  --color-surface:       #E8EADF;
-  --color-surface-alt:   #DDE0D3;
-  --color-muted:         #E5E6DD;
-  --color-border:        #D9DDCC;
-  --color-fg:            #1F3D2E;
-  --color-fg-muted:      #5C7066;
-  --color-primary:       #C75A2C;
-  --color-primary-hover: #B8522A;
-  --color-primary-fg:    #FFFFFF;
-  --color-accent-green:  #10B981;
-  --color-accent-teal:   #0891B2;
+  /* Everyday Wellbeing palette — extracted from Member Guide v2026.1 */
+  --color-bg:            #F5EFE3;  /* cream / parchment — body background */
+  --color-surface:       #EDE5D2;  /* warmer cream — cards */
+  --color-surface-alt:   #E7DAC0;  /* tan — table headers / alt rows */
+  --color-muted:         #EBE3D2;  /* muted cream */
+  --color-border:        #D9CCB0;  /* warm tan border */
+  --color-fg:            #142339;  /* dark navy — body text */
+  --color-fg-muted:      #6B7785;  /* soft slate — muted text */
+  --color-primary:       #B85A3D;  /* rust / terracotta — accent + links */
+  --color-primary-hover: #A24E33;
+  --color-primary-fg:    #F5EFE3;  /* cream on rust */
+  --color-accent-green:  #B85A3D;  /* legacy — rust now (kept for backwards compat) */
+  --color-accent-teal:   #6B7785;  /* legacy — slate now (kept for backwards compat) */
+  --color-accent-tan:    #EAD4A8;  /* light tan — secondary callout panels */
 
-  --color-dark-bg:       #0E1F17;
-  --color-dark-fg:       #F2F2EC;
-  --color-dark-surface:  #1A2E22;
+  --color-dark-bg:       #0E1F2E;  /* deep navy — hero band + dark callouts */
+  --color-dark-fg:       #F5EFE3;  /* cream on navy */
+  --color-dark-surface:  #16293D;  /* lifted navy — dark cards */
 
   --radius: 0.5rem;
   --radius-lg: 0.75rem;
@@ -92,7 +96,7 @@ a:hover { color: var(--color-primary-hover); text-decoration: underline; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(250, 250, 247, 0.92);
+  background: rgba(245, 239, 227, 0.92);
   backdrop-filter: saturate(140%) blur(8px);
   -webkit-backdrop-filter: saturate(140%) blur(8px);
   border-bottom: 1px solid var(--color-border);
@@ -139,7 +143,7 @@ a:hover { color: var(--color-primary-hover); text-decoration: underline; }
   padding-block: clamp(4rem, 9vw, 7rem);
   border-bottom: 1px solid var(--color-border);
 }
-.hero .eyebrow { color: rgba(242, 242, 236, 0.75); }
+.hero .eyebrow { color: rgba(245, 239, 227, 0.75); }
 .hero .container > .eyebrow { margin-left: 0; }
 .hero .container > h1 { margin-left: 0; }
 .hero h1 { color: var(--color-dark-fg); max-width: 18ch; }
@@ -153,7 +157,7 @@ a:hover { color: var(--color-primary-hover); text-decoration: underline; }
 }
 .hero .frame {
   font-size: var(--fs-lead);
-  color: rgba(242, 242, 236, 0.85);
+  color: rgba(245, 239, 227, 0.85);
   max-width: 56ch;
   margin: 0;
 }
@@ -175,8 +179,8 @@ a:hover { color: var(--color-primary-hover); text-decoration: underline; }
   transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 .partner-card:hover {
-  border-color: rgba(199, 90, 44, 0.35);
-  box-shadow: 0 4px 14px rgba(31, 61, 46, 0.06);
+  border-color: rgba(184, 90, 61, 0.35);
+  box-shadow: 0 4px 14px rgba(20, 35, 57, 0.06);
   transform: translateY(-1px);
 }
 .partner-card .logo {
@@ -222,8 +226,8 @@ a:hover { color: var(--color-primary-hover); text-decoration: underline; }
 
 /* Footer partner strip — small white pills on the dark strip */
 .footer-partners {
-  border-top: 1px solid rgba(242, 242, 236, 0.12);
-  border-bottom: 1px solid rgba(242, 242, 236, 0.12);
+  border-top: 1px solid rgba(245, 239, 227, 0.12);
+  border-bottom: 1px solid rgba(245, 239, 227, 0.12);
   padding: 1.75rem 0;
   margin-bottom: 1.75rem;
 }
@@ -238,7 +242,7 @@ a:hover { color: var(--color-primary-hover); text-decoration: underline; }
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: rgba(242, 242, 236, 0.6);
+  color: rgba(245, 239, 227, 0.6);
   margin-right: 0.5rem;
 }
 .footer-partners .partner-mark {
@@ -348,8 +352,8 @@ thead th {
   letter-spacing: 0.08em;
 }
 tbody tr { transition: background-color 120ms ease; }
-tbody tr:hover { background: rgba(199, 90, 44, 0.04); }
-tbody tr:nth-child(even) { background: rgba(232, 234, 223, 0.4); }
+tbody tr:hover { background: rgba(184, 90, 61, 0.04); }
+tbody tr:nth-child(even) { background: rgba(237, 229, 210, 0.4); }
 tbody tr:last-child td { border-bottom: none; }
 td strong { color: var(--color-fg); }
 .matrix-cell-r { color: var(--color-primary); font-weight: 600; }
@@ -453,12 +457,12 @@ td strong { color: var(--color-fg); }
 /* Framed diagram container — gives each diagram its own quiet artifact */
 .diagram-frame {
   margin: 2.25rem 0 1.25rem;
-  background: linear-gradient(180deg, rgba(232, 234, 223, 0.45) 0%, rgba(232, 234, 223, 0.25) 100%);
+  background: linear-gradient(180deg, rgba(237, 229, 210, 0.45) 0%, rgba(237, 229, 210, 0.25) 100%);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: 2.5rem 2.25rem 2rem;
   position: relative;
-  box-shadow: 0 1px 2px rgba(31, 61, 46, 0.03);
+  box-shadow: 0 1px 2px rgba(20, 35, 57, 0.03);
 }
 @media (max-width: 720px) {
   .diagram-frame { padding: 1.75rem 1.25rem 1.25rem; }
@@ -472,7 +476,7 @@ td strong { color: var(--color-fg); }
   display: inline-block;
   background: var(--color-bg);
   padding: 0.25rem 0.75rem;
-  border: 1px solid rgba(199, 90, 44, 0.3);
+  border: 1px solid rgba(184, 90, 61, 0.3);
   border-radius: var(--radius-pill);
   position: absolute;
   top: -0.7rem;
@@ -526,12 +530,12 @@ td strong { color: var(--color-fg); }
   flex-direction: column;
   gap: 0.5rem;
   position: relative;
-  box-shadow: 0 1px 2px rgba(31, 61, 46, 0.04);
+  box-shadow: 0 1px 2px rgba(20, 35, 57, 0.04);
   transition: border-color 150ms ease, background-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
 }
 .funnel .step:hover {
-  border-color: rgba(199, 90, 44, 0.4);
-  box-shadow: 0 3px 8px rgba(31, 61, 46, 0.07);
+  border-color: rgba(184, 90, 61, 0.4);
+  box-shadow: 0 3px 8px rgba(20, 35, 57, 0.07);
   transform: translateY(-1px);
 }
 .funnel .step .step-head {
@@ -677,13 +681,13 @@ td strong { color: var(--color-fg); }
 }
 .decision-tree .branch.yes .pill {
   color: var(--color-primary);
-  border-color: rgba(199, 90, 44, 0.35);
-  background: rgba(199, 90, 44, 0.08);
+  border-color: rgba(184, 90, 61, 0.35);
+  background: rgba(184, 90, 61, 0.08);
 }
 .decision-tree .branch.no .pill {
   color: var(--color-accent-teal);
-  border-color: rgba(8, 145, 178, 0.35);
-  background: rgba(8, 145, 178, 0.08);
+  border-color: rgba(107, 119, 133, 0.35);
+  background: rgba(107, 119, 133, 0.08);
 }
 .decision-tree .branch .outcome {
   background: var(--color-bg);
@@ -693,7 +697,7 @@ td strong { color: var(--color-fg); }
   text-align: center;
   width: 100%;
   position: relative;
-  box-shadow: 0 1px 2px rgba(31, 61, 46, 0.04);
+  box-shadow: 0 1px 2px rgba(20, 35, 57, 0.04);
 }
 .decision-tree .branch.yes .outcome { box-shadow: inset 0 3px 0 0 var(--color-primary); }
 .decision-tree .branch.no .outcome { box-shadow: inset 0 3px 0 0 var(--color-accent-teal); }
@@ -747,12 +751,12 @@ td strong { color: var(--color-fg); }
   flex-direction: column;
   gap: 0.5rem;
   position: relative;
-  box-shadow: 0 1px 2px rgba(31, 61, 46, 0.04);
+  box-shadow: 0 1px 2px rgba(20, 35, 57, 0.04);
   transition: border-color 150ms ease, background-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
 }
 .signature-seq .sig-step:hover {
-  border-color: rgba(199, 90, 44, 0.4);
-  box-shadow: 0 3px 8px rgba(31, 61, 46, 0.07);
+  border-color: rgba(184, 90, 61, 0.4);
+  box-shadow: 0 3px 8px rgba(20, 35, 57, 0.07);
   transform: translateY(-1px);
 }
 .signature-seq .sig-step .order {
@@ -823,7 +827,7 @@ td strong { color: var(--color-fg); }
   border-radius: var(--radius-lg);
   padding: 1.5rem;
   margin: 1.5rem 0 1rem;
-  box-shadow: 0 1px 2px rgba(31, 61, 46, 0.04);
+  box-shadow: 0 1px 2px rgba(20, 35, 57, 0.04);
 }
 .tracker-cta {
   display: flex;
@@ -833,8 +837,8 @@ td strong { color: var(--color-fg); }
   justify-content: space-between;
   padding: 1rem 1.25rem;
   margin: 1.25rem 0;
-  background: rgba(199, 90, 44, 0.06);
-  border: 1px solid rgba(199, 90, 44, 0.25);
+  background: rgba(184, 90, 61, 0.06);
+  border: 1px solid rgba(184, 90, 61, 0.25);
   border-radius: var(--radius);
   font-size: var(--fs-sm);
   color: var(--color-fg);
@@ -894,7 +898,7 @@ td strong { color: var(--color-fg); }
   vertical-align: top;
 }
 .tracker-table tbody tr:last-child td { border-bottom: 0; }
-.tracker-table tbody tr:hover td { background: rgba(31, 61, 46, 0.025); }
+.tracker-table tbody tr:hover td { background: rgba(20, 35, 57, 0.025); }
 .tracker-table td.task {
   font-weight: 500;
   color: var(--color-fg);
@@ -928,14 +932,14 @@ td strong { color: var(--color-fg); }
   border: 1px solid transparent;
 }
 .owner-badge.nexus {
-  background: rgba(199, 90, 44, 0.12);
+  background: rgba(184, 90, 61, 0.12);
   color: var(--color-primary);
-  border-color: rgba(199, 90, 44, 0.3);
+  border-color: rgba(184, 90, 61, 0.3);
 }
 .owner-badge.capitol {
-  background: rgba(31, 61, 46, 0.1);
+  background: rgba(20, 35, 57, 0.1);
   color: var(--color-fg);
-  border-color: rgba(31, 61, 46, 0.25);
+  border-color: rgba(20, 35, 57, 0.25);
 }
 .owner-badge.insight {
   background: rgba(91, 47, 138, 0.12);
@@ -943,9 +947,9 @@ td strong { color: var(--color-fg); }
   border-color: rgba(91, 47, 138, 0.3);
 }
 .owner-badge.amaze {
-  background: rgba(8, 145, 178, 0.12);
+  background: rgba(107, 119, 133, 0.12);
   color: var(--color-accent-teal);
-  border-color: rgba(8, 145, 178, 0.3);
+  border-color: rgba(107, 119, 133, 0.3);
 }
 
 /* Status pills */
@@ -965,9 +969,9 @@ td strong { color: var(--color-fg); }
 }
 .status-pill.open,
 .status-pill.in-flight {
-  background: rgba(199, 90, 44, 0.12);
+  background: rgba(184, 90, 61, 0.12);
   color: var(--color-primary);
-  border-color: rgba(199, 90, 44, 0.3);
+  border-color: rgba(184, 90, 61, 0.3);
 }
 .status-pill.done {
   background: rgba(16, 185, 129, 0.14);
@@ -975,14 +979,14 @@ td strong { color: var(--color-fg); }
   border-color: rgba(16, 185, 129, 0.32);
 }
 .status-pill.delivered {
-  background: rgba(8, 145, 178, 0.12);
+  background: rgba(107, 119, 133, 0.12);
   color: var(--color-accent-teal);
-  border-color: rgba(8, 145, 178, 0.3);
+  border-color: rgba(107, 119, 133, 0.3);
 }
 .status-pill.scheduled {
-  background: rgba(31, 61, 46, 0.1);
+  background: rgba(20, 35, 57, 0.1);
   color: var(--color-fg);
-  border-color: rgba(31, 61, 46, 0.28);
+  border-color: rgba(20, 35, 57, 0.28);
 }
 .status-pill.blocked {
   background: rgba(220, 38, 38, 0.12);
@@ -1113,7 +1117,7 @@ td strong { color: var(--color-fg); }
 }
 .cb-clients-table td.cb-lives { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .cb-clients-table tr.cb-total td {
-  background: rgba(199, 90, 44, 0.06);
+  background: rgba(184, 90, 61, 0.06);
   font-weight: 600;
   border-bottom: none;
   padding-top: 0.55rem;
@@ -1237,7 +1241,7 @@ td strong { color: var(--color-fg); }
   color: var(--color-fg);
 }
 .proj-table tr.proj-base {
-  background: rgba(199, 90, 44, 0.06);
+  background: rgba(184, 90, 61, 0.06);
 }
 .proj-table tr.proj-base td strong { color: var(--color-primary); }
 .proj-meta {
@@ -1295,16 +1299,16 @@ td strong { color: var(--color-fg); }
 }
 [data-step-id]:hover {
   border-color: var(--color-primary);
-  box-shadow: 0 1px 4px rgba(199, 90, 44, 0.15);
+  box-shadow: 0 1px 4px rgba(184, 90, 61, 0.15);
 }
 /* .steps li doesn't have a border by default — give it a subtle hover background */
 .steps li[data-step-id]:hover {
-  background: rgba(199, 90, 44, 0.05);
+  background: rgba(184, 90, 61, 0.05);
   box-shadow: none;
   border-color: var(--color-border);
 }
 .steps li[data-step-id][aria-expanded="true"] {
-  background: rgba(199, 90, 44, 0.09);
+  background: rgba(184, 90, 61, 0.09);
   box-shadow: inset 3px 0 0 0 var(--color-primary);
 }
 [data-step-id]:focus-visible {
@@ -1314,7 +1318,7 @@ td strong { color: var(--color-fg); }
 /* Active step pill — terracotta border + tinted background so the active step is unambiguous */
 [data-step-id][aria-expanded="true"] {
   border-color: var(--color-primary);
-  background: rgba(199, 90, 44, 0.09);
+  background: rgba(184, 90, 61, 0.09);
   box-shadow: 0 0 0 1px var(--color-primary);
 }
 .funnel .step[data-step-id][aria-expanded="true"] .num,
@@ -1337,7 +1341,7 @@ g[data-step-id][aria-expanded="true"] rect { stroke: var(--color-primary); strok
   margin-top: 0;
 }
 .step-detail {
-  background: rgba(232, 234, 223, 0.55);
+  background: rgba(237, 229, 210, 0.55);
   border: 1px solid var(--color-border);
   border-left: 3px solid var(--color-primary);
   border-radius: var(--radius);
@@ -1421,7 +1425,7 @@ g[data-step-id][aria-expanded="true"] rect { stroke: var(--color-primary); strok
 }
 .asset-card:hover {
   border-color: var(--color-primary);
-  box-shadow: 0 2px 8px rgba(199, 90, 44, 0.12);
+  box-shadow: 0 2px 8px rgba(184, 90, 61, 0.12);
 }
 .asset-card .asset-eyebrow {
   font-size: var(--fs-eyebrow);
@@ -1455,11 +1459,11 @@ g[data-step-id][aria-expanded="true"] rect { stroke: var(--color-primary); strok
 /* Footer */
 .footer {
   background: var(--color-dark-bg);
-  color: rgba(242, 242, 236, 0.7);
+  color: rgba(245, 239, 227, 0.7);
   padding: 3rem 0 2.5rem;
   font-size: var(--fs-sm);
 }
-.footer a { color: rgba(242, 242, 236, 0.9); }
+.footer a { color: rgba(245, 239, 227, 0.9); }
 .footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
 
 /* Anchor offset for sticky nav */
@@ -1478,6 +1482,154 @@ section[id] { scroll-margin-top: 72px; }
   html { scroll-behavior: auto; }
 }
 
+/* ===================================================================
+   Everyday Wellbeing — Member Guide brand patterns
+   =================================================================== */
+
+/* Italic-emphasized word inside a headline.
+   Pattern: "Sales <em>process</em>." or "The <em>promise</em>." */
+h1 em, h2 em, .display em, .section-head .title em, .hero h1 em {
+  font-style: italic;
+  color: var(--color-primary);
+  font-weight: 400;
+}
+.italic-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--color-primary);
+}
+
+/* Section header pattern — big italic serif number, eyebrow, mixed headline. */
+.section-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
+  align-items: end;
+  margin-bottom: 1.5rem;
+}
+.section-head .lhs { display: flex; flex-direction: column; }
+.section-head .num {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(3.5rem, 6vw, 5rem);
+  line-height: 0.95;
+  color: var(--color-primary);
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.01em;
+}
+.section-head .eyebrow { margin-bottom: 0.5rem; color: var(--color-fg-muted); }
+.section-head .title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-heading);
+  color: var(--color-fg);
+  margin: 0;
+}
+.section-head .stat { text-align: right; display: flex; flex-direction: column; gap: 0.25rem; }
+.section-head .stat .stat-label {
+  font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.14em;
+  font-weight: 700; color: var(--color-fg-muted);
+}
+.section-head .stat .stat-value {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 1.5rem; color: var(--color-primary); line-height: 1.1;
+}
+@media (max-width: 720px) {
+  .section-head { grid-template-columns: 1fr; }
+  .section-head .stat { text-align: left; }
+}
+
+/* Section page-header bar — "a" mark + section meta + edition badge */
+.section-meta {
+  display: flex; align-items: center; gap: 0.875rem;
+  padding-bottom: 1rem; margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.14em;
+  font-weight: 600; color: var(--color-fg-muted);
+}
+.section-meta .mark {
+  width: 22px; height: 30px; flex: 0 0 22px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--color-dark-bg); border-radius: 4px; padding: 3px;
+}
+.section-meta .mark img { width: 100%; height: 100%; object-fit: contain; }
+.section-meta .meta-eyebrow { flex: 1 1 auto; }
+.section-meta .meta-right { display: flex; align-items: center; gap: 0.75rem; }
+.section-meta .meta-section { color: var(--color-fg); }
+.section-meta .edition {
+  border: 1px solid var(--color-border); border-radius: var(--radius-pill);
+  padding: 0.2rem 0.625rem; background: var(--color-surface); color: var(--color-fg);
+  font-size: 0.625rem; letter-spacing: 0.16em;
+}
+
+/* Dark navy callout — for key highlight content */
+.navy-callout {
+  background: var(--color-dark-bg); color: var(--color-dark-fg);
+  border-radius: var(--radius-lg); padding: 2rem 2.25rem; margin: 1.75rem 0;
+}
+.navy-callout .eyebrow { color: var(--color-primary); }
+.navy-callout h3, .navy-callout h4 {
+  color: var(--color-dark-fg); font-family: var(--font-serif);
+  font-weight: 400; letter-spacing: -0.005em;
+}
+.navy-callout h3 em, .navy-callout h4 em { color: var(--color-primary); font-style: italic; }
+.navy-callout p { color: rgba(245, 239, 227, 0.86); }
+.navy-callout a { color: var(--color-primary); }
+.navy-callout strong { color: var(--color-dark-fg); }
+.navy-callout .stat-big {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: clamp(2.5rem, 4.5vw, 3.5rem); line-height: 1;
+  color: var(--color-dark-fg); margin: 0;
+}
+.navy-callout .stat-sub { color: rgba(245, 239, 227, 0.7); font-size: 0.875rem; margin-top: 0.5rem; }
+
+/* Tan / sand callout */
+.tan-callout {
+  background: var(--color-accent-tan); border: 1px solid #D9BD86;
+  border-radius: var(--radius-md); padding: 1.25rem 1.5rem; margin: 1rem 0;
+  color: var(--color-fg);
+}
+.tan-callout .eyebrow { color: var(--color-primary); }
+
+/* Big stat row — italic-serif values with small uppercase labels */
+.stat-row {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.5rem; padding: 1.5rem 1.75rem;
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); margin: 1.75rem 0;
+}
+.stat-row .stat-item { display: flex; flex-direction: column; gap: 0.25rem; }
+.stat-row .stat-item .value {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 1.875rem; line-height: 1; color: var(--color-primary);
+}
+.stat-row .stat-item .label {
+  font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.14em;
+  font-weight: 600; color: var(--color-fg-muted);
+}
+
+/* Plan tier pills */
+.tier-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 1.5rem; }
+.tier-pills .pill {
+  font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; padding: 0.375rem 0.875rem;
+  border-radius: var(--radius-pill); border: 1px solid var(--color-border);
+  background: var(--color-bg); color: var(--color-fg);
+}
+.tier-pills .pill::before { content: "● "; color: var(--color-primary); }
+
+/* Footer section marker */
+.section-footer-mark {
+  display: flex; justify-content: space-between;
+  margin-top: 3rem; padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.16em;
+  font-weight: 600; color: var(--color-fg-muted);
+}
+
 /* Print */
 @media print {
   .nav, .footer { display: none; }
@@ -1494,7 +1646,10 @@ section[id] { scroll-margin-top: 72px; }
 
 <nav class="nav" aria-label="Section navigation">
   <div class="nav-inner">
-    <span class="nav-brand">Cornerstone Well-Being</span>
+    <span class="nav-brand" style="display:inline-flex; align-items:center; gap:0.625rem;">
+      <img src="assets/logos/everyday-wellbeing.png" alt="Everyday Wellbeing mark" style="height:22px; width:auto; display:block;">
+      <span>Everyday Wellbeing</span>
+    </span>
     <a class="nav-link" href="#tracker">Tracker</a>
     <a class="nav-link" href="#overview">Overview</a>
     <a class="nav-link" href="#sales">Sales</a>
@@ -1511,17 +1666,28 @@ section[id] { scroll-margin-top: 72px; }
 
 <header class="hero">
   <div class="container">
-    <span class="eyebrow">Internal Working Hub</span>
-    <h1>Cornerstone Well-Being Program</h1>
-    <p class="subtitle">Powered by Amaze Health</p>
-    <p class="frame">A Section 125 fixed-indemnity wellbeing program built on Capitol Group's carrier infrastructure, delivered through Nexus Benefit Solutions with Insight Benefits as TPA.</p>
+    <div class="hero-meta" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:2.5rem; font-size:0.6875rem; text-transform:uppercase; letter-spacing:0.14em; color:rgba(245,239,227,0.65); font-weight:600;">
+      <div style="display:flex; align-items:center; gap:0.875rem;">
+        <img src="assets/logos/everyday-wellbeing-cream.png" alt="Everyday Wellbeing mark" style="height:36px; width:auto; display:block;">
+        <span style="font-family: var(--font-serif); font-size:1.0625rem; color:var(--color-dark-fg); text-transform:none; letter-spacing:0.02em;">Everyday Wellbeing</span>
+        <span style="color:rgba(245,239,227,0.5); margin-left:0.25rem;">Powered by Amaze Health</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:0.875rem;">
+        <span>Operations Hub · 2026</span>
+        <span style="border:1px solid rgba(245,239,227,0.25); border-radius:9999px; padding:0.2rem 0.625rem; font-size:0.625rem; letter-spacing:0.16em;">V2026.1</span>
+      </div>
+    </div>
+    <span class="eyebrow" style="color:var(--color-primary);">Internal Working Hub</span>
+    <h1>The <em>Wellbeing</em> program.</h1>
+    <p class="subtitle italic-serif" style="font-size:1.375rem; margin-top:0.25rem; margin-bottom:1.75rem;">Powered by Amaze Health</p>
+    <p class="frame">A Section 125 fixed-indemnity wellbeing program built on Capitol Group's carrier infrastructure, delivered through Nexus Benefit Solutions with Insight Benefits as TPA. Everyday Wellbeing is the client-facing brand; this hub is the operational source of truth for the people running it.</p>
   </div>
 </header>
 
 <section class="section" id="tracker">
   <div class="container">
     <span class="eyebrow">What's Moving</span>
-    <h2>Project Tracker</h2>
+    <h2>Project <em>tracker</em>.</h2>
     <p class="lead">Snapshot of in-flight workstreams across Nexus, Capitol, Insight, and Amaze. The editable workbook lives in OneDrive — owners update their rows there, and this view reflects the latest state.</p>
 
     <!--
@@ -1646,9 +1812,9 @@ section[id] { scroll-margin-top: 72px; }
 <section class="section" id="overview">
   <div class="container">
     <span class="eyebrow">Overview</span>
-    <h2>What this program is, and who does what</h2>
+    <h2>What this <em>program is</em>, and who does what.</h2>
     <div class="prose">
-      <p>The Cornerstone Well-Being Program runs on rails Capitol Group has spent years building. The CEHAS captive, the SiriusPoint reinsurance layer, the carrier paper, and the invoicing infrastructure that supports it all are foundational — none of that gets duplicated, and the program does not exist without it.</p>
+      <p>The Everyday Wellbeing program runs on rails Capitol Group has spent years building. The CEHAS captive, the SiriusPoint reinsurance layer, the carrier paper, and the invoicing infrastructure that supports it all are foundational — none of that gets duplicated, and the program does not exist without it.</p>
       <p>What Nexus is building is the distribution, implementation, and ongoing-service layer that runs on top of those rails. Sales qualification, employee education, payroll setup, weekly eligibility audits, and the client-facing front door in steady state — that's the operational lane Nexus owns, with Insight Benefits as the TPA partner doing the per-cycle work on the Nexus side of the line.</p>
       <p>Amaze Health owns the clinical experience end-to-end. Virtual primary care, concierge engagement, prescriptions, and member-side disenrollment — that's their domain, and Nexus and Insight stay out of care delivery entirely.</p>
       <p>We are early. The Capitol partnership was a May 1 handshake; structure is under operational review. This hub is the working reference for the seams between the four parties — process, roles, hour load, contract and file handoffs, pipeline, and status. It is meant to read like an internal operations doc, not a pitch.</p>
@@ -1682,7 +1848,7 @@ section[id] { scroll-margin-top: 72px; }
 <section class="section" id="sales">
   <div class="container">
     <span class="eyebrow">Process · 01</span>
-    <h2>Sales</h2>
+    <h2>Sales <em>process</em>.</h2>
     <div class="prose">
       <p>Nexus runs two sales teams. Jason owns both and sits on every deal personally. That isn't a growth-stage quirk — it's the design. Keeping the owner on every conversation is how we hold the qualification line and make sure nothing moves forward that shouldn't. The program rides on infrastructure Capitol has spent years building; the responsibility on our side is to make sure the groups we put through it are the right groups.</p>
       <p>Qualification happens upfront and it is deliberately tight. The target profile is 50 to 1,000 eligible employees, with the sweet spot between 50 and 300. We want stable populations, low turnover, and a real payroll function already in place. We do not pursue staffing companies, restaurants, farming or seasonal operations, or any industry where churn or wage volatility would create month-over-month eligibility noise. That narrowness is the upstream risk filter — getting it right at the front end keeps implementation and ongoing service low-lift for everyone downstream, including Capitol.</p>
@@ -1773,7 +1939,7 @@ section[id] { scroll-margin-top: 72px; }
 <section class="section" id="implementation">
   <div class="container">
     <span class="eyebrow">Process · 02</span>
-    <h2>Implementation</h2>
+    <h2>Implementation <em>process</em>.</h2>
     <div class="prose">
       <p>A signed proposal triggers implementation. The first piece of work is payroll setup with the client. Two codes need to land in the client's payroll system: a Section 125 pre-tax deduction code for the employee contribution, and a separate reimbursement code for the indemnity payments, which are not wages and need to be coded as such. Getting these set correctly at the start is what keeps the downstream cycle clean.</p>
       <p>From there, Insight Benefits builds the initial payroll file. For clients with sophisticated payroll systems, we deliver an upload-ready file. For clients who prefer to enter changes manually, we deliver the same data in a format their admin can work from. Either way, the first payroll run after go-live gets a 100 percent audit — not a spot check, every line — to confirm deductions, reimbursements, and eligibility all reconcile to what was sold.</p>
@@ -1855,7 +2021,7 @@ section[id] { scroll-margin-top: 72px; }
 <section class="section" id="service">
   <div class="container">
     <span class="eyebrow">Process · 03</span>
-    <h2>Ongoing Service</h2>
+    <h2>Ongoing <em>service</em>.</h2>
     <div class="prose">
       <p>Steady-state service runs on the client's payroll cycle — weekly or biweekly, whichever they're already on. Every cycle, Insight pulls the payroll register, either by the client emailing the report on a standing schedule or by Insight accessing the client's payroll system directly when that has been set up. The register goes into the Nexus quoting and audit system, the same engine that ran the initial census audit during sales.</p>
       <p>The system runs an eligibility audit against the new file. It identifies who is still qualified, who is no longer qualified because of a pay change or a leave or a status shift, who is newly eligible because a new hire has cleared the waiting period, and who needs to be reclassified. The output is a variance view that Insight reviews at a glance before anything is pushed forward.</p>
@@ -1879,7 +2045,7 @@ section[id] { scroll-margin-top: 72px; }
 <section class="section" id="swimlane">
   <div class="container">
     <span class="eyebrow">At a glance</span>
-    <h2>Process — who does what, when</h2>
+    <h2>Process — <em>who does what</em>, when.</h2>
     <p class="lead">A flat view of the operational seams. Orange tick = owner. Teal tick = supports. Blank cell = not involved in that phase.</p>
 
     <div class="swimlane" role="table" aria-label="Process swim-lane diagram">
@@ -1926,7 +2092,7 @@ section[id] { scroll-margin-top: 72px; }
 <section class="section" id="buckets">
   <div class="container">
     <span class="eyebrow">Routing</span>
-    <h2>Two-Bucket Case Routing</h2>
+    <h2>Two-bucket case <em>routing</em>.</h2>
     <p class="lead">Nexus operates a narrow lane by design. Cases that fit get full Nexus economics; cases that don't route back to Capitol on a different structure. The less work Nexus does, the less Nexus earns — that's how the incentive stays clean.</p>
 
     <div class="diagram-frame" aria-label="Two-bucket routing decision tree">
@@ -2009,7 +2175,7 @@ section[id] { scroll-margin-top: 72px; }
 <section class="section" id="hours">
   <div class="container">
     <span class="eyebrow">Workload model</span>
-    <h2>Insight Hour-Workload</h2>
+    <h2>Insight <em>hour-workload</em>.</h2>
     <p class="lead">What Insight can plan against per client per year. The 5-hour implementation block covers the initial payroll build, first clean audit, education window, and go-live. After that the group is in cycle. Numbers are locked for planning; a group that materially exceeds is treated as an exception, not a re-baseline.</p>
 
     <div class="table-wrap">
@@ -2053,7 +2219,7 @@ section[id] { scroll-margin-top: 72px; }
 <section class="section" id="roles">
   <div class="container">
     <span class="eyebrow">Matrix</span>
-    <h2>Roles &amp; Responsibilities</h2>
+    <h2>Roles &amp; <em>responsibilities</em>.</h2>
     <p class="lead"><span class="matrix-cell-r">R</span> = owns (responsible and accountable). <span class="matrix-cell-s">S</span> = supports (contributes, not the owner). Blank = not involved.</p>
 
     <div class="table-wrap">
@@ -2098,7 +2264,7 @@ section[id] { scroll-margin-top: 72px; }
 <section class="section" id="documents">
   <div class="container">
     <span class="eyebrow">Operational handoffs</span>
-    <h2>Files, contracts, and payroll systems</h2>
+    <h2>Files, contracts, <em>and payroll systems</em>.</h2>
 
     <h3 style="margin-top:2rem;">Eligibility File &amp; Invoicing</h3>
     <p style="max-width: var(--prose-max);">Weekly cadence aligned to the client's payroll cycle. Nexus produces and maintains the eligibility file. Capitol's CEHAS ingests it weekly, generates the invoice, and initiates ACH collection from the employer.</p>
@@ -2307,7 +2473,7 @@ section[id] { scroll-margin-top: 72px; }
 <section class="section" id="pipeline">
   <div class="container">
     <span class="eyebrow">Distribution</span>
-    <h2>Pipeline</h2>
+    <h2>The <em>pipeline</em>.</h2>
     <p class="lead">All Nexus Standard profile. None of these groups are out-of-profile, staffing, or high-turnover. Conversion is sequenced deliberately to protect implementation quality.</p>
 
     <div class="table-wrap">
@@ -2337,7 +2503,7 @@ section[id] { scroll-margin-top: 72px; }
     <div style="margin-top:2.5rem;">
       <span class="eyebrow">Current Book · 6 · 12 · 18-Month Outlook</span>
       <h3 style="font-family:var(--font-serif); font-weight:400; font-size:1.5rem; margin:0.25rem 0 0.5rem; color:var(--color-fg);">Existing book today, plus volume, capacity, and group-mix projections across the next 18 months.</h3>
-      <p style="font-size:var(--fs-sm); color:var(--color-fg-muted); margin:0 0 1.25rem; max-width:68ch;">The Current Book card on the left is the live operational footprint today across the predecessor program plus Amaze-only relationships — the groups, lives, and cadence Nexus already runs. Forward projections (6 / 12 / 18 months) are anchored on a <strong>175-lives-per-group</strong> average for new business and layer on top of the existing book migrating into Cornerstone structure during 2026 (where applicable). The existing book is <strong>~848 enrolled lives across 17 active groups</strong> — a mix of the full Section 125 wellbeing program (EH / CEHAS), Amaze-only concierge medicine relationships, one legacy Champion group transitioning to the new product, and one Elysian relationship.</p>
+      <p style="font-size:var(--fs-sm); color:var(--color-fg-muted); margin:0 0 1.25rem; max-width:68ch;">The Current Book card on the left is the live operational footprint today across the predecessor program plus Amaze-only relationships — the groups, lives, and cadence Nexus already runs. Forward projections (6 / 12 / 18 months) are anchored on a <strong>175-lives-per-group</strong> average for new business and layer on top of the existing book migrating into Everyday Wellbeing structure during 2026 (where applicable). The existing book is <strong>~848 enrolled lives across 17 active groups</strong> — a mix of the full Section 125 wellbeing program (EH / CEHAS), Amaze-only concierge medicine relationships, one legacy Champion group transitioning to the new product, and one Elysian relationship.</p>
 
       <div style="background: var(--color-surface-alt); border-left: 3px solid var(--color-primary); border-radius: var(--radius-lg); padding: 1.5rem 1.75rem; margin: 0 0 1.5rem; max-width: 100%;">
         <span class="eyebrow" style="color: var(--color-primary);">Foundation → Scale</span>
@@ -2428,7 +2594,7 @@ section[id] { scroll-margin-top: 72px; }
             </tbody>
           </table>
           <ul class="proj-meta">
-            <li><strong>Existing book migration:</strong> Existing book ~820 lives across 16 groups migrating to Cornerstone structure during 2026 (where applicable)</li>
+            <li><strong>Existing book migration:</strong> Existing book ~820 lives across 16 groups migrating to Everyday Wellbeing structure during 2026 (where applicable)</li>
             <li><strong>Insight operational labor (base):</strong> ~300 hr/year steady-state (≈ 0.14 FTE)</li>
             <li><strong>Payroll cycles (base):</strong> ~195 cycles / half-year (biweekly cadence)</li>
           </ul>
@@ -2449,7 +2615,7 @@ section[id] { scroll-margin-top: 72px; }
             </tbody>
           </table>
           <ul class="proj-meta">
-            <li><strong>Existing book migration:</strong> Existing book ~820 lives across 16 groups migrating to Cornerstone structure during 2026 (where applicable)</li>
+            <li><strong>Existing book migration:</strong> Existing book ~820 lives across 16 groups migrating to Everyday Wellbeing structure during 2026 (where applicable)</li>
             <li><strong>Insight operational labor (base):</strong> ~580 hr/year (≈ 0.28 FTE)</li>
             <li><strong>Payroll cycles (base):</strong> ~755 cycles / year (biweekly cadence)</li>
           </ul>
@@ -2470,7 +2636,7 @@ section[id] { scroll-margin-top: 72px; }
             </tbody>
           </table>
           <ul class="proj-meta">
-            <li><strong>Existing book migration:</strong> Existing book ~820 lives across 16 groups migrating to Cornerstone structure during 2026 (where applicable)</li>
+            <li><strong>Existing book migration:</strong> Existing book ~820 lives across 16 groups migrating to Everyday Wellbeing structure during 2026 (where applicable)</li>
             <li><strong>Insight operational labor (base):</strong> ~680 hr/year (≈ 0.33 FTE)</li>
             <li><strong>Payroll cycles (base):</strong> ~1,325 cycles / 18 mo (biweekly cadence)</li>
           </ul>
@@ -2506,7 +2672,7 @@ section[id] { scroll-margin-top: 72px; }
             <tr><td>Belco Industries</td><td>Manufacturing</td><td>65</td><td>Sept 30, 2026</td><td>Active — Opportunity Identified</td></tr>
             <tr><td>Indian Summer</td><td>TBD</td><td>250</td><td>Sept 30, 2026</td><td>Active — On Radar</td></tr>
             <tr><td>Peterson Farms</td><td>Agriculture</td><td>350</td><td>Sept 30, 2026</td><td>Active — On Radar</td></tr>
-            <tr style="background: rgba(193, 102, 58, 0.08);"><td><strong>Hope Network</strong></td><td>Nonprofit human services (disabilities, mental health, addiction)</td><td><strong>900</strong></td><td>Long-term (2027+)</td><td>On radar — substantive prior contact</td></tr>
+            <tr style="background: rgba(184, 90, 61, 0.08);"><td><strong>Hope Network</strong></td><td>Nonprofit human services (disabilities, mental health, addiction)</td><td><strong>900</strong></td><td>Long-term (2027+)</td><td>On radar — substantive prior contact</td></tr>
           </tbody>
         </table>
       </div>
@@ -2519,7 +2685,7 @@ section[id] { scroll-margin-top: 72px; }
     </div>
 
     <div class="highlight">
-      <strong>2026 goal.</strong> 1,500–2,500 enrolled employees added across new groups. <strong>End-of-2027 goal.</strong> 5,000–6,000 total enrolled employees. An existing book of ~1,200 lives on a predecessor program will migrate into the Cornerstone structure sequenced across 2026.
+      <strong>2026 goal.</strong> 1,500–2,500 enrolled employees added across new groups. <strong>End-of-2027 goal.</strong> 5,000–6,000 total enrolled employees. An existing book of ~1,200 lives on a predecessor program will migrate into the Everyday Wellbeing structure sequenced across 2026.
     </div>
   </div>
 </section>
@@ -2527,7 +2693,7 @@ section[id] { scroll-margin-top: 72px; }
 <section class="section" id="status">
   <div class="container">
     <span class="eyebrow">Where we are</span>
-    <h2>Status</h2>
+    <h2>Where we <em>stand</em>.</h2>
 
     <div class="status-grid">
       <div class="status-block card">
@@ -2577,13 +2743,13 @@ section[id] { scroll-margin-top: 72px; }
 <section class="section" id="assets">
   <div class="container">
     <span class="eyebrow">Downloads · Artifacts · Deck</span>
-    <h2>Assets</h2>
+    <h2>Reference <em>assets</em>.</h2>
     <p class="lead">Downloadable materials supporting the project — presentation deck, sample artifacts for CEHAS review, and platform screenshots. Updated as the project moves.</p>
 
     <div class="card-grid-3" style="margin-top:1.5rem;">
       <a class="asset-card" href="deck/" target="_blank" rel="noopener noreferrer">
         <span class="asset-eyebrow">Presentation</span>
-        <h4>Cornerstone Program Deck</h4>
+        <h4>Everyday Wellbeing Program Deck</h4>
         <p>Slide-by-slide overview of the program, partnership structure, and operational handoffs.</p>
         <span class="asset-link">Open deck</span>
       </a>
@@ -2630,7 +2796,7 @@ section[id] { scroll-margin-top: 72px; }
 <section class="section" id="team">
   <div class="container">
     <span class="eyebrow">Who's who</span>
-    <h2>Team</h2>
+    <h2>How you <em>reach us</em>.</h2>
 
     <div class="card-grid-4" style="margin-top:1.5rem;">
       <div class="team-col">
@@ -2688,7 +2854,7 @@ section[id] { scroll-margin-top: 72px; }
     </div>
   </div>
   <div class="container">
-    <div>Last updated: 2026-05-16 · Cornerstone Well-Being Program · Internal working hub.</div>
+    <div>Last updated: 2026-05-19 · Everyday Wellbeing · V2026.1 · Internal working hub.</div>
     <div>Questions? <a href="mailto:jason@nexusbenefitsolutions.com">jason@nexusbenefitsolutions.com</a></div>
   </div>
 </footer>
@@ -2737,7 +2903,7 @@ const STEP_DETAILS = {
     title: "Step 1.4 — Quote Generation",
     owner: "Nexus — Wendy/Shea operate the platform; Jason reviews",
     what: "The Nexus quoting platform runs the AI census audit, flags qualification issues, surfaces W-4-versus-paycheck discrepancies, builds an eligibility cheat sheet, and generates per-employee before-and-after paycheck views. Output is a proposal-ready dataset.",
-    inputs: ["Cleaned payroll dataset from Step 1.3", "Selected plan tier (Plan 1500 / 1200 / 900 — subject to Capitol confirmation on Cornerstone benefit schedule)", "Current IRS Pub 15-T tax tables (loaded in the platform)"],
+    inputs: ["Cleaned payroll dataset from Step 1.3", "Selected plan tier (Plan 1500 / 1200 / 1050 / 900 / 750 / 600 — subject to Capitol confirmation on Everyday Wellbeing benefit schedule)", "Current IRS Pub 15-T tax tables (loaded in the platform)"],
     outputs: ["Per-employee before/after paycheck statements", "Employer-level FICA savings summary", "Eligibility cheat sheet (who qualifies, who doesn't, who's borderline)", "Discrepancy report (W-4 vs. actual withholding)"],
     duration: "15–30 minutes of platform time; longer if the dataset needs cleanup passes",
     tools: "Nexus quoting platform (Replit-built, integrated in NexHub CRM)",

@@ -1,11 +1,13 @@
 ---
 title: "README"
-date: "2026-05-17"
+date: "2026-05-19"
 tags: []
 ---
-# Cornerstone Well-Being Program
+# Everyday Wellbeing — Operations Hub
 
-Working project hub for the Cornerstone Well-Being Program — a Section 125 fixed-indemnity wellbeing program delivered through Nexus Benefit Solutions, with Insight Benefits as TPA and Capitol Group as carrier/captive/reinsurance rails. Powered by [[Amaze_Health|Amaze Health]].
+Working project hub for **Everyday Wellbeing** — Powered by Amaze Health. A Section 125 fixed-indemnity wellbeing program delivered through Nexus Benefit Solutions, with Insight Benefits as TPA and Capitol Group as carrier / captive / reinsurance rails.
+
+**Note on naming.** The client-facing brand is **Everyday Wellbeing** (V2026.1). The repo + working directory remain `cornerstone-wellbeing` for infrastructure continuity — that's not user-facing.
 
 ## What this repo is
 
@@ -21,4 +23,4 @@ Hosted via GitHub Pages at: <https://jbearup1981.github.io/cornerstone-wellbeing
 
 ## Status
 
-v0 scaffold deployed. Content development in progress per project plan.
+V2026.1 — brand identity aligned to Everyday Wellbeing Member Guide. Hub live; sample artifacts published; content evolves alongside the Capitol + Insight operational reviews.
